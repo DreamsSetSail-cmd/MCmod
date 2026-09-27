@@ -53,17 +53,26 @@ jobs:
         run: bash gradlew build --no-daemon --console=plain --stacktrace
 
       # gameTest 在 CI 上出现过不退出、无限挂起的情况（本机稳定）。
-      # 因此限制 5 分钟；超时视为失败，但不至于拖垮整个作业。
+      # 因此限制 10 分钟；超时视为失败，但不至于拖垮整个作业。
+      #
+      # 这里**不加 `--no-daemon`**（Build 步骤加了）。实测差别很大：
+      # 带 `--no-daemon` 时 gameTest 会卡在 GameTestRunner 的进度条上不再前进，
+      # 服务器每秒刷出上万行 `[ ++++]`（一次运行累计 14 万行 / 9.7 MB 日志），
+      # 直到 5 分钟超时；同一个 commit 在带 daemon 的构建里约 10 秒就跑完。
+      # 让 gameTest 复用守护进程，与 `main` 分支上稳定通过的那种配置保持一致。
       #
       # 另外必须显式校验日志：实测当测试服务器**启动失败**时
       # （例如 run/ 目录被另一个进程占用会话锁），
       # `runGameTestServer` 仍然返回退出码 0 并报 BUILD SUCCESSFUL——
       # 那是个假绿。所以这里额外 grep 成功标志，找不到就失败。
       - name: Run game tests
-        timeout-minutes: 5
+        timeout-minutes: 10
         run: |
           set -o pipefail
-          bash gradlew runGameTestServer --no-daemon --console=plain 2>&1 | tee gametest.log
+          bash gradlew runGameTestServer --console=plain 2>&1 | tee gametest-raw.log
+          # 折叠进度条：测试卡住时它每 tick 一行，会把日志撑到几十 MB
+          grep -v -E '\[minecraft/GameTestServer\]: \[ [+]*\]$' gametest-raw.log > gametest.log || true
+          tail -n 40 gametest.log
           if ! grep -q "required tests passed" gametest.log; then
             echo "::error::GameTest did not report success. The test server may have failed to start."
             exit 1
