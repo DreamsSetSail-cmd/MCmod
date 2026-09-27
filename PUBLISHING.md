@@ -1,49 +1,56 @@
 # 发布到 GitHub
 
-本地仓库已经初始化并完成首次提交，但**推送需要你的 GitHub 凭据**——
-本机没有可用的登录态（`gh` CLI 未安装，也没有配置 remote）。
-下面按顺序执行即可完成发布。
+本地仓库已初始化、提交作者已改写为你的身份、`origin` 已配好。
+**只剩推送这一步**——它需要浏览器登录 GitHub，由你执行最稳妥。
 
 当前状态：
 
 | 项 | 值 |
 | --- | --- |
+| 远程 | `origin` → <https://github.com/DreamsSetSail-cmd/MCmod.git> |
 | 分支 | `main` |
-| 首次提交 | `4142229` |
-| 跟踪文件 | 157 个 |
-| 提交作者 | `DreamColin <dreamcolin@users.noreply.github.com>` |
+| 提交 | `63c9a65`（初始）、`0e7fa73`（发布指南） |
+| 跟踪文件 | 158 个 |
+| 提交身份 | `DreamsSetSail-cmd <colinwangqihang@outlook.com>` |
 | 发布产物 | `build/libs/echoes-of-oblivion-1.0.0-mc1.20.6-forge.jar` |
 
 ---
 
-## 1. 在 GitHub 上创建空仓库
+## 1. 推送
 
-打开 <https://github.com/new>，填写：
+远程仓库已存在，直接推：
 
-- **Repository name**：`echoes-of-oblivion`
-- **Visibility**：按需选 Public 或 Private
-- ⚠️ **不要**勾选 "Add a README file"、".gitignore"、"license" ——
-  本地已经有这些文件，勾选会导致首次推送冲突
-
-创建后记下仓库地址，形如
-`https://github.com/<你的用户名>/echoes-of-oblivion.git`
-
----
-
-## 2. 关联远程并推送
-
-把下面的 `<你的用户名>` 换成实际值，在项目根目录执行：
-
-```bash
-git remote add origin https://github.com/<你的用户名>/echoes-of-oblivion.git
+```powershell
+cd "J:\mc_mod_dev\forge\1.20.6\Echoes-of-Oblivion"
 git push -u origin main
 ```
 
-推荐用 **Personal Access Token** 代替密码（GitHub 早已不接受账户密码推送）：
+**推送会触发 Git Credential Manager 弹出浏览器要求登录 GitHub**
+（本机凭据存储里目前没有 GitHub 条目）。登录成功后凭据会存入
+Windows 凭据管理器，之后推送无需重复登录。
+
+若用的是便携版 git 而没弹出登录窗口，改用完整版 Git for Windows：
+
+```powershell
+$env:Path = "C:\Program Files\Git\cmd;" + $env:Path
+git push -u origin main
+```
+
+若仓库不是空的（例如你建仓时勾选了 "Add a README file"），
+先合并再推：
+
+```bash
+git pull --rebase origin main
+git push -u origin main
+```
+
+### 备选：用 Personal Access Token
+
+不想走浏览器登录的话（GitHub 早已不接受账户密码推送）：
 
 1. 打开 <https://github.com/settings/tokens> → "Generate new token (classic)"
 2. 勾选 `repo` 权限，生成后复制
-3. 推送时用户名填 GitHub 用户名，密码处粘贴该 token
+3. 推送时用户名填 GitHub 用户名，**密码处粘贴该 token**
 
 或者用 SSH（若本机已有 SSH key）：
 
@@ -97,15 +104,19 @@ git push origin v1.0.0-mc1.20.6-forge
 
 ---
 
-## 6. 提交身份（可选）
+## 6. 提交身份（已完成）
 
-首次提交用的是临时身份 `DreamColin <dreamcolin@users.noreply.github.com>`。
-若希望之后的提交带上你自己的邮箱（这样 GitHub 才会把它们算到你账下）：
+提交作者与提交者均已改写为：
 
-```bash
-git config user.name "DreamColin"
-git config user.email "<你的 GitHub 邮箱>"
 ```
+DreamsSetSail-cmd <colinwangqihang@outlook.com>
+```
+
+该邮箱是 GitHub 账号绑定的邮箱，因此这些提交会正确计入你的贡献图。
+后续提交也会沿用这个身份（已写入本仓库的 `.git/config`，未污染全局配置）。
+
+两个提交的原始哈希在改写后被替换，因此**不要**再引用旧的哈希
+（`4142229` / `5bd6e1f` 等）——若你之前克隆过或在别处引用过，需要重新克隆。
 
 ---
 
