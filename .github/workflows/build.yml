@@ -1,0 +1,65 @@
+name: Build
+
+on:
+  push:
+    branches: ['**']
+    tags: ['v*']
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build mod jar
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
+
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+
+      # ForgeGradle 会下载并反编译 Minecraft，首次运行较慢，这里让缓存覆盖到
+      - name: Cache ForgeGradle caches
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            .gradle
+          key: forge-${{ runner.os }}-${{ hashFiles('build.gradle', 'gradle.properties', 'settings.gradle') }}
+          restore-keys: |
+            forge-${{ runner.os }}-
+
+      - name: Validate language files
+        run: python3 tools/check_lang.py
+
+      - name: Build
+        run: ./gradlew build --no-daemon --stacktrace
+
+      - name: Run game tests
+        run: ./gradlew runGameTestServer --no-daemon
+
+      - name: Upload jar as build artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: echoes-of-oblivion-jar
+          path: build/libs/*.jar
+          if-no-files-found: error
+
+      # 打 tag 推送时自动创建 Release 并附上 jar
+      - name: Attach jar to release
+        if: startsWith(github.ref, 'refs/tags/v')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: build/libs/*.jar
+          generate_release_notes: true
+          draft: false

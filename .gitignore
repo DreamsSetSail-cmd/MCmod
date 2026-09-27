@@ -1,0 +1,38 @@
+# ---- Eclipse ----
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# ---- IntelliJ IDEA ----
+out
+*.ipr
+*.iws
+*.iml
+.idea
+
+# ---- Gradle ----
+build
+.gradle
+
+# ---- 开发运行目录（世界存档、日志、崩溃报告、下载的开发工具） ----
+# 注意：这里包含大体积的临时下载（如 ffmpeg 约 100 MB），不应进版本库。
+run
+run-data
+
+# ---- 本地 AI 助手会话配置（含本机路径与命令白名单，不适合共享） ----
+.claude
+
+# ---- Python（tools/ 下的脚本会生成字节码缓存） ----
+__pycache__/
+*.pyc
+
+# ---- 操作系统 ----
+.DS_Store
+Thumbs.db
+
+# ---- Forge MDK 的模板文件（本项目已删除） ----
+forge_README.txt
+forge*changelog.txt

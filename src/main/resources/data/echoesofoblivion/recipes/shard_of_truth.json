@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " GC",
+    "G G",
+    "CG "
+  ],
+  "key": {
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "C": {
+      "item": "echoesofoblivion:corruption_essence"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:shard_of_truth",
+    "count": 3
+  }
+}

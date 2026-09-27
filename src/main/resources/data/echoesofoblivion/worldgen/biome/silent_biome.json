@@ -1,0 +1,47 @@
+{
+  "temperature": 0.1,
+  "downfall": 0.0,
+  "has_precipitation": false,
+  "effects": {
+    "sky_color": 2039583,
+    "fog_color": 3158064,
+    "water_color": 4159204,
+    "water_fog_color": 329011,
+    "grass_color": 6579300,
+    "foliage_color": 6579300,
+    "grass_color_modifier": "none"
+  },
+  "spawners": {
+    "monster": [],
+    "creature": [],
+    "ambient": [],
+    "axolotls": [],
+    "underground_water_creature": [],
+    "water_creature": [],
+    "water_ambient": [],
+    "misc": []
+  },
+  "spawn_costs": {},
+  "carvers": {
+    "air": [],
+    "liquid": []
+  },
+  "features": [
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [],
+    [
+      "echoesofoblivion:corridor_ruins"
+    ],
+    [
+      "echoesofoblivion:memory_crystal_scatter"
+    ],
+    []
+  ]
+}

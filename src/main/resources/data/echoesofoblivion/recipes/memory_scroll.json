@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "ECE",
+    "PMP",
+    " E "
+  ],
+  "key": {
+    "E": {
+      "item": "echoesofoblivion:void_embers"
+    },
+    "C": {
+      "item": "echoesofoblivion:corruption_essence"
+    },
+    "P": {
+      "item": "echoesofoblivion:shard_of_truth"
+    },
+    "M": {
+      "item": "echoesofoblivion:memory_crystal"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:memory_scroll",
+    "count": 1
+  }
+}

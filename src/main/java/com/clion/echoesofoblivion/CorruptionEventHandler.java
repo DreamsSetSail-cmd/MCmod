@@ -1,0 +1,135 @@
+package com.clion.echoesofoblivion;
+
+import com.clion.echoesofoblivion.memory.PlayerMemoryData;
+import com.clion.echoesofoblivion.memory.PlayerProgress;
+import com.clion.echoesofoblivion.network.ModNetwork;
+import com.clion.echoesofoblivion.network.packets.CorruptionUpdatePacket;
+import com.clion.echoesofoblivion.network.packets.ShadowSyncPacket;
+import com.clion.echoesofoblivion.server.ServerPacketHandler;
+import com.clion.echoesofoblivion.sound.ModSounds;
+import com.clion.echoesofoblivion.world.ModWorldGen;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundSource;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.event.entity.player.PlayerEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
+/**
+ * 侵蚀值与状态同步（阶段 4 的服务端骨架，在阶段 1 就先把「同步」这条链路打通）。
+ *
+ * <p>修复的三个问题：
+ * <ol>
+ *   <li>旧实现同时维护 {@code persistentData.echoes_corruption} 与 {@code PlayerMemoryData.corruptionLevel}
+ *       两套侵蚀值，而客户端显示用的数值没有任何来源——现在唯一定义在 {@link PlayerProgress}。</li>
+ *   <li>旧实现用「维度名字符串里是否含 silent」判断所处维度，脆弱且不符合规范——改用维度 {@code ResourceKey} 比较。</li>
+ *   <li>旧实现登录时只同步侵蚀值，不同步「已收集记忆」——现在两者都同步。</li>
+ * </ol>
+ *
+ * <p>镜像区块的扩散与亡魂生成属于阶段 5，届时会迁入 {@code RealityData}，
+ * 这里不再出现「用随机数在玩家周围直接生成实体」的临时逻辑。
+ */
+public class CorruptionEventHandler {
+
+    /** 同步间隔（tick）。 */
+    private static final int SYNC_INTERVAL = 20;
+
+    private static final Map<UUID, Integer> playerTickCounters = new HashMap<>();
+
+    @SubscribeEvent
+    public void onPlayerTick(TickEvent.PlayerTickEvent.Post event) {
+        if (!(event.player instanceof ServerPlayer player)) {
+            return;
+        }
+        ServerLevel level = player.serverLevel();
+
+        UUID playerId = player.getUUID();
+        int ticks = playerTickCounters.merge(playerId, 1, Integer::sum);
+        if (ticks % SYNC_INTERVAL != 0) {
+            return;
+        }
+
+        PlayerMemoryData data = PlayerMemoryData.get(level);
+        PlayerProgress progress = data.progressOf(player);
+
+        // 每秒推进一次侵蚀值
+        int gain = ConfigHelper.getInt(Config.corruptionGainRate, 1);
+        if (gain > 0) {
+            progress.addCorruption(gain);
+        }
+        // 身处寂静走廊时侵蚀显著加速——「真相在污染你」
+        if (level.dimension().equals(ModWorldGen.SILENT_CORRIDOR)) {
+            progress.addCorruption(2);
+        }
+
+        int before = progress.corruption();
+        data.markDirty();
+
+        ModNetwork.sendToPlayer(new CorruptionUpdatePacket(before, progress.corruptionRatio()), player);
+        ModNetwork.sendToPlayer(new ShadowSyncPacket(shadowStateFor(before)), player);
+
+        // 高侵蚀：低语与心跳（音量随侵蚀升高）
+        if (before >= 50 && ticks % (SYNC_INTERVAL * 5) == 0) {
+            float volume = 0.25f * progress.corruptionRatio();
+            player.playNotifySound(ModSounds.WHISPER_AMBIENT.get(), SoundSource.AMBIENT, volume, 0.8f);
+        }
+        if (before >= 75 && ticks % (SYNC_INTERVAL * 3) == 0) {
+            float volume = 0.35f * progress.corruptionRatio();
+            player.playNotifySound(ModSounds.HEARTBEAT.get(), SoundSource.AMBIENT, volume, 1.0f);
+        }
+    }
+
+    /**
+     * 侵蚀值 → 影子状态码。服务端决定，客户端只负责表现。
+     */
+    public static int shadowStateFor(int corruption) {
+        if (corruption < 20) {
+            return 0;
+        }
+        if (corruption < 40) {
+            return 1;
+        }
+        if (corruption < 60) {
+            return 2;
+        }
+        if (corruption < 80) {
+            return 3;
+        }
+        return 4;
+    }
+
+    /** 登录 / 重生 / 跨维度时全量同步进度，保证客户端缓存与存档一致。 */
+    @SubscribeEvent
+    public void onPlayerJoinWorld(PlayerEvent.PlayerLoggedInEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            syncAll(player);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerChangeDimension(PlayerEvent.PlayerChangedDimensionEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            syncAll(player);
+        }
+    }
+
+    @SubscribeEvent
+    public void onPlayerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+        if (event.getEntity() instanceof ServerPlayer player) {
+            syncAll(player);
+        }
+    }
+
+    private static void syncAll(ServerPlayer player) {
+        PlayerMemoryData data = PlayerMemoryData.get(player.serverLevel());
+        PlayerProgress progress = data.progressOf(player);
+
+        // 位掩码 + 线索 + 侵蚀值统一由 ServerPacketHandler 拼装，避免两处实现漂移
+        ServerPacketHandler.syncProgress(player, progress);
+        ModNetwork.sendToPlayer(new ShadowSyncPacket(shadowStateFor(progress.corruption())), player);
+    }
+}

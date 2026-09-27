@@ -1,0 +1,29 @@
+{
+  "type": "echoesofoblivion:silent_corridor",
+  "generator": {
+    "type": "minecraft:flat",
+    "settings": {
+      "layers": [
+        {
+          "block": "minecraft:bedrock",
+          "height": 1
+        },
+        {
+          "block": "minecraft:deepslate",
+          "height": 4
+        },
+        {
+          "block": "minecraft:blackstone",
+          "height": 1
+        }
+      ],
+      "lakes": false,
+      "features": true,
+      "biome": "echoesofoblivion:silent_biome"
+    },
+    "biome_source": {
+      "type": "minecraft:fixed",
+      "biome": "echoesofoblivion:silent_biome"
+    }
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "memory_collect": {
+    "sounds": [
+      "echoesofoblivion:memory_collect"
+    ],
+    "subtitle": "sounds.echoesofoblivion.memory_collect"
+  },
+  "whisper_ambient": {
+    "sounds": [
+      "echoesofoblivion:whisper_ambient"
+    ],
+    "subtitle": "sounds.echoesofoblivion.whisper_ambient"
+  },
+  "heartbeat": {
+    "sounds": [
+      "echoesofoblivion:heartbeat"
+    ],
+    "subtitle": "sounds.echoesofoblivion.heartbeat"
+  },
+  "corruption_pulse": {
+    "sounds": [
+      "echoesofoblivion:corruption_pulse"
+    ],
+    "subtitle": "sounds.echoesofoblivion.corruption_pulse"
+  },
+  "boss_summon": {
+    "sounds": [
+      "echoesofoblivion:boss_summon"
+    ],
+    "subtitle": "sounds.echoesofoblivion.boss_summon"
+  },
+  "boss_hit": {
+    "sounds": [
+      "echoesofoblivion:boss_hit"
+    ],
+    "subtitle": "sounds.echoesofoblivion.boss_hit"
+  },
+  "boss_death": {
+    "sounds": [
+      {
+        "name": "echoesofoblivion:boss_death",
+        "stream": false
+      },
+      {
+        "name": "echoesofoblivion:boss_death_alt",
+        "stream": false
+      }
+    ],
+    "subtitle": "sounds.echoesofoblivion.boss_death"
+  },
+  "portal_open": {
+    "sounds": [
+      "echoesofoblivion:portal_open"
+    ],
+    "subtitle": "sounds.echoesofoblivion.portal_open"
+  },
+  "portal_travel": {
+    "sounds": [
+      "echoesofoblivion:portal_travel"
+    ],
+    "subtitle": "sounds.echoesofoblivion.portal_travel"
+  },
+  "memory_vision": {
+    "sounds": [
+      "echoesofoblivion:memory_vision"
+    ],
+    "subtitle": "sounds.echoesofoblivion.memory_vision"
+  }
+}

@@ -1,0 +1,42 @@
+modLoader="javafml"
+loaderVersion="[0,)"
+license="MIT"
+
+[[mods]]
+modId="echoesofoblivion"
+# 与 build.gradle 的 version 保持一致，便于玩家对照发布文件
+version="1.0.0-mc1.20.6-forge"
+displayName="Echoes of Oblivion"
+authors="DreamColin and DeepSeekV4.1flash"
+
+description='''
+You are not the hero. You are the contamination.
+A psychological horror exploration mod. Step through an unstable portal into the Silent Corridor,
+an endless dead dimension, and touch the Memory Crystals to witness the last fragments of a
+civilization that erased itself.
+
+Core mechanics:
+- Psychological horror (no jump scares: shadow anomalies, whispers, creeping corruption)
+- Reality collapse (Mirror Chunk infection spreads into the Overworld)
+- Conceptual boss fight (the Silent Aggregate is immune to weapons; memories are your only weapon)
+
+Bringing the truth home does not free you. It follows you.
+'''
+
+# Access Transformers
+# 本模组不使用 AT，显式声明空列表以跳过 Forge 的默认查找，略有加载性能收益。
+accessTransformers = []
+
+[[dependencies.echoes_of_oblivion]]
+    modId="forge"
+    mandatory=true
+    versionRange="[50,)"
+    ordering="NONE"
+    side="BOTH"
+
+[[dependencies.echoes_of_oblivion]]
+    modId="minecraft"
+    mandatory=true
+    versionRange="[1.20.6,1.21)"
+    ordering="NONE"
+    side="BOTH"

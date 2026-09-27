@@ -1,0 +1,23 @@
+Treasure Chests (32x32 and 16x16)
+=================================
+
+Source      : https://opengameart.org/content/treasure-chests-32x32-and-16x16
+Author      : Blarumyrran
+License     : CC0 1.0 Universal
+License URL : https://creativecommons.org/publicdomain/zero/1.0/
+
+Files
+-----
+chests_16x16.png  - 48x80, 3 columns x 4 rows of 16x16 sprites (RGB, green screen key)
+chests_32x32.png  - 96x160, same layout at 32x32
+
+Notes
+-----
+The images are RGB without an alpha channel; the green background is intended
+to be keyed out as transparent.
+
+Status in this project
+----------------------
+Downloaded and verified as valid PNG, but NOT wired into the mod:
+the sheet is a chest, not a memory crystal, so it does not match the
+block it would have to replace. Kept here as a verified CC0 fallback asset.

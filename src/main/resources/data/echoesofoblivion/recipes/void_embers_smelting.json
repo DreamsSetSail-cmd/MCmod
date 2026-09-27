@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "minecraft:crying_obsidian"
+  },
+  "result": {
+    "id": "echoesofoblivion:void_embers",
+    "count": 2
+  },
+  "experience": 0.3,
+  "cookingtime": 200
+}

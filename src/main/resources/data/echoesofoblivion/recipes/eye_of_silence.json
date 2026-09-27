@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "VCV",
+    "SES",
+    "SCS"
+  ],
+  "key": {
+    "V": {
+      "item": "echoesofoblivion:void_embers"
+    },
+    "C": {
+      "item": "echoesofoblivion:corruption_essence"
+    },
+    "S": {
+      "item": "echoesofoblivion:shard_of_truth"
+    },
+    "E": {
+      "item": "minecraft:ender_eye"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:eye_of_silence",
+    "count": 1
+  }
+}

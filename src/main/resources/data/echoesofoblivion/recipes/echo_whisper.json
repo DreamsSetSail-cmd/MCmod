@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "PMP",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "echoesofoblivion:shard_of_truth"
+    },
+    "P": {
+      "item": "minecraft:paper"
+    },
+    "M": {
+      "item": "echoesofoblivion:memory_scroll"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:echo_whisper",
+    "count": 1
+  }
+}
