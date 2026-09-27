@@ -1,0 +1,26 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " M ",
+    "VAV",
+    " C "
+  ],
+  "key": {
+    "M": {
+      "item": "echoesofoblivion:membrane"
+    },
+    "V": {
+      "item": "echoesofoblivion:memory_vial"
+    },
+    "A": {
+      "item": "echoesofoblivion:ossuary_ash"
+    },
+    "C": {
+      "item": "echoesofoblivion:crystal_dust"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:purification_agent",
+    "count": 1
+  }
+}

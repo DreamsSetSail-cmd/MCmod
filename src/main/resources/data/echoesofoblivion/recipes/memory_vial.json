@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " A ",
+    "G G",
+    " T "
+  ],
+  "key": {
+    "A": {
+      "item": "echoesofoblivion:ritual_alloy"
+    },
+    "G": {
+      "item": "minecraft:glass"
+    },
+    "T": {
+      "item": "echoesofoblivion:shard_of_truth"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:memory_vial",
+    "count": 1
+  }
+}

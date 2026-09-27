@@ -3,3 +3,23 @@
 # are changed when only line endings change.
 src/generated/**/.cache/cache text eol=lf
 src/generated/**/*.json text eol=lf
+
+# 语言文件的行尾是**刻意不统一**的：一部分是 LF、一部分是 CRLF。
+# 两种都合规（tools/check_lang_format.py 只拒绝同一个文件里混用），
+# 但如果没有下面这几行，Windows 上的 core.autocrlf 会把 LF 的那批
+# 在检出时变成 CRLF，于是「仓库里的字节」和「工作区的字节」不一致，
+# 每次改动都要重新对一遍行尾。这里把它们钉死为 LF，保持确定性。
+#
+# CRLF 的那批（de_de es_es es_mx fr_fr it_it nl_nl pt_br pt_pt sv_se en_us zh_cn）
+# 不需要声明：仓库里存的是 LF，工作区按 core.autocrlf 得到 CRLF，
+# 打包进 jar 的行尾对 Minecraft 没有影响。
+src/main/resources/assets/echoesofoblivion/lang/cs_cz.json text eol=lf
+src/main/resources/assets/echoesofoblivion/lang/da_dk.json text eol=lf
+src/main/resources/assets/echoesofoblivion/lang/ja_jp.json text eol=lf
+src/main/resources/assets/echoesofoblivion/lang/ko_kr.json text eol=lf
+src/main/resources/assets/echoesofoblivion/lang/nb_no.json text eol=lf
+src/main/resources/assets/echoesofoblivion/lang/pl_pl.json text eol=lf
+src/main/resources/assets/echoesofoblivion/lang/ru_ru.json text eol=lf
+src/main/resources/assets/echoesofoblivion/lang/tr_tr.json text eol=lf
+src/main/resources/assets/echoesofoblivion/lang/uk_ua.json text eol=lf
+src/main/resources/assets/echoesofoblivion/lang/zh_tw.json text eol=lf

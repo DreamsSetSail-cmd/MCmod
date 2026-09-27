@@ -59,7 +59,7 @@ IllegalStateException: Missing test structure: minecraft:empty
 
 ## make_textures.py
 
-生成 9 张像素画贴图（8 个物品图标 + 1 个方块六面贴图）。
+生成 v1.x 的 9 张像素画贴图（8 个物品图标 + 1 个方块六面贴图）。
 
 ```bash
 python tools/make_textures.py
@@ -78,6 +78,58 @@ python tools/make_textures.py
 > 真理碎片糊成一条线、虚空余烬被画布边缘裁切。改用几何图元（圆环 + 矩形 +
 > 多边形）重画这三张后才有干净的轮廓。16×16 下手绘网格的精度不够，
 > 对称图形应当用图元生成。
+
+---
+
+## make_v2_textures.py
+
+生成 v2.0.0 新增的 **32 张物品贴图**（材料、工具、消耗品、12 段残片）。
+
+```bash
+python tools/make_v2_textures.py
+```
+
+复用 `make_textures.py` 的 `Canvas` 与 `write_png`，不重复实现 PNG 编码。
+
+---
+
+## make_niche_texture.py
+
+生成**残片龛**方块的 16×16 贴图与物品图标。
+
+```bash
+python tools/make_niche_texture.py
+```
+
+残片龛是满方块（走 `minecraft:block/cube_all`），所以贴图必须是完整的 16×16 面，
+与记忆水晶那种小方块不同。物品图标就是同一个面——原版方块物品也是这么做的。
+
+它从 `make_v2_textures.py` 导入 `Canvas` / `write_png`，因此那两个脚本必须同目录。
+
+---
+
+## add_*.py（语言键写入脚本）
+
+一组**一次性**脚本，各自把某一批新键写进全部 21 个语言文件
+（`en_us` / `zh_cn` 写真实文本，其余写英文回退，随后由翻译任务补齐）。
+保留它们是为了让「这批键当初是怎么进去的」可复查。
+
+| 脚本 | 内容 |
+| --- | --- |
+| `add_narrative_keys.py` | v1.x 叙事文案 |
+| `add_codex_keys.py` | 记忆图鉴键 |
+| `add_v120_keys.py` | v1.2.0（镜中的你、叫你的名字） |
+| `add_fragment_texts.py` | 12 段残片的标题与正文 |
+| `add_v200_keys.py` / `add_ritual_keys.py` | v2.0.0 物品与三种仪式 |
+| `add_v200_final_keys.py` | 12 个残片**物品名键** + 6 件工具的提示 |
+| `add_v200_zh_tw.py` | 上一批的 `zh_tw` 译文 |
+| `add_v200_niche_keys.py` | 残片龛的 3 个键 |
+| `add_v200_recipes.py` | v2.0.0 的 21 个合成配方（**写的是 JSON 配方，不是语言键**） |
+
+> **写语言文件时务必保留行尾。** 本仓库的语言文件一部分是 CRLF、一部分是 LF，
+> 两者都合规但同一文件内不能混用（见 `check_lang_format.py`）。
+> 这些脚本因此都做**文本层插入**，而不是 `json.dumps` 整体重写——
+> 后者会把 CRLF 静默改成 LF。
 
 ---
 

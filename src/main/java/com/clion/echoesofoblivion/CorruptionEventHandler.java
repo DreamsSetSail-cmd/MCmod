@@ -1,5 +1,6 @@
 package com.clion.echoesofoblivion;
 
+import com.clion.echoesofoblivion.item.ResearcherLanternItem;
 import com.clion.echoesofoblivion.memory.PlayerMemoryData;
 import com.clion.echoesofoblivion.memory.PlayerProgress;
 import com.clion.echoesofoblivion.network.ModNetwork;
@@ -71,6 +72,9 @@ public class CorruptionEventHandler {
         PlayerMemoryData data = PlayerMemoryData.get(level);
         PlayerProgress progress = data.progressOf(player);
 
+        // 记录增长前的值，供提灯的净变化折扣使用
+        int beforeGain = progress.corruption();
+
         // 每秒推进一次侵蚀值
         int gain = ConfigHelper.getInt(Config.corruptionGainRate, 1);
         if (gain > 0) {
@@ -79,6 +83,15 @@ public class CorruptionEventHandler {
         // 身处寂静走廊时侵蚀显著加速——「真相在污染你」
         if (level.dimension().equals(ModWorldGen.SILENT_CORRIDOR)) {
             progress.addCorruption(2);
+        }
+
+        // v2.0.0：研究者提灯让污染长得慢一半。它不是治疗，只是把终点推远。
+        // 用「净变化」而不是逐个来源打折，是为了保证它在走廊（+2）里同样有效——
+        // 只对 gain 打折会让这件物品在最需要它的地方失效。
+        int delta = progress.corruption() - beforeGain;
+        if (delta > 0 && ResearcherLanternItem.isCarried(player)) {
+            int reduction = Math.max(1, Math.round(delta * (1.0f - ResearcherLanternItem.GROWTH_MULTIPLIER)));
+            progress.addCorruption(-reduction);
         }
 
         int before = progress.corruption();

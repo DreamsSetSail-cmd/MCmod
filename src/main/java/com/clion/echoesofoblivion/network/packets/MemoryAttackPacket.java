@@ -38,7 +38,17 @@ public record MemoryAttackPacket(int memoryIndex) implements CustomPacketPayload
     }
 
     public static void handle(MemoryAttackPacket packet, CustomPayloadEvent.Context context) {
-        context.enqueueWork(() -> BossCombat.onMemoryAttack(context.getSender(), packet.memoryIndex()));
+        context.enqueueWork(() -> {
+            var player = context.getSender();
+            // 潜行使用 = 焚烧（v2.0.0）：牺牲这段记忆换取一次即时效果。
+            // 与普通攻击共用同一个键与同一个包，是因为两者的输入意图完全相同
+            // （「我要用这段记忆」），区别只在代价——而代价由玩家自己选择。
+            if (player != null && player.isShiftKeyDown()) {
+                com.clion.echoesofoblivion.server.MemoryBurn.burn(player, packet.memoryIndex());
+                return;
+            }
+            BossCombat.onMemoryAttack(player, packet.memoryIndex());
+        });
         context.setPacketHandled(true);
     }
 }

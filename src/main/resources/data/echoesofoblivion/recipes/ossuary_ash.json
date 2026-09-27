@@ -1,0 +1,11 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "echoesofoblivion:corruption_essence"
+  },
+  "result": {
+    "id": "echoesofoblivion:ossuary_ash"
+  },
+  "experience": 0.35,
+  "cookingtime": 200
+}

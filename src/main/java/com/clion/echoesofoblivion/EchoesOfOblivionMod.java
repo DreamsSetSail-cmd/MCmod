@@ -44,6 +44,8 @@ public class EchoesOfOblivionMod {
         MinecraftForge.EVENT_BUS.register(new CorruptionEventHandler());
         // 阶段 5：镜像区块扩散、重力闪烁、感染区亡魂生成
         MinecraftForge.EVENT_BUS.register(new MirrorChunkHandler());
+        // v2.0.0：仪式的延迟任务队列（静态订阅者，需要显式注册类对象）
+        MinecraftForge.EVENT_BUS.register(com.clion.echoesofoblivion.server.RitualScheduler.class);
 
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, Config.COMMON_SPEC);
         ModLoadingContext.get().registerConfig(ModConfig.Type.CLIENT, Config.CLIENT_SPEC);

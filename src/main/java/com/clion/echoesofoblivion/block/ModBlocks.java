@@ -43,6 +43,24 @@ public class ModBlocks {
             .noLootTable()
             .pushReaction(PushReaction.BLOCK)));
 
+    /**
+     * 残片龛（v2.0.0）：12 段残片在世界里的唯一来源。
+     *
+     * <p>刻意**不发光**（没有 {@code lightLevel}）。它是空的——槽底那点紫只是
+     * 贴图里画的余辉，不是真的光源。一个会照亮周围的空槽会显得「这里还有东西」，
+     * 而它要传达的恰恰是**这里的东西很久以前就被拿走了**。
+     *
+     * <p>{@code noLootTable()}：破坏它不应该把「龛」本身变成可刷的资源。
+     * 它是一次性的历史遗留物，不是一个可以搬回家的家具。
+     */
+    public static final RegistryObject<FragmentNicheBlock> FRAGMENT_NICHE =
+        BLOCKS.register("fragment_niche", () -> new FragmentNicheBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.DEEPSLATE)
+            .strength(1.5f)
+            .sound(SoundType.DEEPSLATE_BRICKS)
+            .noOcclusion()
+            .noLootTable()));
+
     public static final RegistryObject<BlockEntityType<MemoryCrystalBlockEntity>> MEMORY_CRYSTAL_BE =
         BLOCK_ENTITIES.register("memory_crystal", () ->
             BlockEntityType.Builder.of(MemoryCrystalBlockEntity::new, MEMORY_CRYSTAL.get()).build(null));

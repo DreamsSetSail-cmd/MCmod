@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  D",
+    " A ",
+    "T  "
+  ],
+  "key": {
+    "D": {
+      "item": "echoesofoblivion:crystal_dust"
+    },
+    "A": {
+      "item": "echoesofoblivion:ritual_alloy"
+    },
+    "T": {
+      "item": "echoesofoblivion:thread_of_choir"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:shatter_staff",
+    "count": 1
+  }
+}

@@ -1,7 +1,6 @@
 # 发布到 GitHub
 
 本地仓库已初始化、提交作者已改写为你的身份、`origin` 已配好。
-**只剩推送这一步**——它需要浏览器登录 GitHub，由你执行最稳妥。
 
 当前状态：
 
@@ -9,10 +8,10 @@
 | --- | --- |
 | 远程 | `origin` → <https://github.com/DreamsSetSail-cmd/MCmod.git> |
 | 分支 | `main` |
-| 提交 | `63c9a65`（初始）、`0e7fa73`（发布指南） |
-| 跟踪文件 | 158 个 |
 | 提交身份 | `DreamsSetSail-cmd <colinwangqihang@outlook.com>` |
-| 发布产物 | `build/libs/echoes-of-oblivion-1.0.0-mc1.20.6-forge.jar` |
+| 发布产物 | `build/libs/echoes-of-oblivion-2.0.0-mc1.20.6-forge.jar` |
+| 产物大小 | 约 570 KB（85 个 class） |
+| 跟踪文件 | 181 个 |
 
 ---
 
@@ -82,14 +81,14 @@ git push -u origin main
 工作流配置了「推送 `v*` 标签时自动创建 Release 并附上 jar」。所以：
 
 ```bash
-git tag v1.0.0-mc1.20.6-forge
-git push origin v1.0.0-mc1.20.6-forge
+git tag v2.0.0-mc1.20.6-forge
+git push origin v2.0.0-mc1.20.6-forge
 ```
 
 之后 GitHub 会自动：
 - 从该 tag 构建
 - 创建 Release（附带自动生成的更新说明）
-- 把 `echoes-of-oblivion-1.0.0-mc1.20.6-forge.jar` 作为 Release 附件
+- 把 `echoes-of-oblivion-2.0.0-mc1.20.6-forge.jar` 作为 Release 附件
 
 ---
 
@@ -127,5 +126,10 @@ DreamsSetSail-cmd <colinwangqihang@outlook.com>
       （`run/` 含约 252 MB 开发产物与下载的工具，绝不能进仓库）
 - [ ] 根目录有 `LICENSE`（MIT），且 `mods.toml` 里 `license="MIT"`
 - [ ] `python tools/check_lang.py` 输出「全部 21 个语言文件通过校验」
-- [ ] `./gradlew build` 成功，且 `build/libs/` 里的 jar **包含 55 个 class**
-      （可用 `unzip -l` 或压缩软件确认；曾出现过 jar 缺 class 的静默故障）
+- [ ] `python tools/check_lang_format.py` 输出「全部 21 个语言文件格式正常」
+      （21 个语言文件各 201 键）
+- [ ] `./gradlew build` 成功，且 `build/libs/` 里的 jar **包含 85 个 class**
+      （可用 `jar tf` 或压缩软件确认；曾出现过 jar 缺 class 的静默故障）
+- [ ] `./gradlew runGameTestServer` 输出 `All 5 required tests passed`
+- [ ] 根目录没有误提取的 `.class` 或 `com/ data/ net/ META-INF/ assets/` 残留
+      （`gradle` 反编译 Minecraft 时可能把 class 释到根目录，它们**不该进仓库**）

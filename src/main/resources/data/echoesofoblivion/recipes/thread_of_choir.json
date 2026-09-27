@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "echoesofoblivion:membrane"
+    },
+    {
+      "item": "echoesofoblivion:echo_whisper"
+    },
+    {
+      "item": "echoesofoblivion:ossuary_ash"
+    }
+  ],
+  "result": {
+    "id": "echoesofoblivion:thread_of_choir",
+    "count": 1
+  }
+}

@@ -9,8 +9,8 @@ plugins {
 }
 
 // 发布用版本号：包含模组版本、目标 MC 版本与加载器，便于玩家辨认该装哪个文件。
-// 产物名形如 echoes-of-oblivion-1.2.0-mc1.20.6-forge.jar
-version = '1.2.0-mc1.20.6-forge'
+// 产物名形如 echoes-of-oblivion-2.0.0-mc1.20.6-forge.jar
+version = '2.0.0-mc1.20.6-forge'
 group = 'com.clion.echoesofoblivion'
 
 // jar 文件名前缀（默认会取项目名 echoes_of_oblivion，这里改为连字符风格更易读）

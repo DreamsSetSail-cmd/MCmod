@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "SIS",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "minecraft:stone_bricks"
+    },
+    "I": {
+      "item": "echoesofoblivion:archivist_ink"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:blank_plaque",
+    "count": 1
+  }
+}

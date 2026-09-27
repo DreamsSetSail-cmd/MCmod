@@ -5,7 +5,7 @@ license="MIT"
 [[mods]]
 modId="echoesofoblivion"
 # 与 build.gradle 的 version 保持一致，便于玩家对照发布文件
-version="1.2.0-mc1.20.6-forge"
+version="2.0.0-mc1.20.6-forge"
 displayName="Echoes of Oblivion"
 authors="DreamColin and DeepSeekV4.1flash"
 

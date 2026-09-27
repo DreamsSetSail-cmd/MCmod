@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "SSS",
+    "III",
+    "SSS"
+  ],
+  "key": {
+    "S": {
+      "item": "echoesofoblivion:shard_of_truth"
+    },
+    "I": {
+      "item": "minecraft:iron_ingot"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:ritual_alloy",
+    "count": 2
+  }
+}

@@ -1,5 +1,6 @@
 package com.clion.echoesofoblivion.client;
 
+import com.clion.echoesofoblivion.client.screen.FragmentScreen;
 import com.clion.echoesofoblivion.client.screen.MemoryCodexScreen;
 import com.clion.echoesofoblivion.client.screen.MemoryVisionScreen;
 import com.clion.echoesofoblivion.memory.MemoryEntry;
@@ -87,6 +88,16 @@ public final class ClientPacketHandler {
     /** 打开记忆图鉴（v1.1.0）。由记忆卷轴触发。 */
     public static void openCodex() {
         Minecraft.getInstance().setScreen(new MemoryCodexScreen());
+    }
+
+    /**
+     * 打开残片阅读界面（v2.0.0）。
+     *
+     * <p>残片是纯文字物品，没有服务端状态，因此这里不需要往返同步——
+     * 客户端手上的物品本身就携带了要显示的键。
+     */
+    public static void openFragment(String titleKey, String textKey, String kindId) {
+        Minecraft.getInstance().setScreen(new FragmentScreen(titleKey, textKey, kindId));
     }
 
     /**

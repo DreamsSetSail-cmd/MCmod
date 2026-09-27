@@ -1,5 +1,6 @@
 package com.clion.echoesofoblivion.world;
 
+import com.clion.echoesofoblivion.block.ModBlocks;
 import com.mojang.serialization.Codec;
 import net.minecraft.core.BlockPos;
 import net.minecraft.util.RandomSource;
@@ -88,6 +89,18 @@ public class RuinPileFeature extends Feature<NoneFeatureConfiguration> {
                     break;
                 }
                 setBlock(level, pos, wallBlock(random));
+                placedAny = true;
+            }
+        }
+
+        // 4. 残片龛（v2.0.0）：约四分之一的废墟里有一个。
+        //    它是 12 段残片在世界里的唯一来源——残片没有合成配方，
+        //    如果世界里不生成它们，整套叙事在生存模式下就是不可达的。
+        //    放在废墟中心而不是塞进墙里，是为了让它看起来像「本来就该在这里」。
+        if (random.nextFloat() < 0.25f) {
+            BlockPos nichePos = surface;
+            if (isReplaceable(level, nichePos)) {
+                setBlock(level, nichePos, ModBlocks.FRAGMENT_NICHE.get().defaultBlockState());
                 placedAny = true;
             }
         }

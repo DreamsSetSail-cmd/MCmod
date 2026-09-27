@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "minecraft:glass"
+    },
+    {
+      "item": "echoesofoblivion:echo_whisper"
+    },
+    {
+      "item": "echoesofoblivion:void_embers"
+    }
+  ],
+  "result": {
+    "id": "echoesofoblivion:mirror_shard",
+    "count": 1
+  }
+}

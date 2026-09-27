@@ -1,0 +1,21 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "echoesofoblivion:corruption_essence"
+    },
+    {
+      "item": "echoesofoblivion:crystal_dust"
+    },
+    {
+      "item": "echoesofoblivion:crystal_dust"
+    },
+    {
+      "item": "echoesofoblivion:mirror_shard"
+    }
+  ],
+  "result": {
+    "id": "echoesofoblivion:silence_shard",
+    "count": 1
+  }
+}

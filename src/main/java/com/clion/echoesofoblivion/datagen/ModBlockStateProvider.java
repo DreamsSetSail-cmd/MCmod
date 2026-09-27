@@ -26,6 +26,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // 记忆水晶：cube_all + block/memory_crystal 纹理，并同时生成物品模型
         simpleBlockWithItem(ModBlocks.MEMORY_CRYSTAL.get(), cubeAll(ModBlocks.MEMORY_CRYSTAL.get()));
 
+        // 残片龛（v2.0.0）：同为 cube_all 的满方块，纹理 textures/block/fragment_niche.png
+        simpleBlockWithItem(ModBlocks.FRAGMENT_NICHE.get(), cubeAll(ModBlocks.FRAGMENT_NICHE.get()));
+
         // 不稳定传送门：方块本身不可见（RenderShape.INVISIBLE），因此引用原版空气模型，
         // 保证缺少 blockstate 时不会出现「模型缺失」的紫黑格
         invisibleBlock(ModBlocks.UNSTABLE_PORTAL.get());

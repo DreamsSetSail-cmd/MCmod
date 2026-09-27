@@ -36,6 +36,23 @@ public final class PlayerProgress {
         return collected.contains(memoryIndex);
     }
 
+    /**
+     * 遗忘一段记忆（v2.0.0，供记忆焚烧使用）。
+     *
+     * <p><b>这是不可逆的。</b> 被遗忘的记忆会从进度里移除，图鉴上重新变回划痕，
+     * 而水晶不会再提供它（当全部记忆都已见证时，水晶只给「回响」）。
+     * 设计意图见 {@code MemoryBurn}：玩家为了活下去，正在把知道的东西消耗掉。
+     *
+     * <p>注意**不移除线索**：线索是「你已经理解了这件事」的痕迹，
+     * 记住一个结论与记得它的来源是两回事。这也让焚烧留下一点余温——
+     * 你忘了内容，但还记得它教过你什么。
+     *
+     * @return 是否真的遗忘了（原本就没见证过时返回 false）
+     */
+    public boolean forget(int memoryIndex) {
+        return collected.remove(memoryIndex);
+    }
+
     public Set<Integer> collected() {
         return Set.copyOf(collected);
     }

@@ -5,6 +5,7 @@ import com.clion.echoesofoblivion.item.ModItems;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.RegistryObject;
@@ -18,15 +19,12 @@ public class ModCreativeTabs {
             .title(Component.translatable("itemGroup.echoesofoblivion"))
             .icon(() -> new ItemStack(ModItems.MEMORY_CRYSTAL.get()))
             .displayItems((parameters, output) -> {
-                // ModItems.MEMORY_CRYSTAL 是它的 BlockItem，无需再单独添加方块本体
-                output.accept(ModItems.MEMORY_CRYSTAL.get());
-                output.accept(ModItems.CORRIDOR_KEY.get());
-                output.accept(ModItems.MEMORY_SCROLL.get());
-                output.accept(ModItems.ECHO_WHISPER.get());
-                output.accept(ModItems.SHARD_OF_TRUTH.get());
-                output.accept(ModItems.VOID_EMBERS.get());
-                output.accept(ModItems.CORRUPTION_ESSENCE.get());
-                output.accept(ModItems.EYE_OF_SILENCE.get());
+                // 完整清单由 ModItems.creativeTabContents() 提供，顺序即分类顺序
+                // （考古 / 仪式 / 消耗 / 材料 / 工具 / 残片）。
+                // 这样加物品时只需要改一处，不会出现「注册了但标签页里没有」。
+                for (RegistryObject<Item> item : ModItems.creativeTabContents()) {
+                    output.accept(item.get());
+                }
             })
             .build());
 }

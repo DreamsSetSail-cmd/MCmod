@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "echoesofoblivion:ritual_alloy"
+    },
+    {
+      "item": "echoesofoblivion:ritual_alloy"
+    },
+    {
+      "item": "echoesofoblivion:crystal_dust"
+    }
+  ],
+  "result": {
+    "id": "echoesofoblivion:resonant_alloy",
+    "count": 2
+  }
+}

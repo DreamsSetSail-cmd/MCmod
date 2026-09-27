@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " E ",
+    "EME",
+    " E "
+  ],
+  "key": {
+    "M": {
+      "item": "echoesofoblivion:membrane"
+    },
+    "E": {
+      "item": "echoesofoblivion:void_embers"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:researcher_lantern",
+    "count": 1
+  }
+}

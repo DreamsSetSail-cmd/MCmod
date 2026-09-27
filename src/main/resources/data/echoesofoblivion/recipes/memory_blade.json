@@ -1,0 +1,20 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " C ",
+    " C ",
+    " T "
+  ],
+  "key": {
+    "C": {
+      "item": "echoesofoblivion:corrupted_fragment"
+    },
+    "T": {
+      "item": "echoesofoblivion:shard_of_truth"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:memory_blade",
+    "count": 1
+  }
+}

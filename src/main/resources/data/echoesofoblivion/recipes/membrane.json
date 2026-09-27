@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "echoesofoblivion:corruption_essence"
+    },
+    {
+      "item": "echoesofoblivion:void_embers"
+    },
+    {
+      "item": "echoesofoblivion:void_embers"
+    }
+  ],
+  "result": {
+    "id": "echoesofoblivion:membrane",
+    "count": 2
+  }
+}

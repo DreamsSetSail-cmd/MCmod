@@ -150,6 +150,26 @@ public class RealityData extends SavedData {
         ModNetwork.sendToPlayer(new RealityShiftPacket(snapshot(), false, phase), player);
     }
 
+    /**
+     * 从感染集合里移除若干区块（v2.0.0，供净化剂使用）。
+     *
+     * @return 实际被移除的数量（可能少于传入数量，因为部分区块本来就没被感染）
+     */
+    public int removeChunks(java.util.Collection<Long> chunks) {
+        int removed = 0;
+        for (long key : chunks) {
+            if (infected.remove(key)) {
+                removed++;
+            }
+        }
+        if (removed > 0) {
+            // 阶段随规模回落，避免清掉大半之后阶段还停在 3
+            phase = Math.min(3, infected.size() / 128);
+            setDirty();
+        }
+        return removed;
+    }
+
     /** 把增量广播给主世界里的所有玩家。 */
     public void broadcastIncrement(ServerLevel level, List<Long> added) {
         if (added.isEmpty() || !level.dimension().equals(Level.OVERWORLD)) {

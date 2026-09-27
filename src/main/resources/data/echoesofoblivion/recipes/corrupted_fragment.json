@@ -1,0 +1,15 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "echoesofoblivion:shard_of_truth"
+    },
+    {
+      "item": "echoesofoblivion:corruption_essence"
+    }
+  ],
+  "result": {
+    "id": "echoesofoblivion:corrupted_fragment",
+    "count": 1
+  }
+}

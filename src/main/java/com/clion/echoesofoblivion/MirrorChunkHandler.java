@@ -3,6 +3,7 @@ package com.clion.echoesofoblivion;
 import com.clion.echoesofoblivion.entity.MirrorEntity;
 import com.clion.echoesofoblivion.entity.ModEntities;
 import com.clion.echoesofoblivion.entity.PhantomEntity;
+import com.clion.echoesofoblivion.item.StabilizerItem;
 import com.clion.echoesofoblivion.network.ModNetwork;
 import com.clion.echoesofoblivion.network.packets.ShadowSyncPacket;
 import com.clion.echoesofoblivion.sound.ModSounds;
@@ -100,7 +101,9 @@ public class MirrorChunkHandler {
         var random = player.getRandom();
 
         // 1. 重力闪烁：短暂地把玩家向上（或向下）推一下，制造「空间不稳」的错觉
-        if (random.nextFloat() < GRAVITY_FLICKER_CHANCE) {
+        //    v2.0.0：注射过稳定剂的玩家在这 90 秒里不受影响——规则暂时站得住
+        if (!StabilizerItem.isStabilized(player, level.getGameTime())
+                && random.nextFloat() < GRAVITY_FLICKER_CHANCE) {
             Vec3 movement = player.getDeltaMovement();
             double vertical = movement.y;
             if (random.nextBoolean()) {
@@ -212,5 +215,16 @@ public class MirrorChunkHandler {
             return false;
         }
         return RealityData.get(level).isInfected(player.getX(), player.getZ());
+    }
+
+    /**
+     * 玩家退出时清理稳定剂计时。
+     *
+     * <p>不清也不会出错（查询是惰性的），但长跑服务器上那张 Map 会随
+     * 登录过的 UUID 无限增长，属于必须收口的资源。
+     */
+    @SubscribeEvent
+    public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
+        StabilizerItem.clear(event.getEntity().getUUID());
     }
 }

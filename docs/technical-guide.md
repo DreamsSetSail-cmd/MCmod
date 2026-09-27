@@ -54,30 +54,46 @@ org.gradle.caching=false                            # 见下
 │   │   ├── UnstablePortalBlock.java  无碰撞传送门，进入即传送
 │   │   └── entity/MemoryCrystalBlockEntity.java
 │   ├── item/
-│   │   ├── ModItems.java             物品注册
+│   │   ├── ModItems.java             物品注册（42 件）
 │   │   ├── CorridorKeyItem.java      点燃传送门（含 2×3 门框校验）
-│   │   └── EyeOfSilenceItem.java     Boss 召唤凭证
+│   │   ├── EyeOfSilenceItem.java     Boss 召唤凭证
+│   │   ├── ResonanceForkItem.java    三种仪式（v2.0.0）
+│   │   ├── ExcavationShovelItem.java 取样记忆水晶 + 开启被封残片
+│   │   ├── MemoryVialItem.java       降侵蚀，代价是烧掉最近一段记忆
+│   │   ├── StabilizerItem.java       90 秒免疫重力闪烁（含静态计时表）
+│   │   ├── MemoryBladeItem.java      对亡魂追加伤害、对聚合体 0 伤害
+│   │   ├── ShatterStaffItem.java     射线检测 + 落点范围驱散
+│   │   ├── ResearcherLanternItem.java 持有期间侵蚀增长减半
+│   │   ├── MemoryScrollItem.java     打开记忆图鉴
+│   │   ├── RuinsCompassItem.java     螺旋区块扫描找水晶
+│   │   └── LoreFragmentItem.java     12 段残片（含 Kind 分类与阅读界面）
 │   ├── entity/
 │   │   ├── ModEntities.java          实体注册 + 属性（@EventBusSubscriber 自动挂载）
 │   │   ├── PhantomEntity.java        亡魂
+│   │   ├── MirrorEntity.java         镜中的你（不透明渲染）
 │   │   └── SilentAggregateEntity.java Boss：免疫、恐惧光环、稳定性
 │   ├── memory/
 │   │   ├── MemoryRegistry.java       5 段记忆的静态目录（单一事实来源）
 │   │   ├── MemoryEntry.java          记忆 record（id/键/线索/颜色/连接线索）
 │   │   ├── MemoryProgression.java    进度里程碑的世界联动
 │   │   ├── PlayerMemoryData.java     SavedData：按 UUID 分桶的进度容器
-│   │   └── PlayerProgress.java       单玩家进度 + 侵蚀值
+│   │   └── PlayerProgress.java       单玩家进度 + 侵蚀值 + forget()（焚烧用）
 │   ├── network/
 │   │   ├── ModNetwork.java           ChannelBuilder + 9 个包的注册
 │   │   └── packets/                  9 个 CustomPacketPayload
 │   ├── server/
 │   │   ├── ServerPacketHandler.java  水晶交互判定 + 进度同步
-│   │   └── BossCombat.java           记忆攻击、恐惧光环、召唤、终结结算
+│   │   ├── BossCombat.java           记忆攻击、恐惧光环、召唤、终结结算
+│   │   ├── BossAura.java             恐惧光环的渲染/侵蚀副作用
+│   │   ├── MemoryBurn.java           记忆焚烧：按主题施加效果（潜行 + R）
+│   │   └── RitualScheduler.java      仪式的延迟任务队列（静态总线订阅者）
 │   ├── world/
 │   │   ├── ModWorldGen.java          ResourceKey + 自定义 Feature 注册
 │   │   ├── RealityData.java          镜像区块的 SavedData
 │   │   ├── CorridorTeleportHelper.java 双向传送与落点铺设
-│   │   └── RuinPileFeature.java      废墟地物
+│   │   ├── Rituals.java              三种仪式的效果实现
+│   │   ├── RuinPileFeature.java      废墟地物
+│   │   └── MonumentFeature.java      纪念碑（残片的放置来源）
 │   ├── sound/ModSounds.java          11 个 SoundEvent
 │   ├── datagen/                      GatherDataEvent + 两个 provider
 │   └── client/                       所有仅客户端代码
@@ -271,6 +287,101 @@ Boss 会变成无法清除的实体。
 伤害：基础 12，**共鸣（连接线索齐备）翻倍**。
 
 **召唤三条件**（缺一不可）：见证全部 5 段 + 身处感染区块 + 手持寂静之眼。
+
+### 3.8 v2.0.0 的四个新系统
+
+#### 记忆焚烧（`server/MemoryBurn.java`）
+
+潜行 + 记忆攻击键触发。`MemoryAttackPacket` 的潜行分支转发到这里，
+非潜行分支仍归 `BossCombat`——**两条路径共用一个按键**，靠潜行状态分流。
+
+```java
+progress.forget(memoryIndex);   // 不可逆
+data.markDirty();
+ServerPacketHandler.syncProgress(player, progress);   // 图鉴当 tick 变回划痕
+```
+
+效果按**记忆索引**分发，不按数值配置：
+
+| 索引 | 主题 | 效果 |
+| --- | --- | --- |
+| 0, 3 | 仪器的光 | `discard()` 半径 24 内全部亡魂 |
+| 1, 2 | 桥与静默介质 | `setSilent(true)` + `setNoAi(true)` 30 秒，**不驱散** |
+| 4 | 说出来的话 | 清 3x3 区块感染 + 侵蚀压回 50 |
+
+**静默分支的易错点**：恢复时必须过滤 `isRemoved()`。
+实体在被定身的 30 秒里完全可能被别的原因移除，对已移除实体调用
+`setSilent` 会抛异常。
+
+`forget()` **刻意不移除线索**——线索是「你已经理解了这件事」的痕迹，
+与记得它的来源是两回事。
+
+#### 三种仪式（`item/ResonanceForkItem.java` + `world/Rituals.java`）
+
+音叉右键执行当前仪式，潜行右键切换。材料检查与扣除在 `ResonanceForkItem`，
+效果实现在 `Rituals`，**延迟效果**（如 Descent 的 30 秒静音结束）交给
+`RitualScheduler`。
+
+`RitualScheduler` 必须在主类里**以类对象显式注册**：
+
+```java
+MinecraftForge.EVENT_BUS.register(com.clion.echoesofoblivion.server.RitualScheduler.class);
+```
+
+静态 `@SubscribeEvent` 方法不会因为类被「用到」就自动挂载——
+不注册的话队列永远不会被 tick，仪式效果看起来像没生效。
+
+#### 残片（`item/LoreFragmentItem.java` + `client/screen/FragmentScreen.java`）
+
+12 段残片各有独立的**注册名**（`fragment_<id>`），共用一个类，靠构造参数带 `id` 与 `Kind`。
+这样物品栏里能显示不同的名字与图标，而不需要 12 个类。
+
+`Kind` 枚举同时携带语言键后缀与提示颜色，并在 `isFoil()` 里区分：
+私人信件与祈祷有附魔光效，因为它们是唯一「有个人」的两类。
+
+**易错点**：物品注册名是 `fragment_<id>`，所以物品名键是
+`item.echoesofoblivion.fragment_<id>`；而正文与标题是
+`fragment.echoesofoblivion.<id>.title` / `.text`。**这是两套不同的命名**，
+漏掉前者会让残片在物品栏里显示为原始键名（v2.0.0 修过这个缺陷）。
+
+#### 残片龛（`block/FragmentNicheBlock.java`）
+
+12 段残片在世界里的**唯一来源**。它存在的理由是一条推论：
+**「没有配方」必须同时给出另一条获取途径**，否则这 12 件物品在生存模式下
+完全不可得，整套叙事就是死的。
+
+```java
+// 按玩家背包里还没有的索引顺序发放
+for (var entry : ModItems.fragments().entrySet()) {
+    if (!carried.stream().anyMatch(s -> s.is(entry.getValue().get()))) {
+        return new ItemStack(entry.getValue().get(), 1);
+    }
+}
+```
+
+三个刻意的决定：
+
+1. **确定性发放，而不是随机**。12 段的集合上随机必然导致赠券收集者问题——
+   玩家会反复拿到读过的段落而永远缺某一段。改成按缺失索引发放后，
+   「顺序不可控」依然成立：**找到哪个龛才是不可控的那一部分**。
+2. **按背包判定而不是进度存档**。丢掉的段落必须能再拿到；
+   按进度判定会造成永久不可恢复的死锁。
+3. **`noLootTable()`**。破坏它不给掉落——它是一次性的历史遗留物，
+   不是一个可以搬回家的家具。
+
+#### 稳定剂的静态计时表（`item/StabilizerItem.java`）
+
+```java
+private static final Map<UUID, Long> ACTIVE = new ConcurrentHashMap<>();
+```
+
+- 用**游戏刻**（`level.getGameTime()`）而不是墙钟：暂停、卡顿、重启都以世界时间为准。
+- 用 **UUID** 而不是玩家实例：实例会在维度切换后被替换。
+- 查询时**惰性清理**过期项（不需要额外的 tick 任务），
+  另外在 `PlayerLoggedOutEvent` 里显式清理，避免长跑服务器上这张表无限增长。
+
+`MirrorChunkHandler` 在施加重力闪烁前查询它——这是「新物品改变既有系统行为」
+的最小侵入写法：既有系统只多一个条件判断，不需要知道物品的存在。
 
 ---
 
@@ -551,20 +662,34 @@ ModLoadingContext.get().registerConfig(CLIENT, Config.CLIENT_SPEC);   // 49
 仍是色块。因为自绘几何渲染**不采样它们**，所以不影响观感；
 升级为 `MobRenderer` + 正式模型时才需要补上。
 
-### 9.3 废墟只有断墙
+### 9.3 废墟只有断墙（v2.0.0 已部分解决）
 
-`RuinPileFeature` 生成断墙、碎砖、残柱，但**没有环境叙事物**
-（桥墩、仪器基座、名字碑）。方案见 `docs/story-bible.md` §7.3。
+`RuinPileFeature` 生成断墙、碎砖、残柱，现在还会在约四分之一的废墟中心放一个
+**残片龛**。名字碑（`blank_plaque` 作为成品方块）仍未落地，
+方案见 `docs/story-bible.md` §7.3。
 
 ### 9.4 共鸣只有提示，没有第二段文本
 
 `PlayerProgress.isResonant()` 已实现判定，但幻境屏幕只显示一行「回响共鸣」提示。
-**这是叙事上最值得补的一块**：目前玩家无法在游戏内拼出因果链。
+**这是叙事上最值得补的一块**：目前玩家无法在游戏内拼出记忆之间的因果链。
+（v2.0.0 的 12 段残片从侧面缓解了这一点——历史因果现在可以靠收集拼出来，
+但**记忆之间**的共鸣文本仍然只有一行。）
 方案与文案草案见 `docs/story-bible.md` §7.1。
 
-### 9.5 记忆卷轴是普通物品
+### 9.5 ~~记忆卷轴是普通物品~~（已解决）
 
-`memory_scroll` 尚未实现为「已收集记忆的图鉴界面」（见 `docs/story-bible.md` §7.2）。
+`memory_scroll` 已实现为记忆图鉴界面（`MemoryCodexScreen`），
+支持阅读已见证的记忆、查看划掉的条目与侵蚀状态。
+
+### 9.6 残片龛的发放依赖背包状态
+
+`FragmentNicheBlock.takeNextFragment()` 靠**遍历背包**判断玩家还没有哪一段。
+这在单次交互里是 O(12)，完全不是问题；但它有一个语义特性值得记住：
+**玩家把残片存进箱子后，可以去下一个龛再拿一段**。
+
+这是刻意的取舍——按进度存档判定会让丢掉的段落永久不可恢复，
+而「丢了就能再拿」的坏处只是玩家可以多拿几份重复的文本。
+两者相比，前者是死锁，后者只是冗余。
 
 ---
 

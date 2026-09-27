@@ -1,0 +1,18 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "echoesofoblivion:ossuary_ash"
+    },
+    {
+      "item": "echoesofoblivion:void_embers"
+    },
+    {
+      "item": "minecraft:glass_bottle"
+    }
+  ],
+  "result": {
+    "id": "echoesofoblivion:archivist_ink",
+    "count": 1
+  }
+}
