@@ -130,6 +130,10 @@ public final class BossCombat {
 
     /** 终结演出与结算（阶段 6 第 5 条）。 */
     private static void onBossDefeated(ServerLevel level, ServerPlayer player, SilentAggregateEntity boss) {
+        // 最后一句台词：它在感谢你把它们带回来。
+        // 这是全篇最恐怖的一句——玩家以为自己赢了，而它在感谢污染成功。
+        boss.announceDying();
+
         level.playSound(null, boss.blockPosition(), ModSounds.BOSS_DEATH.get(),
             SoundSource.HOSTILE, 1.5f, 0.8f);
         level.sendParticles(ParticleTypes.EXPLOSION_EMITTER,

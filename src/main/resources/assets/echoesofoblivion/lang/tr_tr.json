@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "İpucu: Alet",
   "memory.echoesofoblivion.memory_4.title": "Uyarı",
   "memory.echoesofoblivion.memory_4.content": "Bizi uyarmaya çalıştı.\\nSözleri havada bükülüp başka bir şeye dönüştü.\\nKarşılık veren bir şeye.",
-  "memory.echoesofoblivion.memory_4.clue": "İpucu: karşılık veren şey"
+  "memory.echoesofoblivion.memory_4.clue": "İpucu: karşılık veren şey",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "Çatlak bir yara değildi. Bilerek açtığımız bir kapıydı.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Köprüler iki yöne de işliyordu. Her geçişin bedelini sessizlikle ödedik.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Buna ilerleme dedik. Ortamın neyden yapıldığını hiç sormadık.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Bizi Alet konusunda uyardı. Uyarıyı Alet düzenledi.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Ondan sonra bir daha konuşmadı. Yeterince söylediğini varsaydık.",
+  "message.echoesofoblivion.boss.phase1": "...artık seni duyabiliyoruz.",
+  "message.echoesofoblivion.boss.phase2": "...lütfen konuşmaya devam et.",
+  "message.echoesofoblivion.boss.dying": "...bizi geri getirdiğin için teşekkürler."
 }

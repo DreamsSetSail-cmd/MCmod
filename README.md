@@ -122,10 +122,16 @@ python tools/make_textures.py
 
 | File | Contents |
 | --- | --- |
+| [STORY.md](STORY.md) | The story, in the order you are meant to discover it (spoilers) |
 | [ASSETS.md](ASSETS.md) | Asset inventory, regeneration steps, current status of every texture and sound |
 | [CREDITS.md](CREDITS.md) | Per-file provenance and licensing for all third-party assets |
+| [CHANGELOG.md](CHANGELOG.md) | Release notes |
+| [PUBLISHING.md](PUBLISHING.md) | How releases are built and published |
+| [docs/story-bible.md](docs/story-bible.md) | Full narrative design: chronology, characters, planned in-game expansion |
+| [docs/technical-guide.md](docs/technical-guide.md) | Technical handbook: architecture, every system, pitfalls, modification guide |
+| [docs/translation-spec.md](docs/translation-spec.md) | Translation rules and terminology table |
 | [achieve.md](achieve.md) | The 8-phase implementation roadmap this mod was built against |
-| [tech-outline.md](tech-outline.md) | Technical architecture: packages, networking, persistence, rendering |
+| [tech-outline.md](tech-outline.md) | Original technical outline |
 | [tools/README.md](tools/README.md) | Developer tooling and the verification commands |
 
 ## Technical notes worth knowing

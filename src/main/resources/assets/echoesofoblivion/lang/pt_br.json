@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Pista: o Aparato",
   "memory.echoesofoblivion.memory_4.title": "O Aviso",
   "memory.echoesofoblivion.memory_4.content": "Ela tentou nos avisar.\\nAs palavras dela se torceram no ar e viraram outra coisa.\\nAlgo que também escutava.",
-  "memory.echoesofoblivion.memory_4.clue": "Pista: algo que também escutava"
+  "memory.echoesofoblivion.memory_4.clue": "Pista: algo que também escutava",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "A fenda não era uma ferida. Era uma porta que abrimos de propósito.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "As pontes iam nos dois sentidos. Pagamos cada travessia com silêncio.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Chamamos isso de progresso. Nunca perguntamos do que era feito o meio.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Ela nos avisou sobre o Aparato. O Aparato reescreveu o aviso.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Depois disso, ela nunca mais falou. Achamos que já tinha dito o suficiente.",
+  "message.echoesofoblivion.boss.phase1": "...agora podemos te ouvir.",
+  "message.echoesofoblivion.boss.phase2": "...por favor, continue falando.",
+  "message.echoesofoblivion.boss.dying": "...obrigado por nos trazer de volta."
 }

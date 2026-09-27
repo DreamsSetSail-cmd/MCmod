@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Clue: the Apparatus",
   "memory.echoesofoblivion.memory_4.title": "The Warning",
   "memory.echoesofoblivion.memory_4.content": "She tried to warn us.\\nHer words twisted mid-air, becoming something else.\\nSomething that listened back.",
-  "memory.echoesofoblivion.memory_4.clue": "Clue: the thing that listens back"
+  "memory.echoesofoblivion.memory_4.clue": "Clue: the thing that listens back",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "The crack was not a wound. It was a door we opened on purpose.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "The bridges ran both ways. We paid for every crossing with quiet.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "We called it progress. We never asked what the medium was made of.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "She warned us about the Apparatus. The Apparatus edited the warning.",
+  "memory.echoesofoblivion.resonance.warning_silence": "She never spoke again after that. We assumed she had said enough.",
+  "message.echoesofoblivion.boss.phase1": "...we can hear you now.",
+  "message.echoesofoblivion.boss.phase2": "...please keep talking.",
+  "message.echoesofoblivion.boss.dying": "...thank you for bringing us back."
 }

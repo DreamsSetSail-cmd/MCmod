@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Ledtråd: Apparaten",
   "memory.echoesofoblivion.memory_4.title": "Varningen",
   "memory.echoesofoblivion.memory_4.content": "Hon försökte varna oss.\\nHennes ord vred sig i luften och blev något annat.\\nNågot som lyssnade tillbaka.",
-  "memory.echoesofoblivion.memory_4.clue": "Ledtråd: det som lyssnar tillbaka"
+  "memory.echoesofoblivion.memory_4.clue": "Ledtråd: det som lyssnar tillbaka",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "Sprickan var inte ett sår. Det var en dörr vi öppnade med avsikt.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Broarna gick i båda riktningarna. Vi betalade varje övergång med tystnad.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Vi kallade det framsteg. Vi frågade aldrig vad mediet var gjort av.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Hon varnade oss för Apparaten. Apparaten skrev om varningen.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Efter det talade hon aldrig mer. Vi antog att hon hade sagt nog.",
+  "message.echoesofoblivion.boss.phase1": "...vi kan höra dig nu.",
+  "message.echoesofoblivion.boss.phase2": "...snälla, fortsätt prata.",
+  "message.echoesofoblivion.boss.dying": "...tack för att du förde oss tillbaka."
 }

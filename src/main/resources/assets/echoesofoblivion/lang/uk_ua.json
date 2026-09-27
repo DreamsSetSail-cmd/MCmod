@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Підказка: Апарат",
   "memory.echoesofoblivion.memory_4.title": "Попередження",
   "memory.echoesofoblivion.memory_4.content": "Вона намагалася нас попередити.\\nЇї слова викривилися в повітрі, стаючи чимось іншим.\\nТим, що слухало у відповідь.",
-  "memory.echoesofoblivion.memory_4.clue": "Підказка: те, що слухає у відповідь"
+  "memory.echoesofoblivion.memory_4.clue": "Підказка: те, що слухає у відповідь",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "Тріщина не була раною. Це були двері, які ми відчинили навмисно.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Мости працювали в обидва боки. За кожен перехід ми платили тишею.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Ми називали це поступом. Ми жодного разу не запитали, з чого зроблене це середовище.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Вона попередила нас про Апарат. Апарат відредагував це попередження.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Після цього вона більше не говорила. Ми вирішили, що вона сказала достатньо.",
+  "message.echoesofoblivion.boss.phase1": "...тепер ми чуємо тебе.",
+  "message.echoesofoblivion.boss.phase2": "...будь ласка, говори далі.",
+  "message.echoesofoblivion.boss.dying": "...дякуємо, що привів нас назад."
 }

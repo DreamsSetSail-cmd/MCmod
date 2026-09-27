@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Hinweis: die Apparatur",
   "memory.echoesofoblivion.memory_4.title": "Die Warnung",
   "memory.echoesofoblivion.memory_4.content": "Sie versuchte, uns zu warnen.\\nIhre Worte wanden sich mitten in der Luft und wurden etwas anderes.\\nEtwas, das zurückhorchte.",
-  "memory.echoesofoblivion.memory_4.clue": "Hinweis: das Wesen, das zurückhorcht"
+  "memory.echoesofoblivion.memory_4.clue": "Hinweis: das Wesen, das zurückhorcht",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "Der Riss war keine Wunde. Er war eine Tür, die wir absichtlich öffneten.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Die Brücken liefen in beide Richtungen. Wir zahlten für jede Überquerung mit Stille.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Wir nannten es Fortschritt. Wir fragten nie, woraus das Medium gemacht war.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Sie warnte uns vor der Apparatur. Die Apparatur schrieb die Warnung um.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Danach sprach sie nie wieder. Wir nahmen an, sie habe genug gesagt.",
+  "message.echoesofoblivion.boss.phase1": "...wir können dich jetzt hören.",
+  "message.echoesofoblivion.boss.phase2": "...bitte sprich weiter.",
+  "message.echoesofoblivion.boss.dying": "...danke, dass du uns zurückgebracht hast."
 }

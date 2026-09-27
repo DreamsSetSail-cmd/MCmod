@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Улика: Аппарат",
   "memory.echoesofoblivion.memory_4.title": "Предупреждение",
   "memory.echoesofoblivion.memory_4.content": "Она пыталась нас предупредить.\\nЕё слова искривились в воздухе, становясь чем-то иным.\\nТем, что слушало в ответ.",
-  "memory.echoesofoblivion.memory_4.clue": "Улика: то, что слушает в ответ"
+  "memory.echoesofoblivion.memory_4.clue": "Улика: то, что слушает в ответ",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "Трещина не была раной. Это была дверь, которую мы открыли намеренно.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Мосты работали в обе стороны. За каждый переход мы платили тишиной.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Мы называли это прогрессом. Мы ни разу не спросили, из чего сделана эта среда.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Она предупредила нас об Аппарате. Аппарат отредактировал это предупреждение.",
+  "memory.echoesofoblivion.resonance.warning_silence": "После этого она больше не говорила. Мы решили, что она сказала достаточно.",
+  "message.echoesofoblivion.boss.phase1": "...теперь мы слышим тебя.",
+  "message.echoesofoblivion.boss.phase2": "...пожалуйста, говори дальше.",
+  "message.echoesofoblivion.boss.dying": "...спасибо, что вернул нас обратно."
 }

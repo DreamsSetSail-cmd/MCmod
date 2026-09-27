@@ -36,9 +36,11 @@ public class MemoryVisionScreen extends Screen {
     private final boolean firstTime;
     private final boolean resonant;
     private final List<String> lines;
+    private final List<String> resonanceLines;
     private final String titleText;
     private final String clueText;
     private final String resonantText;
+    private final String resonanceMarker;
     private final String skipText;
 
     private int ticks;
@@ -51,9 +53,12 @@ public class MemoryVisionScreen extends Screen {
         this.titleText = entry.title().getString();
         this.clueText = entry.clueText().getString();
         this.resonantText = Component.translatable("screen.echoesofoblivion.resonance").getString();
+        this.resonanceMarker = "◈";
         this.skipText = Component.translatable("screen.echoesofoblivion.skip").getString();
         // 语言文件里正文以字面量 \n 分隔
         this.lines = List.of(entry.content().getString().split("\\\\n|\\n"));
+        // 共鸣碎片同样以 \n 分隔；只在共鸣时才会被渲染
+        this.resonanceLines = List.of(entry.resonanceText().getString().split("\\\\n|\\n"));
     }
 
     @Override
@@ -127,18 +132,50 @@ public class MemoryVisionScreen extends Screen {
         }
 
         // 线索：这条记忆留下的、可用于关联的碎片
+        // 位置定在 height-96 而不是更靠下：共鸣碎片最多 4 行，
+        // 若贴着底部会与「按 ESC 脱离」提示重叠。
         if (ticks > FADE_IN_TICKS + 40) {
-            int clueY = height - 70;
+            int clueY = height - 96;
             int clueAlpha = (int) (globalAlpha * 190.0f);
             graphics.drawString(font, clueText, centerX - font.width(clueText) / 2, clueY,
                 argb(clueAlpha, 0x9FA8C8), false);
         }
 
-        // 共鸣：关联线索齐备时的额外叙事
+        // 共鸣：关联线索齐备时浮现的「因果碎片」。
+        // 单独看每段记忆都只是悲剧，两段共鸣后才拼得出因果——这是叙事的关键一步，
+        // 因此用金色单独成段，并且逐句淡入。
         if (resonant && ticks > FADE_IN_TICKS + 60) {
-            int resAlpha = (int) (globalAlpha * 230.0f);
-            graphics.drawString(font, resonantText, centerX - font.width(resonantText) / 2,
-                height - 56, argb(resAlpha, 0xFFD27A), false);
+            int labelAlpha = (int) (globalAlpha * 230.0f);
+            int labelY = height - 82;
+            int labelX = centerX - font.width(resonantText) / 2;
+            // 符号与文字分开画，让符号可以单独带色
+            graphics.drawString(font, resonanceMarker, labelX, labelY,
+                argb(labelAlpha, 0xFFD27A), false);
+            graphics.drawString(font, resonantText,
+                labelX + font.width(resonanceMarker + " "), labelY,
+                argb(labelAlpha, 0xFFD27A), false);
+
+            int maxWidth = Math.max(120, (int) (width * 0.62));
+            int resY = labelY + LINE_HEIGHT + 4;
+            for (int i = 0; i < resonanceLines.size() && i < 4; i++) {
+                String line = resonanceLines.get(i);
+                if (line.isEmpty()) {
+                    resY += LINE_HEIGHT;
+                    continue;
+                }
+                // 每一句比标签稍晚出现，读起来像因果在慢慢拼上
+                int appearAt = FADE_IN_TICKS + 70 + i * 14;
+                if (ticks < appearAt) {
+                    break;
+                }
+                float local = Math.min(1.0f, (ticks - appearAt) / 20.0f);
+                int lineAlpha = (int) (globalAlpha * local * 215.0f);
+                for (String wrapped : wrap(line, maxWidth)) {
+                    graphics.drawString(font, wrapped, centerX - font.width(wrapped) / 2, resY,
+                        argb(lineAlpha, 0xE8D6A0), false);
+                    resY += LINE_HEIGHT;
+                }
+            }
         }
 
         // 提示（首次目睹记忆时不提示跳过，让玩家先沉浸）

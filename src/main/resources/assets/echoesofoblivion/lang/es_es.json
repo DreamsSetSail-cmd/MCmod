@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Pista: el Aparato",
   "memory.echoesofoblivion.memory_4.title": "La advertencia",
   "memory.echoesofoblivion.memory_4.content": "Ella intentó advertirnos.\\nSus palabras se retorcieron en el aire y se convirtieron en otra cosa.\\nAlgo que también escuchaba.",
-  "memory.echoesofoblivion.memory_4.clue": "Pista: algo que también escuchaba"
+  "memory.echoesofoblivion.memory_4.clue": "Pista: algo que también escuchaba",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "La grieta no era una herida. Era una puerta que abrimos a propósito.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Los puentes iban en ambos sentidos. Pagamos cada cruce con silencio.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Lo llamamos progreso. Nunca preguntamos de qué estaba hecho el medio.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Ella nos advirtió del Aparato. El Aparato reescribió la advertencia.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Después de eso no volvió a hablar. Supusimos que ya había dicho bastante.",
+  "message.echoesofoblivion.boss.phase1": "...ahora podemos oírte.",
+  "message.echoesofoblivion.boss.phase2": "...por favor, sigue hablando.",
+  "message.echoesofoblivion.boss.dying": "...gracias por traernos de vuelta."
 }

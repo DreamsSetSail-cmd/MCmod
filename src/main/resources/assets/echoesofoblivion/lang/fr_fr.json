@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Indice : l'Appareil",
   "memory.echoesofoblivion.memory_4.title": "L'Avertissement",
   "memory.echoesofoblivion.memory_4.content": "Elle a tenté de nous avertir.\\nSes mots se sont tordus dans les airs, devenant autre chose.\\nQuelque chose qui écoutait en retour.",
-  "memory.echoesofoblivion.memory_4.clue": "Indice : la chose qui écoute en retour"
+  "memory.echoesofoblivion.memory_4.clue": "Indice : la chose qui écoute en retour",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "La fêlure n'était pas une blessure. C'était une porte que nous avons ouverte délibérément.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Les ponts allaient dans les deux sens. Nous avons payé chaque traversée avec du silence.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Nous avons appelé cela le progrès. Nous n'avons jamais demandé de quoi le support était fait.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Elle nous a avertis de l'Appareil. L'Appareil a réécrit l'avertissement.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Après cela, elle n'a plus jamais parlé. Nous avons supposé qu'elle en avait dit assez.",
+  "message.echoesofoblivion.boss.phase1": "...nous pouvons vous entendre, à présent.",
+  "message.echoesofoblivion.boss.phase2": "...continuez à parler, s'il vous plaît.",
+  "message.echoesofoblivion.boss.dying": "...merci de nous avoir ramenés."
 }

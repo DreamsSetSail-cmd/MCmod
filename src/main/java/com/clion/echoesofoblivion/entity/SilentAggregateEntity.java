@@ -4,6 +4,7 @@ import com.clion.echoesofoblivion.network.ModNetwork;
 import com.clion.echoesofoblivion.network.packets.RenderStatePacket;
 import com.clion.echoesofoblivion.sound.ModSounds;
 import net.minecraft.core.particles.ParticleTypes;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.tags.DamageTypeTags;
@@ -38,6 +39,12 @@ public class SilentAggregateEntity extends Monster {
 
     /** 恐惧光环半径。 */
     private static final double AURA_RADIUS = 16.0;
+
+    /**
+     * 台词的送达半径。比光环大得多——那几句话不是「对你喊」，
+     * 而是整片区域都听见了，包括你。
+     */
+    private static final double ANNOUNCE_RADIUS = 48.0;
 
     private int stability = MAX_STABILITY;
     private int phase;
@@ -123,6 +130,40 @@ public class SilentAggregateEntity extends Monster {
             if (player instanceof net.minecraft.server.level.ServerPlayer serverPlayer) {
                 ModNetwork.sendToPlayer(packet, serverPlayer);
             }
+        }
+        announcePhase();
+    }
+
+    /**
+     * 阶段切换时说一句被「改写」过的话。
+     *
+     * <p>这是全篇叙事「语言被污染」的唯一直接证据：句子语法完全正确，
+     * 但主语可疑、意思不对——它不是在对玩家说话，它是在**用玩家的话**对玩家说话。
+     *
+     * <p>刻意极短、极轻（{@code false} 参数走聊天栏而非头顶），
+     * 让它像从环境音里渗出来的一样，而不是一句正式的 Boss 台词。
+     */
+    private void announcePhase() {
+        String key = switch (phase) {
+            case 1 -> "message.echoesofoblivion.boss.phase1";
+            case 2 -> "message.echoesofoblivion.boss.phase2";
+            default -> null;
+        };
+        if (key == null) {
+            return;
+        }
+        for (Player player : this.level().getEntitiesOfClass(Player.class,
+            this.getBoundingBox().inflate(ANNOUNCE_RADIUS))) {
+            player.displayClientMessage(Component.translatable(key), false);
+        }
+    }
+
+    /** 濒死时的最后一句。由 {@code BossCombat} 在结算前调用。 */
+    public void announceDying() {
+        for (Player player : this.level().getEntitiesOfClass(Player.class,
+            this.getBoundingBox().inflate(ANNOUNCE_RADIUS))) {
+            player.displayClientMessage(
+                Component.translatable("message.echoesofoblivion.boss.dying"), false);
         }
     }
 

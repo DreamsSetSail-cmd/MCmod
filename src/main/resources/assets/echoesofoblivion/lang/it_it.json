@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Indizio: l'Apparecchio",
   "memory.echoesofoblivion.memory_4.title": "L'Avvertimento",
   "memory.echoesofoblivion.memory_4.content": "Lei tentò di avvertirci.\\nLe sue parole si torsero a mezz'aria, diventando altro.\\nQualcosa che ascoltava a sua volta.",
-  "memory.echoesofoblivion.memory_4.clue": "Indizio: la cosa che ascolta a sua volta"
+  "memory.echoesofoblivion.memory_4.clue": "Indizio: la cosa che ascolta a sua volta",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "L'incrinatura non era una ferita. Era una porta che abbiamo aperto di proposito.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "I ponti correvano in entrambe le direzioni. Pagavamo ogni traversata con il silenzio.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Lo chiamammo progresso. Non chiedemmo mai di cosa fosse fatto il mezzo.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Lei ci avvertì dell'Apparecchio. L'Apparecchio riscrisse l'avvertimento.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Da allora non parlò mai più. Pensammo che avesse detto abbastanza.",
+  "message.echoesofoblivion.boss.phase1": "...ora possiamo sentirti.",
+  "message.echoesofoblivion.boss.phase2": "...continua a parlare, ti prego.",
+  "message.echoesofoblivion.boss.dying": "...grazie per averci riportati indietro."
 }

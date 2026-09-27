@@ -116,10 +116,16 @@ python tools/make_textures.py
 
 | 文件 | 内容 |
 | --- | --- |
+| [STORY.zh_cn.md](STORY.zh_cn.md) | 故事线，按你应当发现的顺序讲述（含剧透） |
 | [ASSETS.md](ASSETS.md) | 素材清单、重生成步骤、每张贴图与音效的当前状态 |
 | [CREDITS.md](CREDITS.md) | 所有第三方素材的逐文件来源与授权 |
+| [CHANGELOG.md](CHANGELOG.md) | 版本更新说明 |
+| [PUBLISHING.md](PUBLISHING.md) | 发布流程与 GitHub Actions 说明 |
+| [docs/story-bible.md](docs/story-bible.md) | 完整叙事设计：编年史、角色、后续游戏内呈现方案 |
+| [docs/technical-guide.md](docs/technical-guide.md) | 技术手册：架构、各系统实现、踩过的坑、修改指南 |
+| [docs/translation-spec.md](docs/translation-spec.md) | 翻译规则与术语表 |
 | [achieve.md](achieve.md) | 本模组实现时对照的 8 阶段路线图 |
-| [tech-outline.md](tech-outline.md) | 技术架构：包结构、网络、持久化、渲染 |
+| [tech-outline.md](tech-outline.md) | 原始技术大纲 |
 | [tools/README.md](tools/README.md) | 开发工具与验证命令 |
 
 ## 值得了解的技术细节

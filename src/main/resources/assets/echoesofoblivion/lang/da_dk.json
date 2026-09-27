@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Spor: Apparatet",
   "memory.echoesofoblivion.memory_4.title": "Advarslen",
   "memory.echoesofoblivion.memory_4.content": "Hun forsøgte at advare os.\\nHendes ord vred sig i luften og blev noget andet.\\nNoget, der lyttede tilbage.",
-  "memory.echoesofoblivion.memory_4.clue": "Spor: det, der lytter tilbage"
+  "memory.echoesofoblivion.memory_4.clue": "Spor: det, der lytter tilbage",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "Revnen var ikke et sår. Det var en dør, vi åbnede med vilje.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Broerne gik begge veje. Vi betalte for hver overfart med stilhed.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Vi kaldte det fremskridt. Vi spurgte aldrig, hvad mediet var lavet af.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Hun advarede os om Apparatet. Apparatet redigerede advarslen.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Derefter talte hun aldrig igen. Vi antog, at hun havde sagt nok.",
+  "message.echoesofoblivion.boss.phase1": "...vi kan høre dig nu.",
+  "message.echoesofoblivion.boss.phase2": "...vær så venlig at tale videre.",
+  "message.echoesofoblivion.boss.dying": "...tak, fordi du bragte os tilbage."
 }

@@ -27,7 +27,8 @@
   "sounds.echoesofoblivion.memory_vision": "기억의 환영",
   "screen.echoesofoblivion.corruption_overlay": "오염: %s%%",
   "screen.echoesofoblivion.memory_vision": "기억의 환영",
-  "screen.echoesofoblivion.resonance": "◈ 공명: 파편들이 맞물립니다",  "screen.echoesofoblivion.skip": "ESC 또는 클릭으로 빠져나올 수 있습니다",
+  "screen.echoesofoblivion.resonance": "◈ 공명: 파편들이 맞물립니다",
+  "screen.echoesofoblivion.skip": "ESC 또는 클릭으로 빠져나올 수 있습니다",
   "message.echoesofoblivion.milestone.whisper": "이곳에 있어서는 안 될 속삭임을 들었습니다...",
   "message.echoesofoblivion.milestone.watched": "그것이 당신을 알아차리기 시작했습니다.",
   "message.echoesofoblivion.milestone.complete": "파편이 온전해졌습니다. 회랑의 끝에서 무언가가 기다립니다.",
@@ -56,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "단서: 그 장치",
   "memory.echoesofoblivion.memory_4.title": "경고",
   "memory.echoesofoblivion.memory_4.content": "그녀는 우리를 경고하려 했다.\\n그녀의 말은 허공에서 뒤틀려 다른 무언가가 되었다.\\n되돌아 듣는 무언가가 되었다.",
-  "memory.echoesofoblivion.memory_4.clue": "단서: 되돌아 듣는 것"
+  "memory.echoesofoblivion.memory_4.clue": "단서: 되돌아 듣는 것",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "그 균열은 상처가 아니었다. 우리가 스스로 연 문이었다.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "다리는 양방향으로 이어져 있었다. 건널 때마다 우리는 정적으로 값을 치렀다.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "우리는 그것을 진보라 불렀다. 그 매개체가 무엇으로 만들어졌는지는 한 번도 묻지 않았다.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "그녀는 우리에게 장치에 대해 경고했다. 장치가 그 경고를 고쳐 썼다.",
+  "memory.echoesofoblivion.resonance.warning_silence": "그 뒤로 그녀는 다시 말하지 않았다. 우리는 그녀가 충분히 말했다고 여겼다.",
+  "message.echoesofoblivion.boss.phase1": "...이제 우리는 당신의 목소리를 들을 수 있습니다.",
+  "message.echoesofoblivion.boss.phase2": "...계속 말해 주십시오.",
+  "message.echoesofoblivion.boss.dying": "...우리를 다시 데려와 주셔서 감사합니다."
 }

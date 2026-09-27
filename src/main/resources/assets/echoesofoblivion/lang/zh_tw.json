@@ -9,7 +9,8 @@
   "item.echoesofoblivion.shard_of_truth": "真實碎片",
   "item.echoesofoblivion.void_embers": "虛空餘燼",
   "item.echoesofoblivion.corruption_essence": "腐化精華",
-  "item.echoesofoblivion.eye_of_silence": "寂靜之眼",  "itemGroup.echoesofoblivion": "Echoes of Oblivion",
+  "item.echoesofoblivion.eye_of_silence": "寂靜之眼",
+  "itemGroup.echoesofoblivion": "Echoes of Oblivion",
   "entity.echoesofoblivion.silent_aggregate": "Silent Aggregate",
   "entity.echoesofoblivion.phantom": "夜魅",
   "key.categories.echoesofoblivion": "Echoes of Oblivion",
@@ -56,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "線索：那台儀器",
   "memory.echoesofoblivion.memory_4.title": "警告",
   "memory.echoesofoblivion.memory_4.content": "她試圖警告我們。\\n她的話語在半空中扭曲，變成別的東西。\\n變成某種會回望的東西。",
-  "memory.echoesofoblivion.memory_4.clue": "線索：會回望的東西"
+  "memory.echoesofoblivion.memory_4.clue": "線索：會回望的東西",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "那道裂痕不是傷口。是我們刻意打開的門。",
+  "memory.echoesofoblivion.resonance.silence_bridge": "橋是雙向的。每一次跨越，我們都以寂靜付帳。",
+  "memory.echoesofoblivion.resonance.bridge_silence": "我們稱之為進步。我們從沒問過那個媒介是用什麼做的。",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "她警告過我們關於儀器的事。儀器改寫了那則警告。",
+  "memory.echoesofoblivion.resonance.warning_silence": "在那之後，她再也沒有出聲。我們以為她已經說完了。",
+  "message.echoesofoblivion.boss.phase1": "...我們現在聽得見你了。",
+  "message.echoesofoblivion.boss.phase2": "...請繼續說下去。",
+  "message.echoesofoblivion.boss.dying": "...謝謝你把我們帶回來。"
 }

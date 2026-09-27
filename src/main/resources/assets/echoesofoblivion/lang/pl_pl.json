@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Wskazówka: Aparat",
   "memory.echoesofoblivion.memory_4.title": "Ostrzeżenie",
   "memory.echoesofoblivion.memory_4.content": "Próbowała nas ostrzec.\\nJej słowa skręciły się w powietrzu, stając się czymś innym.\\nCzymś, co słuchało z drugiej strony.",
-  "memory.echoesofoblivion.memory_4.clue": "Wskazówka: coś, co słucha z drugiej strony"
+  "memory.echoesofoblivion.memory_4.clue": "Wskazówka: coś, co słucha z drugiej strony",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "Pęknięcie nie było raną. To były drzwi, które otworzyliśmy celowo.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Mosty działały w obie strony. Za każde przejście płaciliśmy ciszą.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Nazywaliśmy to postępem. Nigdy nie zapytaliśmy, z czego wykonano medium.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Ostrzegała nas przed Aparatem. Aparat zredagował to ostrzeżenie.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Potem już nigdy się nie odezwała. Uznaliśmy, że powiedziała dość.",
+  "message.echoesofoblivion.boss.phase1": "...teraz cię słyszymy.",
+  "message.echoesofoblivion.boss.phase2": "...proszę, mów dalej.",
+  "message.echoesofoblivion.boss.dying": "...dziękujemy, że sprowadziłeś nas z powrotem."
 }

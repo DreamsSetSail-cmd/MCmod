@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "手がかり: あの装置",
   "memory.echoesofoblivion.memory_4.title": "警告",
   "memory.echoesofoblivion.memory_4.content": "彼女は私たちに警告しようとした。\\n彼女の言葉は宙でねじれ、別の何かになった。\\n聞き返してくる何かになった。",
-  "memory.echoesofoblivion.memory_4.clue": "手がかり: 聞き返してくるもの"
+  "memory.echoesofoblivion.memory_4.clue": "手がかり: 聞き返してくるもの",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "あの裂け目は傷ではなかった。私たちが自ら開けた扉だった。",
+  "memory.echoesofoblivion.resonance.silence_bridge": "橋はどちらへも通じていた。渡るたびに、私たちは静寂で支払った。",
+  "memory.echoesofoblivion.resonance.bridge_silence": "私たちはそれを進歩と呼んだ。その媒質が何でできているのか、一度も問わなかった。",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "彼女は装置について警告した。装置はその警告を書き換えた。",
+  "memory.echoesofoblivion.resonance.warning_silence": "それきり彼女は二度と声を発しなかった。私たちは、十分に語ったのだと思った。",
+  "message.echoesofoblivion.boss.phase1": "……いま、あなたの声が聞こえます。",
+  "message.echoesofoblivion.boss.phase2": "……どうか、話し続けてください。",
+  "message.echoesofoblivion.boss.dying": "……私たちを連れ戻してくれて、ありがとうございます。"
 }

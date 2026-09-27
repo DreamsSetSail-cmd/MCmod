@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Stopa: Přístroj",
   "memory.echoesofoblivion.memory_4.title": "Varování",
   "memory.echoesofoblivion.memory_4.content": "Pokusila se nás varovat.\\nJejí slova se ve vzduchu zkroutila a stala se něčím jiným.\\nNěčím, co naslouchalo zpět.",
-  "memory.echoesofoblivion.memory_4.clue": "Stopa: to, co naslouchá zpět"
+  "memory.echoesofoblivion.memory_4.clue": "Stopa: to, co naslouchá zpět",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "Trhlina nebyla rána. Byly to dveře, které jsme otevřeli záměrně.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Mosty vedly oběma směry. Za každý přechod jsme platili tichem.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Nazývali jsme to pokrokem. Nikdy jsme se nezeptali, z čeho je to médium.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Varovala nás před Přístrojem. Přístroj to varování přepsal.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Potom už nikdy nepromluvila. Mysleli jsme, že řekla dost.",
+  "message.echoesofoblivion.boss.phase1": "...teď vás slyšíme.",
+  "message.echoesofoblivion.boss.phase2": "...mluvte prosím dál.",
+  "message.echoesofoblivion.boss.dying": "...děkujeme, že jste nás přivedli zpět."
 }

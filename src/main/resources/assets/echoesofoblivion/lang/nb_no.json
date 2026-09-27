@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Holdepunkt: Apparatet",
   "memory.echoesofoblivion.memory_4.title": "Advarselen",
   "memory.echoesofoblivion.memory_4.content": "Hun forsøkte å advare oss.\\nOrdene hennes vred seg i luften og ble noe annet.\\nNoe som lyttet tilbake.",
-  "memory.echoesofoblivion.memory_4.clue": "Holdepunkt: det som lytter tilbake"
+  "memory.echoesofoblivion.memory_4.clue": "Holdepunkt: det som lytter tilbake",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "Revnen var ikke et sår. Det var en dør vi åpnet med vilje.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "Broene gikk begge veier. Vi betalte for hver overgang med stillhet.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "Vi kalte det fremskritt. Vi spurte aldri hva mediet var laget av.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Hun advarte oss om Apparatet. Apparatet redigerte advarselen.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Etter det snakket hun aldri igjen. Vi antok at hun hadde sagt nok.",
+  "message.echoesofoblivion.boss.phase1": "...vi kan høre deg nå.",
+  "message.echoesofoblivion.boss.phase2": "...vær så snill, fortsett å snakke.",
+  "message.echoesofoblivion.boss.dying": "...takk for at du brakte oss tilbake."
 }

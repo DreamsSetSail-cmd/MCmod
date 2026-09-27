@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "线索：那台仪器",
   "memory.echoesofoblivion.memory_4.title": "警告",
   "memory.echoesofoblivion.memory_4.content": "她试图警告我们。\\n她的话语在半空中扭曲，变成了别的东西。\\n变成了某种会回应的东西。",
-  "memory.echoesofoblivion.memory_4.clue": "线索：会回应的东西"
+  "memory.echoesofoblivion.memory_4.clue": "线索：会回应的东西",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "那道裂痕不是伤口。是我们有意打开的门。",
+  "memory.echoesofoblivion.resonance.silence_bridge": "桥是双向的。每一次跨越，我们都用安静付账。",
+  "memory.echoesofoblivion.resonance.bridge_silence": "我们称之为进步。我们从没问过，那个介质是用什么做的。",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "她警告我们提防那台仪器。而仪器改写了那句警告。",
+  "memory.echoesofoblivion.resonance.warning_silence": "那之后她再没出过声。我们以为她已经说完了。",
+  "message.echoesofoblivion.boss.phase1": "……我们现在能听见你了。",
+  "message.echoesofoblivion.boss.phase2": "……请继续说。",
+  "message.echoesofoblivion.boss.dying": "……谢谢你把我们带回来。"
 }

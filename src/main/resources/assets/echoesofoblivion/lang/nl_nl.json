@@ -57,5 +57,13 @@
   "memory.echoesofoblivion.memory_3.clue": "Aanwijzing: het Apparaat",
   "memory.echoesofoblivion.memory_4.title": "De Waarschuwing",
   "memory.echoesofoblivion.memory_4.content": "Ze probeerde ons te waarschuwen.\\nHaar woorden verwrongen in de lucht en werden iets anders.\\nIets dat terugluisterde.",
-  "memory.echoesofoblivion.memory_4.clue": "Aanwijzing: het ding dat terugluistert"
+  "memory.echoesofoblivion.memory_4.clue": "Aanwijzing: het ding dat terugluistert",
+  "memory.echoesofoblivion.resonance.sky_apparatus": "De barst was geen wond. Het was een deur die we met opzet openden.",
+  "memory.echoesofoblivion.resonance.silence_bridge": "De bruggen liepen in beide richtingen. We betaalden elke oversteek met stilte.",
+  "memory.echoesofoblivion.resonance.bridge_silence": "We noemden het vooruitgang. We vroegen nooit waarvan het medium gemaakt was.",
+  "memory.echoesofoblivion.resonance.apparatus_warning": "Ze waarschuwde ons voor het Apparaat. Het Apparaat herschreef de waarschuwing.",
+  "memory.echoesofoblivion.resonance.warning_silence": "Daarna sprak ze nooit meer. We namen aan dat ze genoeg had gezegd.",
+  "message.echoesofoblivion.boss.phase1": "...we kunnen je nu horen.",
+  "message.echoesofoblivion.boss.phase2": "...blijf alsjeblieft praten.",
+  "message.echoesofoblivion.boss.dying": "...dank je dat je ons terugbracht."
 }
