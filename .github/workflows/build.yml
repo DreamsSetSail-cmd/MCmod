@@ -14,6 +14,9 @@ jobs:
   build:
     name: Build mod jar
     runs-on: ubuntu-latest
+    # 兜底：任何步骤异常挂起时，作业最多跑 45 分钟就结束，
+    # 避免像 test 步骤那样无限期占用 runner。
+    timeout-minutes: 45
 
     steps:
       - name: Checkout
@@ -29,7 +32,6 @@ jobs:
         uses: gradle/actions/setup-gradle@v6
 
       # ForgeGradle 会下载并反编译 Minecraft，首次约 5~10 分钟。
-      # 这里显式缓存，让后续运行命中。
       - name: Cache ForgeGradle caches
         uses: actions/cache@v6
         with:
@@ -45,11 +47,17 @@ jobs:
       - name: Validate language files
         run: python3 tools/check_lang.py
 
+      # 用 `bash gradlew` 而不是 `./gradlew`：git 在 Windows 上不记录
+      # POSIX 可执行位，靠 `./gradlew` 会得到 exit 126（曾被这个问题卡过一次）。
       - name: Build
-        run: ./gradlew build --no-daemon --stacktrace
+        run: bash gradlew build --no-daemon --console=plain --stacktrace
 
+      # gameTest 在 CI 上出现过不退出、无限挂起的情况（本机稳定）。
+      # 因此限制 5 分钟；超时视为失败，但不至于拖垮整个作业。
+      # 真正的构建正确性由上一步 build 与语言校验保证，测试是额外一层。
       - name: Run game tests
-        run: ./gradlew runGameTestServer --no-daemon
+        timeout-minutes: 5
+        run: bash gradlew runGameTestServer --no-daemon --console=plain
 
       - name: Upload jar as build artifact
         uses: actions/upload-artifact@v7
