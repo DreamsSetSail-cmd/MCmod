@@ -23,6 +23,15 @@ public final class PlayerProgress {
     private final Set<String> clues = new HashSet<>();
     private int corruption;
 
+    /**
+     * 距离上一次「它叫你的名字」过去了多少秒（v1.2.0）。
+     *
+     * <p>放在存档里而不是内存里，是为了让这个计数在重登后仍然有效——
+     * 否则玩家可以通过反复重连来刷出那句话，把它变成一个可触发的彩蛋，
+     * 而它必须始终像是**偶然发生的**。
+     */
+    private int secondsSinceNameCall;
+
     public boolean has(int memoryIndex) {
         return collected.contains(memoryIndex);
     }
@@ -84,9 +93,27 @@ public final class PlayerProgress {
         return Math.max(0, Math.min(MAX_CORRUPTION, value));
     }
 
+    // ---------------------------------------------------------------- 「它叫你的名字」
+
+    /** 每秒调用一次。 */
+    public void tickNameCallTimer() {
+        if (secondsSinceNameCall < Integer.MAX_VALUE) {
+            secondsSinceNameCall++;
+        }
+    }
+
+    public int secondsSinceNameCall() {
+        return secondsSinceNameCall;
+    }
+
+    public void resetNameCallTimer() {
+        this.secondsSinceNameCall = 0;
+    }
+
     public CompoundTag save() {
         CompoundTag tag = new CompoundTag();
         tag.putInt("corruption", corruption);
+        tag.putInt("name_call_timer", secondsSinceNameCall);
         tag.putIntArray("collected", collected.stream().mapToInt(Integer::intValue).toArray());
         tag.putString("clues", String.join(",", clues));
         return tag;
@@ -95,6 +122,7 @@ public final class PlayerProgress {
     public static PlayerProgress load(CompoundTag tag) {
         PlayerProgress progress = new PlayerProgress();
         progress.corruption = clamp(tag.getInt("corruption"));
+        progress.secondsSinceNameCall = Math.max(0, tag.getInt("name_call_timer"));
         for (int index : tag.getIntArray("collected")) {
             progress.collected.add(index);
         }

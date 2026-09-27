@@ -20,6 +20,9 @@ public class ClientEvents {
             SilentAggregateRenderer::new);
         event.registerEntityRenderer(ModEntities.PHANTOM.get(),
             PhantomRenderer::new);
+        // v1.2.0：不透明渲染，与上面两个的加法混合刻意相反（见 MirrorRenderer 注释）
+        event.registerEntityRenderer(ModEntities.MIRROR.get(),
+            MirrorRenderer::new);
     }
 
     @SubscribeEvent

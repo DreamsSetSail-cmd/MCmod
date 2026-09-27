@@ -36,6 +36,8 @@ public final class CorruptionVisuals {
     public static void onComputeFogColor(ViewportEvent.ComputeFogColor event) {
         float ratio = effectiveRatio();
         if (ratio <= 0.0f) {
+            // 侵蚀不够时也可能处在聚合体光环里，因此这里不能直接返回
+            applyAuraColor(event);
             return;
         }
         // 向暗紫红偏移：被污染的世界连空气都是脏的
@@ -45,20 +47,39 @@ public final class CorruptionVisuals {
         event.setRed(red);
         event.setGreen(green);
         event.setBlue(blue);
+        applyAuraColor(event);
+    }
+
+    /** 光环的去饱和：向灰靠拢，让世界看起来像被抽掉了信息。 */
+    private static void applyAuraColor(ViewportEvent.ComputeFogColor event) {
+        if (auraFactor() <= 0.0f) {
+            return;
+        }
+        float grey = (event.getRed() + event.getGreen() + event.getBlue()) / 3.0f;
+        event.setRed(desaturate(event.getRed(), grey));
+        event.setGreen(desaturate(event.getGreen(), grey));
+        event.setBlue(desaturate(event.getBlue(), grey));
     }
 
     @SubscribeEvent
     public static void onRenderFog(ViewportEvent.RenderFog event) {
         float ratio = effectiveRatio();
-        if (ratio <= 0.0f) {
+        boolean inAura = auraFactor() > 0.0f;
+        if (ratio <= 0.0f && !inAura) {
             return;
         }
-        // 侵蚀越高，雾从远处一路压到脸上
         float near = event.getNearPlaneDistance();
         float far = event.getFarPlaneDistance();
-        float factor = Math.min(1.0f, ratio);
 
-        float newFar = Math.max(MIN_FOG_DISTANCE, far * (1.0f - factor * 0.8f));
+        float newFar = far;
+        if (ratio > 0.0f) {
+            // 侵蚀越高，雾从远处一路压到脸上
+            float factor = Math.min(1.0f, ratio);
+            newFar = Math.max(MIN_FOG_DISTANCE, newFar * (1.0f - factor * 0.8f));
+        }
+        // 聚合体光环再把视野收拢一层（v1.2.0）
+        newFar = applyAuraToFog(newFar);
+
         float newNear = Math.min(near, newFar * 0.25f);
         event.setFarPlaneDistance(newFar);
         event.setNearPlaneDistance(newNear);
@@ -73,6 +94,9 @@ public final class CorruptionVisuals {
         if (minecraft.level == null || minecraft.player == null) {
             return 0.0f;
         }
+        if (!Config.enableShadowEffects.get()) {
+            return 0.0f;
+        }
         float raw = ClientData.getCorruptionRatio();
         if (raw <= FOG_ONSET) {
             return 0.0f;
@@ -80,5 +104,42 @@ public final class CorruptionVisuals {
         float normalized = (raw - FOG_ONSET) / (1.0f - FOG_ONSET);
         double intensity = ConfigHelper.getDouble(Config.overlayIntensity, 1.0);
         return (float) Math.max(0.0, Math.min(1.0, normalized * intensity));
+    }
+
+    // ---------------------------------------------------------------- 聚合体光环（v1.2.0）
+
+    /**
+     * 光环造成的额外收拢（0~1）。
+     *
+     * <p>这是聚合体「静默领域」技能的<b>可感知部分</b>：光环越强，视野被压得越近。
+     * 它不是伤害，而是**空间感被抽走**——玩家感觉周围在缩，但找不到攻击来源。
+     * 这正好与它的名字（Silent）和设定（一切的不在）一致。
+     */
+    private static float auraFactor() {
+        return Math.max(0.0f, Math.min(1.0f, ClientData.getBossAura()));
+    }
+
+    /** 光环造成的额外雾距收拢。由 {@link #onRenderFog} 调用。 */
+    static float applyAuraToFog(float far) {
+        float aura = auraFactor();
+        if (aura <= 0.0f) {
+            return far;
+        }
+        // 光环全开时视野压到 40%
+        return Math.max(MIN_FOG_DISTANCE * 0.6f, far * (1.0f - aura * 0.6f));
+    }
+
+    /**
+     * 光环的颜色偏移：向「无」的方向去。
+     *
+     * <p>不是变黑（黑色仍是一种颜色），而是**去饱和**——所有颜色向灰靠拢，
+     * 让世界看起来像被抽掉了信息。
+     */
+    static float desaturate(float channel, float grey) {
+        float aura = auraFactor();
+        if (aura <= 0.0f) {
+            return channel;
+        }
+        return channel + (grey - channel) * aura * 0.75f;
     }
 }

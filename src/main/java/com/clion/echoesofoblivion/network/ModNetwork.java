@@ -1,6 +1,7 @@
 package com.clion.echoesofoblivion.network;
 
 import com.clion.echoesofoblivion.EchoesOfOblivionMod;
+import com.clion.echoesofoblivion.network.packets.BossAuraPacket;
 import com.clion.echoesofoblivion.network.packets.CodexRequestPacket;
 import com.clion.echoesofoblivion.network.packets.CorruptionUpdatePacket;
 import com.clion.echoesofoblivion.network.packets.MemoryAttackPacket;
@@ -98,6 +99,12 @@ public final class ModNetwork {
         CHANNEL.messageBuilder(CodexRequestPacket.class, 9)
             .codec(CodexRequestPacket.STREAM_CODEC)
             .consumerMainThread(CodexRequestPacket::handle)
+            .add();
+
+        // v1.2.0：聚合体光环强度（客户端据此抑制环境音）
+        CHANNEL.messageBuilder(BossAuraPacket.class, 10)
+            .codec(BossAuraPacket.STREAM_CODEC)
+            .consumerMainThread(BossAuraPacket::handle)
             .add();
     }
 

@@ -71,5 +71,6 @@
   "screen.echoesofoblivion.codex.no_resonance": "Até agora nada ressoou. Nenhuma pista encontrou a sua memória.",
   "screen.echoesofoblivion.codex.empty_title": "o registo está em branco",
   "screen.echoesofoblivion.codex.empty_body": "Alguém começou a escrevê-lo. Não chegou ao fim.",
-  "item.echoesofoblivion.memory_scroll.desc": "Registo do que foi testemunhado"
+  "item.echoesofoblivion.memory_scroll.desc": "Registo do que foi testemunhado",
+  "message.echoesofoblivion.name_call": "(%s)."
 }

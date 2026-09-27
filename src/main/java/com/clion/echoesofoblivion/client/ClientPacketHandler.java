@@ -79,6 +79,11 @@ public final class ClientPacketHandler {
         ClientScreenEffects.startTravelFade(entering, stable);
     }
 
+    /** 聚合体光环强度（v1.2.0）。用于抑制环境音，不涉及伤害。 */
+    public static void applyBossAura(float intensity) {
+        ClientData.setBossAura(intensity);
+    }
+
     /** 打开记忆图鉴（v1.1.0）。由记忆卷轴触发。 */
     public static void openCodex() {
         Minecraft.getInstance().setScreen(new MemoryCodexScreen());

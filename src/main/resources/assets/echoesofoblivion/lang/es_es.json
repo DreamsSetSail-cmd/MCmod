@@ -71,5 +71,6 @@
   "screen.echoesofoblivion.codex.no_resonance": "Aún no ha resonado nada. Falta emparejar una pista con su memoria.",
   "screen.echoesofoblivion.codex.empty_title": "el registro está en blanco",
   "screen.echoesofoblivion.codex.empty_body": "Alguien empezó a escribirlo. No terminó.",
-  "item.echoesofoblivion.memory_scroll.desc": "Registro de lo atestiguado"
+  "item.echoesofoblivion.memory_scroll.desc": "Registro de lo atestiguado",
+  "message.echoesofoblivion.name_call": "(%s)."
 }

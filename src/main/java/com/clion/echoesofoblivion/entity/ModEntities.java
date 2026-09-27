@@ -42,6 +42,21 @@ public class ModEntities {
             .build("phantom")
     );
 
+    /**
+     * 镜中的你（v1.2.0）。
+     *
+     * <p>归入 {@code MISC} 而不是 {@code MONSTER}，因为它不参与刷怪上限与怪物生成逻辑：
+     * 它由感染区块的扩散逻辑手动放置，数量应当极少，且绝不能挤占正常生物的名额。
+     * 玩家尺寸（0.6 x 1.8），与它「长得和你一样」的设定一致。
+     */
+    public static final RegistryObject<EntityType<MirrorEntity>> MIRROR = ENTITIES.register(
+        "mirror",
+        () -> EntityType.Builder.of(MirrorEntity::new, MobCategory.MISC)
+            .sized(0.6f, 1.8f)
+            .clientTrackingRange(10)
+            .build("mirror")
+    );
+
     @SubscribeEvent
     public static void registerAttributes(EntityAttributeCreationEvent event) {
         event.put(SILENT_AGGREGATE.get(), Monster.createMonsterAttributes()
@@ -58,5 +73,7 @@ public class ModEntities {
             .add(Attributes.MOVEMENT_SPEED, 0.2)
             .add(Attributes.FLYING_SPEED, 0.3)
             .build());
+
+        event.put(MIRROR.get(), MirrorEntity.createAttributes().build());
     }
 }

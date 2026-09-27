@@ -71,5 +71,6 @@
   "screen.echoesofoblivion.codex.no_resonance": "Nic jeszcze nie zarezonowało. Dopasuj wskazówkę do wspomnienia.",
   "screen.echoesofoblivion.codex.empty_title": "zapis jest pusty",
   "screen.echoesofoblivion.codex.empty_body": "Ktoś zaczął to spisywać. Nie dokończył.",
-  "item.echoesofoblivion.memory_scroll.desc": "Zapis tego, co się widziało"
+  "item.echoesofoblivion.memory_scroll.desc": "Zapis tego, co się widziało",
+  "message.echoesofoblivion.name_call": "(%s)."
 }

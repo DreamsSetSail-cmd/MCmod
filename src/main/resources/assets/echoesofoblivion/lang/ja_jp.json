@@ -71,5 +71,6 @@
   "screen.echoesofoblivion.codex.no_resonance": "まだ何も共鳴していない。手がかりを記憶に重ねる。",
   "screen.echoesofoblivion.codex.empty_title": "記録は白紙のまま",
   "screen.echoesofoblivion.codex.empty_body": "誰かが書き始めた。書き終わることはなかった。",
-  "item.echoesofoblivion.memory_scroll.desc": "目撃したものの記録"
+  "item.echoesofoblivion.memory_scroll.desc": "目撃したものの記録",
+  "message.echoesofoblivion.name_call": "（%s）。"
 }

@@ -8,6 +8,7 @@ import com.clion.echoesofoblivion.network.packets.ShadowSyncPacket;
 import com.clion.echoesofoblivion.server.ServerPacketHandler;
 import com.clion.echoesofoblivion.sound.ModSounds;
 import com.clion.echoesofoblivion.world.ModWorldGen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundSource;
@@ -37,6 +38,20 @@ public class CorruptionEventHandler {
 
     /** 同步间隔（tick）。 */
     private static final int SYNC_INTERVAL = 20;
+
+    /** 「它叫你的名字」的侵蚀阈值。 */
+    private static final int NAME_CALL_CORRUPTION = 75;
+
+    /** 两次叫名之间的最短间隔（秒）。 */
+    private static final int NAME_CALL_MIN_INTERVAL = 240;
+
+    /**
+     * 每秒触发叫名的概率。
+     *
+     * <p>{@code 1/480} 意味着在侵蚀持续高于阈值时，中位等待约 8 分钟。
+     * 配合 4 分钟的最短间隔，实际节奏大约每 8~15 分钟一次。
+     */
+    private static final float NAME_CALL_CHANCE = 1.0f / 480.0f;
 
     private static final Map<UUID, Integer> playerTickCounters = new HashMap<>();
 
@@ -81,6 +96,37 @@ public class CorruptionEventHandler {
             float volume = 0.35f * progress.corruptionRatio();
             player.playNotifySound(ModSounds.HEARTBEAT.get(), SoundSource.AMBIENT, volume, 1.0f);
         }
+
+        // 「它叫你的名字」（v1.2.0）
+        maybeCallPlayerName(player, progress, before);
+    }
+
+    /**
+     * 侵蚀很高时，极低概率在聊天栏出现「（你的名字）。」——没有别的内容。
+     *
+     * <p>这是「语言被污染」这一核心设定最直接的用法：它证明那个东西**认识你**，
+     * 而它认识你的方式，是把你变成它的词汇之一。
+     *
+     * <p>频率刻意压得极低（中位约 8 分钟一次，且至少间隔 4 分钟）。
+     * 一次就足够恐怖；如果每几分钟来一次，它就会退化成骚扰而不是恐怖。
+     * 计时器存在存档里，因此重连无法影响它。
+     */
+    private static void maybeCallPlayerName(ServerPlayer player, PlayerProgress progress, int corruption) {
+        progress.tickNameCallTimer();
+        if (corruption < NAME_CALL_CORRUPTION) {
+            return;
+        }
+        if (progress.secondsSinceNameCall() < NAME_CALL_MIN_INTERVAL) {
+            return;
+        }
+        if (player.getRandom().nextFloat() >= NAME_CALL_CHANCE) {
+            return;
+        }
+
+        progress.resetNameCallTimer();
+        // 用玩家自己的名字作为参数，翻译文件只负责括号与标点
+        player.displayClientMessage(
+            Component.translatable("message.echoesofoblivion.name_call", player.getName()), false);
     }
 
     /**
@@ -106,6 +152,9 @@ public class CorruptionEventHandler {
     @SubscribeEvent
     public void onPlayerJoinWorld(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
+            // 保险：上一次会话若在聚合体光环内退出，客户端会残留一个被压制的雾效。
+            // 登录时先清零，让服务端在下一 tick 重新按实际距离计算。
+            com.clion.echoesofoblivion.server.BossAura.clearAura(player);
             syncAll(player);
         }
     }

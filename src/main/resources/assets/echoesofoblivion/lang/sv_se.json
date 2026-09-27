@@ -71,5 +71,6 @@
   "screen.echoesofoblivion.codex.no_resonance": "Ingenting har resonerat ännu. Ingen ledtråd har hittat sitt minne.",
   "screen.echoesofoblivion.codex.empty_title": "anteckningen är tom",
   "screen.echoesofoblivion.codex.empty_body": "Någon började skriva ner det. Det blev inte färdigt.",
-  "item.echoesofoblivion.memory_scroll.desc": "Anteckning över det som setts"
+  "item.echoesofoblivion.memory_scroll.desc": "Anteckning över det som setts",
+  "message.echoesofoblivion.name_call": "(%s)."
 }

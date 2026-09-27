@@ -71,5 +71,6 @@
   "screen.echoesofoblivion.codex.no_resonance": "Ingenting har gitt gjenklang ennå. Knytt et holdepunkt til et minne.",
   "screen.echoesofoblivion.codex.empty_title": "nedtegnelsen er tom",
   "screen.echoesofoblivion.codex.empty_body": "Noen begynte å skrive den ned. Ble ikke ferdig.",
-  "item.echoesofoblivion.memory_scroll.desc": "En nedtegnelse av det man har vært vitne til"
+  "item.echoesofoblivion.memory_scroll.desc": "En nedtegnelse av det man har vært vitne til",
+  "message.echoesofoblivion.name_call": "(%s)."
 }

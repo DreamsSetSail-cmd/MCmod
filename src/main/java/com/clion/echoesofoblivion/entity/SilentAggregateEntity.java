@@ -2,6 +2,7 @@ package com.clion.echoesofoblivion.entity;
 
 import com.clion.echoesofoblivion.network.ModNetwork;
 import com.clion.echoesofoblivion.network.packets.RenderStatePacket;
+import com.clion.echoesofoblivion.server.BossAura;
 import com.clion.echoesofoblivion.sound.ModSounds;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.chat.Component;
@@ -110,6 +111,10 @@ public class SilentAggregateEntity extends Monster {
             phase = nextPhase;
             broadcastPhase();
         }
+
+        // 环境级技能（v1.2.0）：静默领域、回响成形、收敛表现。
+        // 刻意不做任何伤害技能——见 BossAura 的类注释。
+        BossAura.tick(this, phase);
     }
 
     private void applyFearAura() {

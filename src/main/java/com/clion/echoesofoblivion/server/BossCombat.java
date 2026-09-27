@@ -134,6 +134,9 @@ public final class BossCombat {
         // 这是全篇最恐怖的一句——玩家以为自己赢了，而它在感谢污染成功。
         boss.announceDying();
 
+        // 收敛：所有东西同时收回去（v1.2.0 的环境级收尾表现）
+        BossAura.collapse(boss, level);
+
         level.playSound(null, boss.blockPosition(), ModSounds.BOSS_DEATH.get(),
             SoundSource.HOSTILE, 1.5f, 0.8f);
         level.sendParticles(ParticleTypes.EXPLOSION_EMITTER,
@@ -149,6 +152,8 @@ public final class BossCombat {
                 com.clion.echoesofoblivion.item.ModItems.SHARD_OF_TRUTH.get(), 1));
 
         ModNetwork.sendToPlayer(RenderStatePacket.bossDefeat(), player);
+        // 光环随之消散，否则玩家的雾会被永久压着
+        BossAura.clearAura(player);
         boss.discard();
     }
 

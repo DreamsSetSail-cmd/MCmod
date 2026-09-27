@@ -29,6 +29,8 @@ public final class ClientData {
     private static int realityPhase;
     private static int bossPhase = -1;
     private static float bossStability;
+    /** 聚合体光环强度 0~1（v1.2.0）。用于抑制环境音，不是伤害。 */
+    private static float bossAura;
     private static final Set<Long> infectedChunks = new HashSet<>();
     private static Set<String> clues = Set.of();
 
@@ -147,6 +149,15 @@ public final class ClientData {
         return bossStability;
     }
 
+    /** 聚合体光环强度 0~1。0 表示不在光环内（声音正常）。 */
+    public static void setBossAura(float intensity) {
+        bossAura = intensity;
+    }
+
+    public static float getBossAura() {
+        return bossAura;
+    }
+
     /** 断线或切换存档时清空，避免把上一个世界的数据带到下一个。 */
     public static void resetAll() {
         resetCorruption();
@@ -157,5 +168,6 @@ public final class ClientData {
         realityPhase = 0;
         bossPhase = -1;
         bossStability = 0.0f;
+        bossAura = 0.0f;
     }
 }

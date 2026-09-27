@@ -247,10 +247,19 @@ warning(4)  ←→ apparatus(3), silence(1)
 
 | 元素 | 状态 |
 | --- | --- |
-| 5 段记忆文本（中英）+ 线索 | ✅ 已实现（21 种语言） |
+| 5 段记忆文本 + 线索 | ✅ 已实现（21 种语言） |
 | 共鸣判定与「回响共鸣」提示 | ✅ 已实现（`PlayerProgress.isResonant`） |
 | 逐句浮现的幻境屏幕 | ✅ 已实现（`MemoryVisionScreen`） |
-| **共鸣专属的第二段文本**（每对组合一条） | ❌ 未实现，见第 7 节 |
+| **共鸣专属的因果碎片**（5 条） | ✅ v1.1.0（`MemoryEntry.resonanceKey`） |
+| Boss 被「改写」的台词（3 句） | ✅ v1.1.0（`SilentAggregateEntity.announcePhase`） |
+| 记忆图鉴与共鸣连线 | ✅ v1.1.0（`MemoryCodexScreen`） |
+| 遗迹环境叙事（桥墩/基座/空白名字碑） | ✅ v1.1.0（`MonumentFeature`） |
+| **镜中的你**（感染区里的人形） | ✅ v1.2.0（`MirrorEntity`） |
+| **它叫你的名字** | ✅ v1.2.0（`CorruptionEventHandler.maybeCallPlayerName`） |
+| **侵蚀值影响记忆文本** | ✅ v1.2.0（`MemoryVisionScreen.corruptChar`） |
+| **聚合体的环境级技能** | ✅ v1.2.0（`BossAura`） |
+| 记忆之间的「顺序惩罚」 | ❌ 未实现，见 `ideas-backlog.md` |
+| 废墟的「布局语法」 | ❌ 未实现（当前仍是噪点式散布） |
 
 ---
 

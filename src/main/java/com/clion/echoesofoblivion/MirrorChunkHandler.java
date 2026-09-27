@@ -1,5 +1,6 @@
 package com.clion.echoesofoblivion;
 
+import com.clion.echoesofoblivion.entity.MirrorEntity;
 import com.clion.echoesofoblivion.entity.ModEntities;
 import com.clion.echoesofoblivion.entity.PhantomEntity;
 import com.clion.echoesofoblivion.network.ModNetwork;
@@ -35,6 +36,15 @@ public class MirrorChunkHandler {
 
     /** 感染区内每个玩家每次检查触发重力的概率。 */
     private static final float GRAVITY_FLICKER_CHANCE = 0.06f;
+
+    /**
+     * 「镜中的你」的出现概率（v1.2.0）。
+     *
+     * <p>检查间隔是 10 tick，因此 0.0006 大约等于每 10000 次检查出现一次，
+     * 在感染区持续活动时约每 10~20 分钟一次。这个频率是刻意的：
+     * 它必须罕见到你无法确认它是机制还是错觉。
+     */
+    private static final float MIRROR_CHANCE = 0.0006f;
 
     @SubscribeEvent
     public void onLevelTick(TickEvent.LevelTickEvent.Post event) {
@@ -118,12 +128,49 @@ public class MirrorChunkHandler {
             spawnPhantomNear(level, player);
         }
 
-        // 4. 感染区的影子状态强制拉高
+        // 4. 镜中的你（v1.2.0）：极低概率，且全球同时只允许一个。
+        //    概率刻意压到远低于亡魂——它必须罕见，否则会变成一种「怪物」，
+        //    而它应当始终是「我是不是看错了」。
+        if (random.nextFloat() < MIRROR_CHANCE && countNearbyMirrors(level, player) == 0) {
+            spawnMirrorNear(level, player);
+        }
+
+        // 5. 感染区的影子状态强制拉高
         ModNetwork.sendToPlayer(new ShadowSyncPacket(4), player);
     }
 
     private int countNearbyPhantoms(ServerLevel level, ServerPlayer player) {
         return level.getEntitiesOfClass(PhantomEntity.class, player.getBoundingBox().inflate(48)).size();
+    }
+
+    private int countNearbyMirrors(ServerLevel level, ServerPlayer player) {
+        return level.getEntitiesOfClass(MirrorEntity.class, player.getBoundingBox().inflate(96)).size();
+    }
+
+    /**
+     * 在玩家视野**之外**放置一个镜中的你。
+     *
+     * <p>生成距离 24~40 格：太近会立刻触发它的消散（6 格规则），太远则在雾里看不见。
+     * 这个距离让玩家有机会先瞥见一个静止的人形，然后在靠近时失去它。
+     */
+    private void spawnMirrorNear(ServerLevel level, ServerPlayer player) {
+        MirrorEntity mirror = ModEntities.MIRROR.get().create(level);
+        if (mirror == null) {
+            return;
+        }
+        var random = player.getRandom();
+
+        // 生成在玩家的侧后方，避免正前方「凭空出现」
+        double angle = Math.toRadians(player.getYRot() + 120.0 + random.nextDouble() * 120.0);
+        double distance = 24.0 + random.nextDouble() * 16.0;
+        double x = player.getX() + Math.cos(angle) * distance;
+        double z = player.getZ() + Math.sin(angle) * distance;
+
+        int y = level.getHeight(net.minecraft.world.level.levelgen.Heightmap.Types.MOTION_BLOCKING_NO_LEAVES,
+            (int) x, (int) z);
+        mirror.moveTo(x, y, z, random.nextFloat() * 360.0f, 0.0f);
+        level.addFreshEntity(mirror);
+        // 刻意不播放任何音效：有声音它就成了「一个怪物」
     }
 
     private void spawnPhantomNear(ServerLevel level, ServerPlayer player) {

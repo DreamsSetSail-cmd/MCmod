@@ -125,9 +125,19 @@ public class MemoryVisionScreen extends Screen {
             int color = argb((int) (la * 225.0f), 0xE0E0E0);
             int jitterX = Math.round((JITTER.nextFloat() - 0.5f) * 2.0f * jitterScale);
             int jitterY = Math.round((JITTER.nextFloat() - 0.5f) * jitterScale);
+            int wrapIndex = 0;
             for (String wrapped : wrap(line, textWidth)) {
-                graphics.drawString(font, wrapped, left + jitterX, y + jitterY, color, false);
+                int lineWidth = font.width(wrapped);
+                int startX = centerX - lineWidth / 2 + jitterX;
+                if (textInstability() > 0.0f) {
+                    // 逐字绘制：抖动 + 形近字替换 + 偶发缺字。
+                    // 行号用 (i, wrapIndex) 组合，保证同一行内每个字符的位置判定稳定。
+                    drawUnstableLine(graphics, wrapped, i * 7 + wrapIndex, startX, y + jitterY, color);
+                } else {
+                    graphics.drawString(font, wrapped, startX, y + jitterY, color, false);
+                }
                 y += LINE_HEIGHT;
+                wrapIndex++;
             }
         }
 
@@ -211,6 +221,113 @@ public class MemoryVisionScreen extends Screen {
             result.add(current.toString());
         }
         return result.isEmpty() ? List.of(text) : result;
+    }
+
+    // ---------------------------------------------------------------- 文本不稳定（v1.2.0）
+
+    /** 侵蚀低于该比例时文字完全正常。 */
+    private static final float TEXT_UNSTABLE_ONSET = 0.40f;
+
+    /**
+     * 相似的替换字符。
+     *
+     * <p>选择标准：**看起来像同一个字**，但细看不对。
+     * 这比随机乱码有效得多——乱码会被立刻识别为「特效」，
+     * 而一个长得几乎一样的字形会让人怀疑自己是不是看错了。
+     */
+    private static final char[] LOOKALIKES = {'o', 'l', 'I', 'i', 'ı', 'ɑ', 'е', 'о', 'ѕ', 'ν'};
+
+    /**
+     * 按侵蚀程度让记忆文本变得不稳定。
+     *
+     * <p>三件事按强度递增发生：
+     * <ol>
+     *   <li>字符位置轻微错位（{@code glyphOffset}）</li>
+     *   <li>个别字符被替换成形近字（{@code corruptChar}）</li>
+     *   <li>个别字符整个消失（{@code corruptChar} 返回 0）</li>
+     * </ol>
+     *
+     * <p><b>两个必须遵守的约束</b>：
+     * <ul>
+     *   <li><b>必须仍然可读。</b>缺字太多会变成烦人而不是恐怖，
+     *       因此最高侵蚀下也只有约 1/7 的字符受影响。</li>
+     *   <li><b>不能闪烁。</b>随机源由 {@code (行号, 列号)} 的固定哈希构成，
+     *       与时间无关——同一个字在所有帧里的状态完全一致。
+     *       如果文字每帧都在跳，玩家会立刻明白那是渲染效果。</li>
+     * </ul>
+     *
+     * @return 要绘制的单个字符；返回 {@code 0} 表示这个字消失了
+     */
+    private char corruptChar(String line, int lineIndex, int charIndex) {
+        char c = line.charAt(charIndex);
+        if (c == ' ') {
+            return c;
+        }
+
+        float intensity = textInstability();
+        if (intensity <= 0.0f) {
+            return c;
+        }
+
+        // 固定哈希：同一位置在任何一帧都得到同样的判定。
+        // 0x9E3779B1 是 Knuth 黄金比常数的 32 位形式（对应无符号的 2654435761）。
+        int hash = (lineIndex * 31 + charIndex) * 0x9E3779B1;
+        hash ^= hash >>> 15;
+        hash *= 0x85ebca6b;
+        hash ^= hash >>> 13;
+        int roll = Math.floorMod(hash, 1000);
+
+        // 消失：最高侵蚀下约 4%
+        if (roll < (int) (intensity * 40)) {
+            return 0;
+        }
+        // 形近字替换：最高侵蚀下约 10%
+        if (roll < (int) (intensity * 140)) {
+            int pick = Math.floorMod(hash >> 8, LOOKALIKES.length);
+            return LOOKALIKES[pick];
+        }
+        return c;
+    }
+
+    /** 每个字符的额外水平抖动（像素）。侵蚀越高，字距越乱。 */
+    private int glyphOffset(int lineIndex, int charIndex) {
+        float intensity = textInstability();
+        if (intensity <= 0.0f) {
+            return 0;
+        }
+        // 0x9E3779B1 同样是黄金比常数的 32 位形式
+        int hash = (lineIndex * 17 + charIndex * 7) * 0x9E3779B1;
+        hash ^= hash >>> 13;
+        int roll = Math.floorMod(hash, 3) - 1;   // -1 / 0 / 1
+        return Math.round(roll * intensity * 1.6f);
+    }
+
+    /** 当前文本不稳定强度 0~1。 */
+    private float textInstability() {
+        float ratio = ClientData.getCorruptionRatio();
+        if (ratio <= TEXT_UNSTABLE_ONSET) {
+            return 0.0f;
+        }
+        return Math.min(1.0f, (ratio - TEXT_UNSTABLE_ONSET) / (1.0f - TEXT_UNSTABLE_ONSET));
+    }
+
+    /**
+     * 逐字绘制一行，应用抖动与不稳定。
+     *
+     * <p>不用 {@code drawString} 整行绘制，因为需要给每个字符单独定位与替换。
+     */
+    private void drawUnstableLine(GuiGraphics graphics, String line, int lineIndex,
+                                  int startX, int y, int color) {
+        int x = startX;
+        for (int i = 0; i < line.length(); i++) {
+            char c = corruptChar(line, lineIndex, i);
+            if (c != 0) {
+                graphics.drawString(font, String.valueOf(c), x + glyphOffset(lineIndex, i), y,
+                    color, false);
+            }
+            // 用原字符的宽度推进，避免文字整体「缩水」而失去可读性
+            x += font.width(String.valueOf(line.charAt(i)));
+        }
     }
 
     private static int argb(int alpha, int rgb) {
