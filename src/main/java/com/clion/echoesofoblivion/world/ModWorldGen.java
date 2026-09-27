@@ -37,6 +37,13 @@ public class ModWorldGen {
     public static final RegistryObject<RuinPileFeature> RUIN_PILE = FEATURES.register("ruin_pile",
         () -> new RuinPileFeature(NoneFeatureConfiguration.CODEC));
 
+    /**
+     * 可读的遗迹（v1.1.0）：桥墩 / 仪器基座 / 名字碑。
+     * 形态由数据包 JSON 的 {@code kind} 决定，因此只注册一个地物类型。
+     */
+    public static final RegistryObject<MonumentFeature> MONUMENT = FEATURES.register("monument",
+        () -> new MonumentFeature(MonumentFeature.Config.CODEC));
+
     public static void register(IEventBus modBus) {
         FEATURES.register(modBus);
     }

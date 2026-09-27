@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "Derefter talte hun aldrig igen. Vi antog, at hun havde sagt nok.",
   "message.echoesofoblivion.boss.phase1": "...vi kan høre dig nu.",
   "message.echoesofoblivion.boss.phase2": "...vær så venlig at tale videre.",
-  "message.echoesofoblivion.boss.dying": "...tak, fordi du bragte os tilbage."
+  "message.echoesofoblivion.boss.dying": "...tak, fordi du bragte os tilbage.",
+  "screen.echoesofoblivion.codex": "Hukommelsens Kodeks",
+  "screen.echoesofoblivion.codex.hint": "ESC for at lukke",
+  "screen.echoesofoblivion.codex.no_resonance": "Intet har givet genlyd endnu. Forbind et spor med en hukommelse.",
+  "screen.echoesofoblivion.codex.empty_title": "optegnelsen er tom",
+  "screen.echoesofoblivion.codex.empty_body": "Nogen begyndte at skrive den ned. Blev ikke færdig.",
+  "item.echoesofoblivion.memory_scroll.desc": "En optegnelse over det, man har været vidne til"
 }

@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "Daarna sprak ze nooit meer. We namen aan dat ze genoeg had gezegd.",
   "message.echoesofoblivion.boss.phase1": "...we kunnen je nu horen.",
   "message.echoesofoblivion.boss.phase2": "...blijf alsjeblieft praten.",
-  "message.echoesofoblivion.boss.dying": "...dank je dat je ons terugbracht."
+  "message.echoesofoblivion.boss.dying": "...dank je dat je ons terugbracht.",
+  "screen.echoesofoblivion.codex": "Herinneringscodex",
+  "screen.echoesofoblivion.codex.hint": "ESC om te sluiten",
+  "screen.echoesofoblivion.codex.no_resonance": "Er is nog niets in resonantie gekomen. Geen aanwijzing heeft zijn herinnering gevonden.",
+  "screen.echoesofoblivion.codex.empty_title": "de optekening is leeg",
+  "screen.echoesofoblivion.codex.empty_body": "Iemand begon het op te schrijven. Het is niet af.",
+  "item.echoesofoblivion.memory_scroll.desc": "Optekening van wat gezien is"
 }

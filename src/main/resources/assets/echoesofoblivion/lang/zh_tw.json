@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "在那之後，她再也沒有出聲。我們以為她已經說完了。",
   "message.echoesofoblivion.boss.phase1": "...我們現在聽得見你了。",
   "message.echoesofoblivion.boss.phase2": "...請繼續說下去。",
-  "message.echoesofoblivion.boss.dying": "...謝謝你把我們帶回來。"
+  "message.echoesofoblivion.boss.dying": "...謝謝你把我們帶回來。",
+  "screen.echoesofoblivion.codex": "記憶圖鑑",
+  "screen.echoesofoblivion.codex.hint": "ESC 關閉",
+  "screen.echoesofoblivion.codex.no_resonance": "還沒有任何共鳴。把一條線索對上它所指向的記憶。",
+  "screen.echoesofoblivion.codex.empty_title": "紀錄是空白的",
+  "screen.echoesofoblivion.codex.empty_body": "有人開始把它寫下來。沒有寫完。",
+  "item.echoesofoblivion.memory_scroll.desc": "你所見證之物的紀錄"
 }

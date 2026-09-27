@@ -21,8 +21,9 @@ public class ModItems {
     public static final RegistryObject<Item> CORRIDOR_KEY = ITEMS.register("corridor_key",
         () -> new CorridorKeyItem(new Properties().stacksTo(1)));
 
+    /** 记忆卷轴：右键打开记忆图鉴（v1.1.0 起不再是装饰品）。 */
     public static final RegistryObject<Item> MEMORY_SCROLL = ITEMS.register("memory_scroll",
-        () -> new Item(new Properties().stacksTo(1)));
+        () -> new MemoryScrollItem(new Properties().stacksTo(1)));
 
     public static final RegistryObject<Item> ECHO_WHISPER = ITEMS.register("echo_whisper",
         () -> new Item(new Properties()));

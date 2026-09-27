@@ -117,6 +117,21 @@ public final class ServerPacketHandler {
     }
 
     /**
+     * 记忆图鉴的进度刷新请求（v1.1.0）。
+     *
+     * <p>无校验可言——它只要把该玩家目前的状态原样回送即可。
+     * 用完整的 {@code MemorySyncPacket} 而不是增量，是因为位掩码本身就是完整状态，
+     * 因此并发、乱序、重复请求都无害。
+     */
+    public static void onCodexRequest(ServerPlayer player) {
+        if (player == null) {
+            return;
+        }
+        PlayerMemoryData data = PlayerMemoryData.get(player.serverLevel());
+        syncProgress(player, data.progressOf(player));
+    }
+
+    /**
      * 由方块坐标确定性推导记忆索引。
      *
      * <p>使用固定的混合函数而非 {@code Random}：同一个坐标在任何时候、任何客户端

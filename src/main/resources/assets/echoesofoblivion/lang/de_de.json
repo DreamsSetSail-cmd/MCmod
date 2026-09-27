@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "Danach sprach sie nie wieder. Wir nahmen an, sie habe genug gesagt.",
   "message.echoesofoblivion.boss.phase1": "...wir können dich jetzt hören.",
   "message.echoesofoblivion.boss.phase2": "...bitte sprich weiter.",
-  "message.echoesofoblivion.boss.dying": "...danke, dass du uns zurückgebracht hast."
+  "message.echoesofoblivion.boss.dying": "...danke, dass du uns zurückgebracht hast.",
+  "screen.echoesofoblivion.codex": "Erinnerungskodex",
+  "screen.echoesofoblivion.codex.hint": "ESC zum Schließen",
+  "screen.echoesofoblivion.codex.no_resonance": "Nichts ist bisher in Resonanz getreten. Kein Hinweis hat seine Erinnerung gefunden.",
+  "screen.echoesofoblivion.codex.empty_title": "die Niederschrift ist leer",
+  "screen.echoesofoblivion.codex.empty_body": "Jemand begann, es aufzuschreiben. Es wurde nicht vollendet.",
+  "item.echoesofoblivion.memory_scroll.desc": "Niederschrift des Gesehenen"
 }

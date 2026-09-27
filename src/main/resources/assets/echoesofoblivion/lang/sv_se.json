@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "Efter det talade hon aldrig mer. Vi antog att hon hade sagt nog.",
   "message.echoesofoblivion.boss.phase1": "...vi kan höra dig nu.",
   "message.echoesofoblivion.boss.phase2": "...snälla, fortsätt prata.",
-  "message.echoesofoblivion.boss.dying": "...tack för att du förde oss tillbaka."
+  "message.echoesofoblivion.boss.dying": "...tack för att du förde oss tillbaka.",
+  "screen.echoesofoblivion.codex": "Minnescodex",
+  "screen.echoesofoblivion.codex.hint": "ESC för att stänga",
+  "screen.echoesofoblivion.codex.no_resonance": "Ingenting har resonerat ännu. Ingen ledtråd har hittat sitt minne.",
+  "screen.echoesofoblivion.codex.empty_title": "anteckningen är tom",
+  "screen.echoesofoblivion.codex.empty_body": "Någon började skriva ner det. Det blev inte färdigt.",
+  "item.echoesofoblivion.memory_scroll.desc": "Anteckning över det som setts"
 }

@@ -54,10 +54,29 @@ jobs:
 
       # gameTest 在 CI 上出现过不退出、无限挂起的情况（本机稳定）。
       # 因此限制 5 分钟；超时视为失败，但不至于拖垮整个作业。
-      # 真正的构建正确性由上一步 build 与语言校验保证，测试是额外一层。
+      #
+      # 另外必须显式校验日志：实测当测试服务器**启动失败**时
+      # （例如 run/ 目录被另一个进程占用会话锁），
+      # `runGameTestServer` 仍然返回退出码 0 并报 BUILD SUCCESSFUL——
+      # 那是个假绿。所以这里额外 grep 成功标志，找不到就失败。
       - name: Run game tests
         timeout-minutes: 5
-        run: bash gradlew runGameTestServer --no-daemon --console=plain
+        run: |
+          set -o pipefail
+          bash gradlew runGameTestServer --no-daemon --console=plain 2>&1 | tee gametest.log
+          if ! grep -q "required tests passed" gametest.log; then
+            echo "::error::GameTest did not report success. The test server may have failed to start."
+            exit 1
+          fi
+
+      # 把测试日志留档，方便排查 CI 上的偶发挂起
+      - name: Upload game test log
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: gametest-log
+          path: gametest.log
+          if-no-files-found: ignore
 
       - name: Upload jar as build artifact
         uses: actions/upload-artifact@v7

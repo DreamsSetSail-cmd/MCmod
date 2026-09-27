@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "Etter det snakket hun aldri igjen. Vi antok at hun hadde sagt nok.",
   "message.echoesofoblivion.boss.phase1": "...vi kan høre deg nå.",
   "message.echoesofoblivion.boss.phase2": "...vær så snill, fortsett å snakke.",
-  "message.echoesofoblivion.boss.dying": "...takk for at du brakte oss tilbake."
+  "message.echoesofoblivion.boss.dying": "...takk for at du brakte oss tilbake.",
+  "screen.echoesofoblivion.codex": "Minnekodeksen",
+  "screen.echoesofoblivion.codex.hint": "ESC for å lukke",
+  "screen.echoesofoblivion.codex.no_resonance": "Ingenting har gitt gjenklang ennå. Knytt et holdepunkt til et minne.",
+  "screen.echoesofoblivion.codex.empty_title": "nedtegnelsen er tom",
+  "screen.echoesofoblivion.codex.empty_body": "Noen begynte å skrive den ned. Ble ikke ferdig.",
+  "item.echoesofoblivion.memory_scroll.desc": "En nedtegnelse av det man har vært vitne til"
 }

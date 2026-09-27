@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "それきり彼女は二度と声を発しなかった。私たちは、十分に語ったのだと思った。",
   "message.echoesofoblivion.boss.phase1": "……いま、あなたの声が聞こえます。",
   "message.echoesofoblivion.boss.phase2": "……どうか、話し続けてください。",
-  "message.echoesofoblivion.boss.dying": "……私たちを連れ戻してくれて、ありがとうございます。"
+  "message.echoesofoblivion.boss.dying": "……私たちを連れ戻してくれて、ありがとうございます。",
+  "screen.echoesofoblivion.codex": "記憶図鑑",
+  "screen.echoesofoblivion.codex.hint": "ESC で閉じる",
+  "screen.echoesofoblivion.codex.no_resonance": "まだ何も共鳴していない。手がかりを記憶に重ねる。",
+  "screen.echoesofoblivion.codex.empty_title": "記録は白紙のまま",
+  "screen.echoesofoblivion.codex.empty_body": "誰かが書き始めた。書き終わることはなかった。",
+  "item.echoesofoblivion.memory_scroll.desc": "目撃したものの記録"
 }

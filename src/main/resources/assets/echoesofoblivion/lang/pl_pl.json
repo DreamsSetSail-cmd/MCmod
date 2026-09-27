@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "Potem już nigdy się nie odezwała. Uznaliśmy, że powiedziała dość.",
   "message.echoesofoblivion.boss.phase1": "...teraz cię słyszymy.",
   "message.echoesofoblivion.boss.phase2": "...proszę, mów dalej.",
-  "message.echoesofoblivion.boss.dying": "...dziękujemy, że sprowadziłeś nas z powrotem."
+  "message.echoesofoblivion.boss.dying": "...dziękujemy, że sprowadziłeś nas z powrotem.",
+  "screen.echoesofoblivion.codex": "Kodeks Wspomnień",
+  "screen.echoesofoblivion.codex.hint": "ESC, aby zamknąć",
+  "screen.echoesofoblivion.codex.no_resonance": "Nic jeszcze nie zarezonowało. Dopasuj wskazówkę do wspomnienia.",
+  "screen.echoesofoblivion.codex.empty_title": "zapis jest pusty",
+  "screen.echoesofoblivion.codex.empty_body": "Ktoś zaczął to spisywać. Nie dokończył.",
+  "item.echoesofoblivion.memory_scroll.desc": "Zapis tego, co się widziało"
 }

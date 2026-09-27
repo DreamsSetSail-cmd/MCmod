@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "Après cela, elle n'a plus jamais parlé. Nous avons supposé qu'elle en avait dit assez.",
   "message.echoesofoblivion.boss.phase1": "...nous pouvons vous entendre, à présent.",
   "message.echoesofoblivion.boss.phase2": "...continuez à parler, s'il vous plaît.",
-  "message.echoesofoblivion.boss.dying": "...merci de nous avoir ramenés."
+  "message.echoesofoblivion.boss.dying": "...merci de nous avoir ramenés.",
+  "screen.echoesofoblivion.codex": "Codex de mémoire",
+  "screen.echoesofoblivion.codex.hint": "ESC pour fermer",
+  "screen.echoesofoblivion.codex.no_resonance": "Rien n'a encore résonné. Aucun indice n'a retrouvé sa mémoire.",
+  "screen.echoesofoblivion.codex.empty_title": "le registre reste blanc",
+  "screen.echoesofoblivion.codex.empty_body": "Quelqu'un a commencé à l'écrire. Cela ne s'est pas terminé.",
+  "item.echoesofoblivion.memory_scroll.desc": "Relation de ce qui a été vu"
 }

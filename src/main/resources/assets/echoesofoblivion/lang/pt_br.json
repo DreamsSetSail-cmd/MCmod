@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "Depois disso, ela nunca mais falou. Achamos que já tinha dito o suficiente.",
   "message.echoesofoblivion.boss.phase1": "...agora podemos te ouvir.",
   "message.echoesofoblivion.boss.phase2": "...por favor, continue falando.",
-  "message.echoesofoblivion.boss.dying": "...obrigado por nos trazer de volta."
+  "message.echoesofoblivion.boss.dying": "...obrigado por nos trazer de volta.",
+  "screen.echoesofoblivion.codex": "Códice de memória",
+  "screen.echoesofoblivion.codex.hint": "ESC para fechar",
+  "screen.echoesofoblivion.codex.no_resonance": "Ainda não ressoou nada. Nenhuma pista encontrou a sua memória.",
+  "screen.echoesofoblivion.codex.empty_title": "o registro está em branco",
+  "screen.echoesofoblivion.codex.empty_body": "Alguém começou a escrever. Não terminou.",
+  "item.echoesofoblivion.memory_scroll.desc": "Registro do que foi presenciado"
 }

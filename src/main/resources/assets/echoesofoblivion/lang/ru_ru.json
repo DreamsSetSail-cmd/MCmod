@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "После этого она больше не говорила. Мы решили, что она сказала достаточно.",
   "message.echoesofoblivion.boss.phase1": "...теперь мы слышим тебя.",
   "message.echoesofoblivion.boss.phase2": "...пожалуйста, говори дальше.",
-  "message.echoesofoblivion.boss.dying": "...спасибо, что вернул нас обратно."
+  "message.echoesofoblivion.boss.dying": "...спасибо, что вернул нас обратно.",
+  "screen.echoesofoblivion.codex": "Кодекс воспоминаний",
+  "screen.echoesofoblivion.codex.hint": "ESC — закрыть",
+  "screen.echoesofoblivion.codex.no_resonance": "Пока ничто не отозвалось. Сопоставьте улику с воспоминанием.",
+  "screen.echoesofoblivion.codex.empty_title": "запись пуста",
+  "screen.echoesofoblivion.codex.empty_body": "Кто-то начал её записывать. Не закончил.",
+  "item.echoesofoblivion.memory_scroll.desc": "Запись увиденного"
 }

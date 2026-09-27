@@ -1,5 +1,6 @@
 package com.clion.echoesofoblivion.client;
 
+import com.clion.echoesofoblivion.client.screen.MemoryCodexScreen;
 import com.clion.echoesofoblivion.client.screen.MemoryVisionScreen;
 import com.clion.echoesofoblivion.memory.MemoryEntry;
 import com.clion.echoesofoblivion.memory.MemoryRegistry;
@@ -76,6 +77,11 @@ public final class ClientPacketHandler {
         }
         minecraft.player.playSound(ModSounds.PORTAL_TRAVEL.get(), 1.0f, stable ? 1.0f : 0.6f);
         ClientScreenEffects.startTravelFade(entering, stable);
+    }
+
+    /** 打开记忆图鉴（v1.1.0）。由记忆卷轴触发。 */
+    public static void openCodex() {
+        Minecraft.getInstance().setScreen(new MemoryCodexScreen());
     }
 
     /**

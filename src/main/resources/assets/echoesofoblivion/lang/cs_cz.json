@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "Potom už nikdy nepromluvila. Mysleli jsme, že řekla dost.",
   "message.echoesofoblivion.boss.phase1": "...teď vás slyšíme.",
   "message.echoesofoblivion.boss.phase2": "...mluvte prosím dál.",
-  "message.echoesofoblivion.boss.dying": "...děkujeme, že jste nás přivedli zpět."
+  "message.echoesofoblivion.boss.dying": "...děkujeme, že jste nás přivedli zpět.",
+  "screen.echoesofoblivion.codex": "Kodex vzpomínek",
+  "screen.echoesofoblivion.codex.hint": "ESC pro zavření",
+  "screen.echoesofoblivion.codex.no_resonance": "Zatím nic nezarezonovalo. Přiřaďte stopu ke vzpomínce.",
+  "screen.echoesofoblivion.codex.empty_title": "záznam je prázdný",
+  "screen.echoesofoblivion.codex.empty_body": "Někdo ho začal zapisovat. Nedopsal.",
+  "item.echoesofoblivion.memory_scroll.desc": "Záznam toho, co bylo spatřeno"
 }

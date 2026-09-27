@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "Ondan sonra bir daha konuşmadı. Yeterince söylediğini varsaydık.",
   "message.echoesofoblivion.boss.phase1": "...artık seni duyabiliyoruz.",
   "message.echoesofoblivion.boss.phase2": "...lütfen konuşmaya devam et.",
-  "message.echoesofoblivion.boss.dying": "...bizi geri getirdiğin için teşekkürler."
+  "message.echoesofoblivion.boss.dying": "...bizi geri getirdiğin için teşekkürler.",
+  "screen.echoesofoblivion.codex": "Anı Kodeksi",
+  "screen.echoesofoblivion.codex.hint": "Kapatmak için ESC",
+  "screen.echoesofoblivion.codex.no_resonance": "Henüz hiçbir şey yankılanmadı. Bir ipucunu bir anıyla eşleştirin.",
+  "screen.echoesofoblivion.codex.empty_title": "kayıt boş",
+  "screen.echoesofoblivion.codex.empty_body": "Biri onu yazmaya başlamış. Bitirememiş.",
+  "item.echoesofoblivion.memory_scroll.desc": "Tanık olunanların kaydı"
 }

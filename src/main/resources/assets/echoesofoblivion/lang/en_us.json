@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "She never spoke again after that. We assumed she had said enough.",
   "message.echoesofoblivion.boss.phase1": "...we can hear you now.",
   "message.echoesofoblivion.boss.phase2": "...please keep talking.",
-  "message.echoesofoblivion.boss.dying": "...thank you for bringing us back."
+  "message.echoesofoblivion.boss.dying": "...thank you for bringing us back.",
+  "screen.echoesofoblivion.codex": "Memory Codex",
+  "screen.echoesofoblivion.codex.hint": "ESC to close",
+  "screen.echoesofoblivion.codex.no_resonance": "Nothing has resonated yet. Match a clue to a memory.",
+  "screen.echoesofoblivion.codex.empty_title": "the record is blank",
+  "screen.echoesofoblivion.codex.empty_body": "Someone started to write it down. It did not finish.",
+  "item.echoesofoblivion.memory_scroll.desc": "A record of what you have witnessed"
 }

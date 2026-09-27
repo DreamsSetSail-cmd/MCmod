@@ -1,6 +1,7 @@
 package com.clion.echoesofoblivion.network;
 
 import com.clion.echoesofoblivion.EchoesOfOblivionMod;
+import com.clion.echoesofoblivion.network.packets.CodexRequestPacket;
 import com.clion.echoesofoblivion.network.packets.CorruptionUpdatePacket;
 import com.clion.echoesofoblivion.network.packets.MemoryAttackPacket;
 import com.clion.echoesofoblivion.network.packets.MemoryCrystalUsePacket;
@@ -91,6 +92,12 @@ public final class ModNetwork {
         CHANNEL.messageBuilder(MemoryAttackPacket.class, 8)
             .codec(MemoryAttackPacket.STREAM_CODEC)
             .consumerMainThread(MemoryAttackPacket::handle)
+            .add();
+
+        // v1.1.0：记忆图鉴的进度刷新请求（无载荷）
+        CHANNEL.messageBuilder(CodexRequestPacket.class, 9)
+            .codec(CodexRequestPacket.STREAM_CODEC)
+            .consumerMainThread(CodexRequestPacket::handle)
             .add();
     }
 

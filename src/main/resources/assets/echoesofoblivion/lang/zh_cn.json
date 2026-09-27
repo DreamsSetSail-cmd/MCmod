@@ -65,5 +65,11 @@
   "memory.echoesofoblivion.resonance.warning_silence": "那之后她再没出过声。我们以为她已经说完了。",
   "message.echoesofoblivion.boss.phase1": "……我们现在能听见你了。",
   "message.echoesofoblivion.boss.phase2": "……请继续说。",
-  "message.echoesofoblivion.boss.dying": "……谢谢你把我们带回来。"
+  "message.echoesofoblivion.boss.dying": "……谢谢你把我们带回来。",
+  "screen.echoesofoblivion.codex": "记忆图鉴",
+  "screen.echoesofoblivion.codex.hint": "ESC 关闭",
+  "screen.echoesofoblivion.codex.no_resonance": "还没有任何共鸣。把一条线索对上它所指向的记忆。",
+  "screen.echoesofoblivion.codex.empty_title": "记录是空白的",
+  "screen.echoesofoblivion.codex.empty_body": "有人开始把它写下来。没有写完。",
+  "item.echoesofoblivion.memory_scroll.desc": "你已目睹之物的记录"
 }

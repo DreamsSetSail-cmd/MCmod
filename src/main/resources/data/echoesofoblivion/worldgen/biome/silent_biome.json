@@ -37,7 +37,10 @@
     [],
     [],
     [
-      "echoesofoblivion:corridor_ruins"
+      "echoesofoblivion:corridor_ruins",
+      "echoesofoblivion:corridor_bridge_stump",
+      "echoesofoblivion:corridor_apparatus_base",
+      "echoesofoblivion:corridor_monument"
     ],
     [
       "echoesofoblivion:memory_crystal_scatter"
