@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "她帶著它走到了最後。它沒能救她。",
   "block.echoesofoblivion.fragment_niche": "殘片龕",
   "block.echoesofoblivion.fragment_niche.taken": "龕交出了它一直含著的東西。",
-  "block.echoesofoblivion.fragment_niche.empty": "它有的東西你已經全帶在身上了。"
+  "block.echoesofoblivion.fragment_niche.empty": "它有的東西你已經全帶在身上了。",
+  "message.echoesofoblivion.misaligned_echo": "你聽過的某個東西回來了，但不對。",
+  "message.echoesofoblivion.misaligned_echo.hint": "迴廊留不住聲音。"
 }

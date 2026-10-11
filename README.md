@@ -40,6 +40,18 @@ under the ambient audio. The higher it gets, the harder it is to see where you a
 wherever you stand. Inside them gravity flickers, particles run backwards, and phantoms take form
 and hunt the living.
 
+**The medium is decaying** — Inside the corridor you will hear **sounds you just heard**, replayed
+wrong: the pitch is always flat, the direction is reflected to your other side, the volume trails
+off as if it gave out on its own, and it arrives two to seven seconds late — long enough that you
+can no longer be sure it was an echo. Nothing new was recorded for this. It is the *same* sounds,
+broken. An echo is supposed to be a delayed copy; when the echo starts getting it wrong, the
+medium holding it is going bad.
+
+The ruins decay the same way. They are not random rubble: a wall runs along one axis and **collapses
+in whole segments**, columns stand at a **constant spacing** and then simply stop, and fallen beams
+lie along a single line. Random rubble reads as geology. This reads as **order that broke** — which
+is a different, and worse, thing.
+
 **Rites you perform yourself** — The **Resonance Fork** performs one of three rites, each consuming
 real materials. *Requiem* scatters every echo within 32 blocks. **Descent** silences the world
 within 48 blocks for 30 seconds — the first time you get to be the one who makes the silence,
@@ -118,6 +130,13 @@ Two config files are generated on first run: `echoesofoblivion-common.toml` (ser
 | `enableMirrorChunks` | true | Toggle the reality-collapse mechanic |
 | `overlayIntensity` | 1.0 | Strength of the corruption fog |
 | `enableShadowEffects` | true | Toggle phantom glimpses |
+| `enableMisalignedEchoes` | true | Toggle the decaying-medium echo mechanic |
+| `misalignedEchoRate` | 1.0 | Echo frequency multiplier (0 = never) |
+
+If `misalignedEchoes` becomes disorienting, `misalignedEchoRate = 0.3` keeps the mechanic
+noticeable without it dominating the audio; `0` turns it off. The setting exists because
+a mechanic built on *unreliable sound* is one some players will legitimately need to quiet down —
+and a horror mod that ignores that is just an accessibility problem.
 
 ## Languages
 
@@ -192,6 +211,7 @@ python tools/make_v2_textures.py    # v2.0.0 set
 | [docs/story-expansion.md](docs/story-expansion.md) | v2.0.0 narrative expansion: the 12 lore fragments in full, and the completed timeline |
 | [docs/technical-guide.md](docs/technical-guide.md) | Technical handbook: architecture, every system, pitfalls, modification guide |
 | [docs/ideas-backlog.md](docs/ideas-backlog.md) | Ideas that were considered and not built, with the reasoning |
+| [docs/roadmap-v2x.md](docs/roadmap-v2x.md) | The v2.1–v2.5 plan: one theme per release, and the three rules they all obey |
 | [docs/translation-spec.md](docs/translation-spec.md) | Translation rules and terminology table |
 | [achieve.md](achieve.md) | The 8-phase implementation roadmap this mod was built against |
 | [tech-outline.md](tech-outline.md) | Original technical outline |

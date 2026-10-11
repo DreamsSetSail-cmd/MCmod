@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "그녀는 그것을 끝까지 지니고 갔습니다. 그것은 그녀를 구하지 못했습니다.",
   "block.echoesofoblivion.fragment_niche": "파편의 벽감",
   "block.echoesofoblivion.fragment_niche.taken": "벽감이 품고 있던 것을 내놓습니다.",
-  "block.echoesofoblivion.fragment_niche.empty": "그것이 가졌던 것은 이미 전부 당신이 지니고 있습니다."
+  "block.echoesofoblivion.fragment_niche.empty": "그것이 가졌던 것은 이미 전부 당신이 지니고 있습니다.",
+  "message.echoesofoblivion.misaligned_echo": "이전에 들었던 무언가가 잘못된 모습으로 돌아옵니다.",
+  "message.echoesofoblivion.misaligned_echo.hint": "회랑은 소리를 붙잡아 두지 못합니다."
 }

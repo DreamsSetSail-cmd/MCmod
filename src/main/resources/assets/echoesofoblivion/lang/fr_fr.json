@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Elle l'a portée jusqu'au bout. Elle ne l'a pas sauvée.",
   "block.echoesofoblivion.fragment_niche": "Niche à fragments",
   "block.echoesofoblivion.fragment_niche.taken": "La niche cède ce qu'elle retenait.",
-  "block.echoesofoblivion.fragment_niche.empty": "Vous portez déjà tout ce qu'elle avait."
+  "block.echoesofoblivion.fragment_niche.empty": "Vous portez déjà tout ce qu'elle avait.",
+  "message.echoesofoblivion.misaligned_echo": "Quelque chose de déjà entendu revient de travers.",
+  "message.echoesofoblivion.misaligned_echo.hint": "Le corridor ne retient pas le son."
 }

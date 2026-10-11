@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Она несла его до конца. Он её не спас.",
   "block.echoesofoblivion.fragment_niche": "Ниша фрагментов",
   "block.echoesofoblivion.fragment_niche.taken": "Ниша отдаёт то, что держала.",
-  "block.echoesofoblivion.fragment_niche.empty": "Ты уже несёшь всё, что у неё было."
+  "block.echoesofoblivion.fragment_niche.empty": "Ты уже несёшь всё, что у неё было.",
+  "message.echoesofoblivion.misaligned_echo": "Услышанное прежде возвращается неправильным.",
+  "message.echoesofoblivion.misaligned_echo.hint": "Коридор не удерживает звук."
 }

@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Ella lo llevó hasta el final. No la salvó.",
   "block.echoesofoblivion.fragment_niche": "Hornacina del fragmento",
   "block.echoesofoblivion.fragment_niche.taken": "La hornacina cede lo que guardaba.",
-  "block.echoesofoblivion.fragment_niche.empty": "Ya llevas encima todo lo que tenía."
+  "block.echoesofoblivion.fragment_niche.empty": "Ya llevas encima todo lo que tenía.",
+  "message.echoesofoblivion.misaligned_echo": "Algo que ya se oyó vuelve, pero está mal.",
+  "message.echoesofoblivion.misaligned_echo.hint": "El corredor no retiene el sonido."
 }

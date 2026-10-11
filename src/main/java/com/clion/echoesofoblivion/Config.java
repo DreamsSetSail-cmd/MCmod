@@ -18,6 +18,10 @@ public class Config {
     public static ForgeConfigSpec.BooleanValue enableShadowEffects;
     public static ForgeConfigSpec.DoubleValue whisperVolume;
 
+    /** v2.1.0：错位的回响。音高错、方向反、延迟——介质在腐坏。 */
+    public static ForgeConfigSpec.BooleanValue enableMisalignedEchoes;
+    public static ForgeConfigSpec.DoubleValue misalignedEchoRate;
+
     static {
         ForgeConfigSpec.Builder commonBuilder = new ForgeConfigSpec.Builder();
         commonBuilder.comment("General Settings");
@@ -58,6 +62,15 @@ public class Config {
         whisperVolume = clientBuilder
             .comment("低语音效音量系数")
             .defineInRange("whisperVolume", 0.5, 0.0, 1.0);
+
+        // v2.1.0
+        enableMisalignedEchoes = clientBuilder
+            .comment("是否启用「错位的回响」（走廊里重放你听过的声音，但音高错、方向反、有延迟）")
+            .define("enableMisalignedEchoes", true);
+
+        misalignedEchoRate = clientBuilder
+            .comment("错位回响的频率系数。1.0 为默认（期望约每 26 秒一次），0 = 永不触发")
+            .defineInRange("misalignedEchoRate", 1.0, 0.0, 10.0);
 
         CLIENT_SPEC = clientBuilder.build();
     }

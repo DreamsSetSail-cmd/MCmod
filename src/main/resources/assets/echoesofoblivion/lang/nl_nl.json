@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Zij droeg hem tot het einde. Het heeft haar niet gered.",
   "block.echoesofoblivion.fragment_niche": "Fragmentnis",
   "block.echoesofoblivion.fragment_niche.taken": "De nis geeft op wat ze vasthield.",
-  "block.echoesofoblivion.fragment_niche.empty": "Je draagt al alles wat ze had."
+  "block.echoesofoblivion.fragment_niche.empty": "Je draagt al alles wat ze had.",
+  "message.echoesofoblivion.misaligned_echo": "Iets wat eerder gehoord is, komt verkeerd terug.",
+  "message.echoesofoblivion.misaligned_echo.hint": "De Gang houdt het geluid niet vast."
 }

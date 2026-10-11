@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Hon bar den till slutet. Den räddade henne inte.",
   "block.echoesofoblivion.fragment_niche": "Fragmentnisch",
   "block.echoesofoblivion.fragment_niche.taken": "Nischen ger upp det som den höll.",
-  "block.echoesofoblivion.fragment_niche.empty": "Du bär redan allt den hade."
+  "block.echoesofoblivion.fragment_niche.empty": "Du bär redan allt den hade.",
+  "message.echoesofoblivion.misaligned_echo": "Något som hörts förut kommer tillbaka fel.",
+  "message.echoesofoblivion.misaligned_echo.hint": "Korridoren håller inte kvar ljudet."
 }

@@ -383,6 +383,56 @@ private static final Map<UUID, Long> ACTIVE = new ConcurrentHashMap<>();
 `MirrorChunkHandler` 在施加重力闪烁前查询它——这是「新物品改变既有系统行为」
 的最小侵入写法：既有系统只多一个条件判断，不需要知道物品的存在。
 
+### 3.9 v2.1.0：错位的回响（客户端）
+
+**这是本项目第一个纯客户端的新机制**，值得说明为什么。
+
+#### 为什么放在客户端
+
+`PlaySoundEvent` 是**客户端**事件，而「这个玩家听到了什么」本来就是客户端的知识。
+放在客户端带来三个好处：
+
+1. 不需要新增网络包。
+2. 不需要在服务端为每个玩家维护一份声音缓冲。
+3. 不会有「服务端播了但没到客户端」的不同步。
+
+代价只是「是否在走廊里」要用客户端维度判断——完全可以接受，因为错的只是**表现**。
+
+#### 一个必须先搞清楚的 API 细节
+
+`SoundInstance` **没有**公开取回 `SoundEvent` 的方法：
+
+```
+SoundInstance.getLocation()      -> ResourceLocation   ✅
+SoundInstance.getSoundEvent()    -> 不存在              ❌
+```
+
+`AbstractSoundInstance` 只在构造时**接收** `SoundEvent`，不保留可访问的字段。
+因此缓冲里存的是 `ResourceLocation`，重放走
+`SimpleSoundInstance(ResourceLocation, ...)` 的路径构造器。
+
+这反而更通用：它同样能重放原版与其它模组的声音。
+
+#### 延迟用 `SoundManager.playDelayed`
+
+不要自己在客户端 tick 里维护倒计时队列——`playDelayed(instance, ticks)`
+是引擎原生的，不会因为客户端卡顿而漂移。
+
+#### 防止回声自我繁殖
+
+重放的声音会再次经过 `PlaySoundEvent`。如果不拦，坏掉的声音会被当成新的原声记录，
+于是**回声产生回声**，迅速淹没玩家。这里用一个 `replaying` 布尔标志在
+`playDelayed` 前后夹住。一行代价换掉一个会毁掉体验的风险。
+
+#### 回声为什么不能滚雪球
+
+| 约束 | 值 | 理由 |
+| --- | --- | --- |
+| 缓冲容量 | 12 条 | 太久以前的声音重放出来，玩家认不出是自己的回声 |
+| 最小记录距离 | 3 格 | 贴着你响的脚步重放只会像卡顿 |
+| 排除音效 | 心跳、低语、幻境、腐化脉动 | 它们本来就是氛围，重放没有「出错」感 |
+| 判定频率 | 每秒 1/26，最短间隔 20 秒 | 介质在腐坏，不是音响坏了 |
+
 ---
 
 ## 4. 渲染实现（Forge 1.20.6 的特殊情况）
@@ -579,7 +629,7 @@ python tools/check_lang.py
 | `gradlew compileJava` | 编译正确性 | ~20s |
 | `python tools/check_lang.py` | 21 个语言文件的一致性 | ~1s |
 | `gradlew build` | 编译 + 打包（含 datagen 产物） | ~1min |
-| `gradlew runGameTestServer` | 服务端逻辑（5 项断言） | ~3min |
+| `gradlew runGameTestServer` | 服务端逻辑（7 项断言） | ~3min |
 | `gradlew runData` | datagen provider 输出 | ~2min |
 | `gradlew runServer` | 数据包加载、维度注册 | ~2min |
 | `gradlew runClient` | 资源解析、渲染路径、音效 | ~5min |
@@ -604,7 +654,49 @@ ForgeConfigSpec$ConfigValue.get
 这是环境限制，与模组无关，真机不会发生。
 
 因此测试只覆盖不依赖 tick 的逻辑：武器免疫、稳定性阶段推进、记忆库一致性、
-方块放置、属性注册。**凡是需要实体真正跑 tick 的行为，只能靠 `runClient` 实机验证。**
+方块放置、残片注册表一致性、属性注册。**凡是需要实体真正跑 tick 的行为，只能靠 `runClient` 实机验证。**
+
+#### gameTest 会**假挂起**：先查是不是 CPU 被抢光了
+
+这一条是 v2.1.0 花了很久才定性的，值得单独写下来。
+
+**症状**：`runGameTestServer` 不退出，测试进度条 `[     ]` 无限重复，
+`run/logs/latest.log` 每秒涨十几 MB（一次运行能到 10 MB 以上），
+日志里偶尔出现：
+
+```
+Can't keep up! Is the server overloaded? Running 18575ms or 371 ticks behind
+```
+
+**看起来像**：测试死锁、新代码引入了阻塞、Forge 的 gameTest 框架有问题。
+
+**实际原因**：这台机器只有 **4 个逻辑核**。当有残留的 Gradle daemon 或上一次
+被杀掉一半的测试服务器进程还在占用 CPU 时，测试服务器拿不到时间片，
+tick 严重落后——于是**进度条打印本身变成了主要负载**，
+服务器更跟不上，形成正反馈。测试并没有死锁，它只是跑不动。
+
+**所以步骤是**：
+
+```powershell
+# 1. 先看有没有残留的 java 进程
+Get-Process java | Select-Object Id, CPU, WorkingSet64
+
+# 2. 全部结束，再清掉上一次的运行目录（会话锁会阻止服务器启动）
+Get-Process java | Stop-Process -Force
+Remove-Item -Recurse -Force run\world, run\logs
+
+# 3. 重新跑
+.\gradlew.bat runGameTestServer --console=plain
+```
+
+清理之后同一次提交是 **17 秒跑完 7 项测试全绿**。
+
+**同一个坑在 CI 上表现为 tag 运行失败、分支运行成功**——两次是同一个 commit，
+差别只是 runner 当时的负载。CI 侧的缓解措施是不要把输出管进很慢的消费者，
+并且**不要加 `--no-daemon`**（见 `.github/workflows/build.yml` 的注释）。
+
+**教训**：在 4 核机器上，凡是「奇怪地卡住」的 Gradle 任务，
+**先把残留 java 进程清一遍**，再开始怀疑代码。这比读日志快得多。
 
 **gameTest 结构**：`@GameTest(template = "echoesofoblivion:empty")` 会去找
 `data/echoesofoblivion/structures/empty.nbt`。原版没有 `minecraft:empty` 这个结构，

@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "她带着它走到了最后。它没能救她。",
   "block.echoesofoblivion.fragment_niche": "残片龛",
   "block.echoesofoblivion.fragment_niche.taken": "龛交出了它一直含着的东西。",
-  "block.echoesofoblivion.fragment_niche.empty": "它有的东西你已经全带在身上了。"
+  "block.echoesofoblivion.fragment_niche.empty": "它有的东西你已经全带在身上了。",
+  "message.echoesofoblivion.misaligned_echo": "你听过的某个东西回来了，但不对。",
+  "message.echoesofoblivion.misaligned_echo.hint": "走廊留不住声音。"
 }

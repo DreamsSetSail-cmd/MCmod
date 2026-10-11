@@ -5,6 +5,8 @@ import com.clion.echoesofoblivion.block.ModBlocks;
 import com.clion.echoesofoblivion.entity.ModEntities;
 import com.clion.echoesofoblivion.entity.SilentAggregateEntity;
 import com.clion.echoesofoblivion.memory.MemoryRegistry;
+import com.clion.echoesofoblivion.item.LoreFragmentItem;
+import com.clion.echoesofoblivion.item.ModItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.gametest.framework.GameTest;
 import net.minecraft.gametest.framework.GameTestHelper;
@@ -145,6 +147,61 @@ public final class BossGameTests {
         BlockPos pos = new BlockPos(2, 2, 2);
         helper.setBlock(pos, ModBlocks.MEMORY_CRYSTAL.get());
         helper.assertBlockPresent(ModBlocks.MEMORY_CRYSTAL.get(), pos);
+        helper.succeed();
+    }
+
+    /**
+     * v2.0.0：残片龛可放置、可被识别。
+     *
+     * <p>它是 12 段残片在世界里的唯一来源（残片刻意没有合成配方），
+     * 因此这个方块一旦注册出错，整套考古叙事在生存模式下就不可达。
+     */
+    @GameTest(template = "echoesofoblivion:empty")
+    public static void fragmentNicheIsPlaceable(GameTestHelper helper) {
+        BlockPos pos = new BlockPos(3, 2, 3);
+        helper.setBlock(pos, ModBlocks.FRAGMENT_NICHE.get());
+        helper.assertBlockPresent(ModBlocks.FRAGMENT_NICHE.get(), pos);
+        helper.succeed();
+    }
+
+    /**
+     * v2.0.0：残片注册表必须完整且命名一致。
+     *
+     * <p>三个容易静默出错的地方：
+     * <ol>
+     *   <li>段数不是 12（漏注册一段，玩家永远集不齐）。</li>
+     *   <li>注册名不是 {@code fragment_<id>}——{@code ModItems} 按这个规则注册，
+     *       语言键也按这个拼；一旦脱节，物品栏里就显示原始键名
+     *       （v2.0.0 修过这个缺陷，加测试防止复发）。</li>
+     *   <li>{@code fragmentId} 与注册表键不一致——{@code FragmentNicheBlock}
+     *       与语言键都依赖它。</li>
+     * </ol>
+     */
+    @GameTest(template = "echoesofoblivion:empty")
+    public static void loreFragmentsAreRegistered(GameTestHelper helper) {
+        var fragments = ModItems.fragments();
+        if (fragments.size() != 12) {
+            helper.fail("残片应为 12 段，实际注册了 " + fragments.size() + " 段");
+            return;
+        }
+        for (var entry : fragments.entrySet()) {
+            var item = entry.getValue().get();
+            var id = net.minecraftforge.registries.ForgeRegistries.ITEMS.getKey(item);
+            if (id == null || !id.getPath().equals("fragment_" + entry.getKey())) {
+                helper.fail("残片 " + entry.getKey() + " 的注册名应为 fragment_"
+                    + entry.getKey() + "，实际为 " + id);
+                return;
+            }
+            if (!(item instanceof LoreFragmentItem fragment)) {
+                helper.fail("残片 " + entry.getKey() + " 不是 LoreFragmentItem");
+                return;
+            }
+            if (!fragment.fragmentId().equals(entry.getKey())) {
+                helper.fail("残片 " + entry.getKey() + " 的 fragmentId 是 "
+                    + fragment.fragmentId());
+                return;
+            }
+        }
         helper.succeed();
     }
 

@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Nesla ji až do konce. Nezachránila ji.",
   "block.echoesofoblivion.fragment_niche": "Výklenek pro fragmenty",
   "block.echoesofoblivion.fragment_niche.taken": "Výklenek vydává to, co držel.",
-  "block.echoesofoblivion.fragment_niche.empty": "Už nesete všechno, co měla."
+  "block.echoesofoblivion.fragment_niche.empty": "Už nesete všechno, co měla.",
+  "message.echoesofoblivion.misaligned_echo": "Něco, co už zaznělo, se vrací špatně.",
+  "message.echoesofoblivion.misaligned_echo.hint": "Chodba neudrží zvuk."
 }

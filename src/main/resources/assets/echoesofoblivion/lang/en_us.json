@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "She carried it to the end. It did not save her.",
   "block.echoesofoblivion.fragment_niche": "Fragment Niche",
   "block.echoesofoblivion.fragment_niche.taken": "The niche gives up what it was holding.",
-  "block.echoesofoblivion.fragment_niche.empty": "You are already carrying everything it had."
+  "block.echoesofoblivion.fragment_niche.empty": "You are already carrying everything it had.",
+  "message.echoesofoblivion.misaligned_echo": "Something you heard before comes back wrong.",
+  "message.echoesofoblivion.misaligned_echo.hint": "The corridor does not keep sound well."
 }

@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Ella la llevó hasta el final. No la salvó.",
   "block.echoesofoblivion.fragment_niche": "Nicho del fragmento",
   "block.echoesofoblivion.fragment_niche.taken": "El nicho cede lo que guardaba.",
-  "block.echoesofoblivion.fragment_niche.empty": "Ya llevas encima todo lo que tenía."
+  "block.echoesofoblivion.fragment_niche.empty": "Ya llevas encima todo lo que tenía.",
+  "message.echoesofoblivion.misaligned_echo": "Algo que ya se escuchó vuelve, pero está mal.",
+  "message.echoesofoblivion.misaligned_echo.hint": "El corredor no conserva el sonido."
 }

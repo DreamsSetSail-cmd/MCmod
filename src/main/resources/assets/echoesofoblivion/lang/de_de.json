@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Sie trug sie bis zum Ende. Sie hat sie nicht gerettet.",
   "block.echoesofoblivion.fragment_niche": "Fragmentnische",
   "block.echoesofoblivion.fragment_niche.taken": "Die Nische gibt her, was sie barg.",
-  "block.echoesofoblivion.fragment_niche.empty": "Du trägst bereits alles, was sie hatte."
+  "block.echoesofoblivion.fragment_niche.empty": "Du trägst bereits alles, was sie hatte.",
+  "message.echoesofoblivion.misaligned_echo": "Etwas früher Gehörtes kommt falsch zurück.",
+  "message.echoesofoblivion.misaligned_echo.hint": "Der Korridor hält den Klang nicht."
 }

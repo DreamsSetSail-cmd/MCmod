@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "彼女はそれを最後まで持ち歩いた。それは彼女を救わなかった。",
   "block.echoesofoblivion.fragment_niche": "欠片の窪み",
   "block.echoesofoblivion.fragment_niche.taken": "窪みは、抱えていたものを手放します。",
-  "block.echoesofoblivion.fragment_niche.empty": "それが持っていたものは、すでにすべてあなたが運んでいます。"
+  "block.echoesofoblivion.fragment_niche.empty": "それが持っていたものは、すでにすべてあなたが運んでいます。",
+  "message.echoesofoblivion.misaligned_echo": "以前に聞いたものが、間違った形で戻ってきます。",
+  "message.echoesofoblivion.misaligned_echo.hint": "回廊は音を保てない。"
 }

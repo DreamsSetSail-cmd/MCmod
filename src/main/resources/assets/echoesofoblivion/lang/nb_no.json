@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Hun bar den til det siste. Den reddet henne ikke.",
   "block.echoesofoblivion.fragment_niche": "Fragmentnisje",
   "block.echoesofoblivion.fragment_niche.taken": "Nisjen gir fra seg det den holdt.",
-  "block.echoesofoblivion.fragment_niche.empty": "Du bærer allerede alt den hadde."
+  "block.echoesofoblivion.fragment_niche.empty": "Du bærer allerede alt den hadde.",
+  "message.echoesofoblivion.misaligned_echo": "Noe man har hørt før, kommer tilbake feil.",
+  "message.echoesofoblivion.misaligned_echo.hint": "Korridoren holder ikke på lyden."
 }

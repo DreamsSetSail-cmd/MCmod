@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Ela a carregou até o fim. Não a salvou.",
   "block.echoesofoblivion.fragment_niche": "Nicho do fragmento",
   "block.echoesofoblivion.fragment_niche.taken": "O nicho cede o que guardava.",
-  "block.echoesofoblivion.fragment_niche.empty": "Você já carrega tudo o que ele tinha."
+  "block.echoesofoblivion.fragment_niche.empty": "Você já carrega tudo o que ele tinha.",
+  "message.echoesofoblivion.misaligned_echo": "Algo que já se ouviu volta errado.",
+  "message.echoesofoblivion.misaligned_echo.hint": "O corredor não guarda o som."
 }

@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Niosła ją do końca. Nie uratowała jej.",
   "block.echoesofoblivion.fragment_niche": "Nisza Fragmentów",
   "block.echoesofoblivion.fragment_niche.taken": "Nisza oddaje to, co trzymała.",
-  "block.echoesofoblivion.fragment_niche.empty": "Niesiesz już wszystko, co miała."
+  "block.echoesofoblivion.fragment_niche.empty": "Niesiesz już wszystko, co miała.",
+  "message.echoesofoblivion.misaligned_echo": "Coś, co już słyszano, wraca fałszywe.",
+  "message.echoesofoblivion.misaligned_echo.hint": "Korytarz nie zatrzymuje dźwięku."
 }

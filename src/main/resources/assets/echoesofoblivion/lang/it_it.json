@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Lei l'ha portata fino alla fine. Non l'ha salvata.",
   "block.echoesofoblivion.fragment_niche": "Nicchia del frammento",
   "block.echoesofoblivion.fragment_niche.taken": "La nicchia cede ciò che teneva.",
-  "block.echoesofoblivion.fragment_niche.empty": "Porti già con te tutto ciò che aveva."
+  "block.echoesofoblivion.fragment_niche.empty": "Porti già con te tutto ciò che aveva.",
+  "message.echoesofoblivion.misaligned_echo": "Qualcosa di già udito ritorna sbagliato.",
+  "message.echoesofoblivion.misaligned_echo.hint": "Il corridoio non trattiene il suono."
 }

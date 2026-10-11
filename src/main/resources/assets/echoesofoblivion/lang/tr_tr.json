@@ -199,5 +199,7 @@
   "item.echoesofoblivion.researcher_lantern.slow": "Sonuna kadar taşıdı. Onu kurtarmadı.",
   "block.echoesofoblivion.fragment_niche": "Parça Nişi",
   "block.echoesofoblivion.fragment_niche.taken": "Niş, tuttuğunu bırakıyor.",
-  "block.echoesofoblivion.fragment_niche.empty": "Onun sahip olduğu her şeyi zaten taşıyorsun."
+  "block.echoesofoblivion.fragment_niche.empty": "Onun sahip olduğu her şeyi zaten taşıyorsun.",
+  "message.echoesofoblivion.misaligned_echo": "Daha önce duyulan bir şey yanlış hâlde geri dönüyor.",
+  "message.echoesofoblivion.misaligned_echo.hint": "Koridor sesi tutmuyor."
 }
