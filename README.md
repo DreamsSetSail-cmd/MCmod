@@ -80,6 +80,19 @@ roll back.
 
 > You wrote yourself into that civilization's place. That is not a victory. It is a succession.
 
+**Then it counts what you spent** — Winning is not the end. After the Aggregate comes apart, the
+screen fades and the chat lists — one line at a time, two seconds apart — **every memory you
+burned** and **every name you carved**. Then it tells you what is not coming back. Only after that
+does the Shard of Truth actually reach your inventory.
+
+None of it takes anything from you; the memories were already burned and the steles already carved.
+It just makes you read it. And when it is over, a stele appears near you that **was not there
+before** — and it is empty. It refuses to be inscribed: hold a Blank Plaque to it and the stone
+simply does not take it, and your plaque is not consumed. There is no drop, no advancement, no
+sound. It is there when you turn around.
+
+> You won, and something is smaller than it was before.
+
 **Rites you perform yourself** — The **Resonance Fork** performs one of three rites, each consuming
 real materials. *Requiem* scatters every echo within 32 blocks. **Descent** silences the world
 within 48 blocks for 30 seconds — the first time you get to be the one who makes the silence,

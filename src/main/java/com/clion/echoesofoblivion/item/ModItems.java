@@ -56,6 +56,10 @@ public class ModItems {
     public static final RegistryObject<Item> NAME_STELE = ITEMS.register("name_stele",
         () -> new BlockItem(ModBlocks.NAME_STELE.get(), new Properties()));
 
+    /** 空碑：清点之后出现的、比原来更多的那一块（v2.5.0）。 */
+    public static final RegistryObject<Item> EMPTY_PLAQUE = ITEMS.register("empty_plaque",
+        () -> new BlockItem(ModBlocks.EMPTY_PLAQUE.get(), new Properties()));
+
     /** 记忆卷轴：右键打开记忆图鉴。 */
     public static final RegistryObject<Item> MEMORY_SCROLL = ITEMS.register("memory_scroll",
         () -> new MemoryScrollItem(new Properties().stacksTo(1)));
@@ -221,7 +225,7 @@ public class ModItems {
         @SuppressWarnings("unchecked")
         RegistryObject<Item>[] all = new RegistryObject[]{
             // 考古
-            MEMORY_CRYSTAL, FRAGMENT_NICHE, NAME_STELE, MEMORY_SCROLL, RUINS_COMPASS, EXCAVATION_SHOVEL,
+            MEMORY_CRYSTAL, FRAGMENT_NICHE, NAME_STELE, EMPTY_PLAQUE, MEMORY_SCROLL, RUINS_COMPASS, EXCAVATION_SHOVEL,
             // 仪式
             CORRIDOR_KEY, EYE_OF_SILENCE, RESONANCE_FORK, RITUAL_ALLOY, SILENCE_SHARD,
             // 消耗

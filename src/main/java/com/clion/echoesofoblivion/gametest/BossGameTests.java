@@ -8,6 +8,7 @@ import com.clion.echoesofoblivion.memory.Contradictions;
 import com.clion.echoesofoblivion.memory.MemoryRegistry;
 import com.clion.echoesofoblivion.memory.PlayerProgress;
 import com.clion.echoesofoblivion.server.NameSteleObservation;
+import com.clion.echoesofoblivion.server.Reckoning;
 import com.clion.echoesofoblivion.item.LoreFragmentItem;
 import com.clion.echoesofoblivion.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -401,6 +402,32 @@ public final class BossGameTests {
         helper.succeed();
     }
 
+    /**
+     * v2.5.0：终局清点与空碑的三个静默失效点。
+     *
+     * <ol>
+     *   <li>清点的步骤延迟必须是正数——否则整个序列在一秒内刷完，
+     *       玩家来不及读，它会从「结算」退化成一次刷屏。</li>
+     *   <li>空碑必须可放置——它是全篇最后一个视觉元素，
+     *       注册出错会让结局少掉那一下。</li>
+     *   <li>清点必须能在「什么都没烧、什么都没刻」的情况下走完——
+     *       这是最常见的路径（多数玩家不会烧记忆），
+     *       如果它在那里崩掉或卡住，多数玩家看不到结局。</li>
+     * </ol>
+     */
+    @GameTest(template = "echoesofoblivion:empty")
+    public static void reckoningAndEmptyPlaqueAreSound(GameTestHelper helper) {
+        if (!Reckoning.parametersAreSane()) {
+            helper.fail("清点的步骤延迟必须为正，否则序列会瞬间刷完");
+            return;
+        }
+        // 空碑可放置
+        BlockPos pos = new BlockPos(3, 2, 4);
+        helper.setBlock(pos, ModBlocks.EMPTY_PLAQUE.get());
+        helper.assertBlockPresent(ModBlocks.EMPTY_PLAQUE.get(), pos);
+
+        helper.succeed();
+    }
     /** 两个实体的属性必须已注册，否则创建时会抛异常。 */
     @GameTest(template = "echoesofoblivion:empty")
     public static void entitiesHaveAttributes(GameTestHelper helper) {        if (!checkAttributes(helper, ModEntities.SILENT_AGGREGATE.get(), "silent_aggregate")) {

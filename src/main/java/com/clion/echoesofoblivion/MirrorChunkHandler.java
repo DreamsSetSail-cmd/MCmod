@@ -228,5 +228,6 @@ public class MirrorChunkHandler {
         StabilizerItem.clear(event.getEntity().getUUID());
         com.clion.echoesofoblivion.server.NameSteleObservation.forget(event.getEntity().getUUID());
         com.clion.echoesofoblivion.server.ChoirBleed.forget(event.getEntity().getUUID());
+        com.clion.echoesofoblivion.server.Reckoning.forget(event.getEntity().getUUID());
     }
 }

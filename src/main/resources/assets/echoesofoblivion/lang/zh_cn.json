@@ -217,5 +217,15 @@
   "fragment.echoesofoblivion.choir_errata.title": "勘誤，第 41 次會談",
   "fragment.echoesofoblivion.choir_errata.text": "第 41 次會談。出席：九人。\\n橋將會建成。（已核。）\\n橋將會建成。（已核。）\\n橋已建成。（已核。）\\n橋早已建成。（已核。）\\n四條是同一條。我自己比對過。\\n我不知道檔案為什麼留著四條。",
   "message.echoesofoblivion.choir.bleed": "你从未见证过这个，但你现在知道它的名字了：%s",
-  "message.echoesofoblivion.choir.bleed.hint": "附近的某个人知道一些你不知道的事。"
+  "message.echoesofoblivion.choir.bleed.hint": "附近的某个人知道一些你不知道的事。",
+  "message.echoesofoblivion.reckoning.opening": "走廊安静了。该清点少了什么了。",
+  "message.echoesofoblivion.reckoning.burned": "已焚烧：%s",
+  "message.echoesofoblivion.reckoning.burned_none": "已焚烧：无。",
+  "message.echoesofoblivion.reckoning.inscribed": "名册上多了一个名字。它还在那里。",
+  "message.echoesofoblivion.reckoning.inscribed_none": "名册上新增：无。",
+  "message.echoesofoblivion.reckoning.closing": "花掉的东西不会回来。记忆不会，名字也不会。",
+  "message.echoesofoblivion.reckoning.settled": "账目结清了。",
+  "block.echoesofoblivion.empty_plaque": "空碑",
+  "block.echoesofoblivion.empty_plaque.refused": "这块石头不接受。",
+  "block.echoesofoblivion.empty_plaque.look": "这里什么都没有写。而位置是够的。"
 }

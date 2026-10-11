@@ -3,6 +3,7 @@ package com.clion.echoesofoblivion;
 import com.clion.echoesofoblivion.item.ResearcherLanternItem;
 import com.clion.echoesofoblivion.server.ChoirBleed;
 import com.clion.echoesofoblivion.server.NameSteleObservation;
+import com.clion.echoesofoblivion.server.Reckoning;
 import com.clion.echoesofoblivion.memory.PlayerMemoryData;
 import com.clion.echoesofoblivion.memory.PlayerProgress;
 import com.clion.echoesofoblivion.network.ModNetwork;
@@ -123,6 +124,9 @@ public class CorruptionEventHandler {
         // v2.4.0：合唱渗出。多人且进度有差异时才可能发生——
         // 挂在同一个每秒 tick 上，不新增调度点。
         ChoirBleed.tick(player);
+
+        // v2.5.0：推进终局清点的步骤队列（没有进行中的清点时立即返回）。
+        Reckoning.tick(player);
 
         int before = progress.corruption();
         data.markDirty();

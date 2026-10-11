@@ -217,5 +217,15 @@
   "fragment.echoesofoblivion.choir_errata.title": "Errata, Session 41",
   "fragment.echoesofoblivion.choir_errata.text": "Session 41. Present: nine.\\nThe bridge will be built. (Checked.)\\nThe bridge will be built. (Checked.)\\nThe bridge is built. (Checked.)\\nThe bridge was built. (Checked.)\\nAll four entries are the same entry. I have compared them myself.\\nI do not know why the archive keeps four.",
   "message.echoesofoblivion.choir.bleed": "You have not witnessed this, but you know its name now: %s",
-  "message.echoesofoblivion.choir.bleed.hint": "Someone nearby knows something you do not."
+  "message.echoesofoblivion.choir.bleed.hint": "Someone nearby knows something you do not.",
+  "message.echoesofoblivion.reckoning.opening": "The corridor is quiet. It is time to count what is missing.",
+  "message.echoesofoblivion.reckoning.burned": "Burned: %s",
+  "message.echoesofoblivion.reckoning.burned_none": "Burned: none.",
+  "message.echoesofoblivion.reckoning.inscribed": "A name was added to the register. It is still there.",
+  "message.echoesofoblivion.reckoning.inscribed_none": "Added to the register: nothing.",
+  "message.echoesofoblivion.reckoning.closing": "Nothing that was spent comes back. Not the memories, not the names.",
+  "message.echoesofoblivion.reckoning.settled": "The account is closed.",
+  "block.echoesofoblivion.empty_plaque": "Empty Plaque",
+  "block.echoesofoblivion.empty_plaque.refused": "The stone does not take it.",
+  "block.echoesofoblivion.empty_plaque.look": "There is nothing written here. There is room for something."
 }

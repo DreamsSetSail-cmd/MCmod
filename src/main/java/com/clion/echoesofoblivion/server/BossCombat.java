@@ -146,15 +146,20 @@ public final class BossCombat {
 
         // 叙事结算
         player.displayClientMessage(Component.translatable("message.echoesofoblivion.boss.defeated"), false);
-        // 结局纪念品
-        player.getInventory().placeItemBackInInventory(
-            new net.minecraft.world.item.ItemStack(
-                com.clion.echoesofoblivion.item.ModItems.SHARD_OF_TRUTH.get(), 1));
 
         ModNetwork.sendToPlayer(RenderStatePacket.bossDefeat(), player);
         // 光环随之消散，否则玩家的雾会被永久压着
         BossAura.clearAura(player);
         boss.discard();
+
+        // v2.5.0：结局不再是奖励，而是一次**结算**。
+        //
+        // 真理碎片原本在这里直接发放；现在推迟到清点走完之后
+        // （见 Reckoning 的类注释：只有走完这段，它才真正交到手上）。
+        //
+        // 这一步刻意放在 discard() 之后：聚合体必须先消失，
+        // 否则清点会像是在它注视下进行的一场仪式。
+        Reckoning.begin(player);
     }
 
     /** 找到范围内最近的 Boss。 */

@@ -79,6 +79,20 @@ public class ModBlocks {
             .strength(2.0f)
             .sound(SoundType.DEEPSLATE_BRICKS)));
 
+    /**
+     * 空碑（v2.5.0）——「缺席优于出现」的最终形态。
+     *
+     * <p>击败聚合体、走完清点之后，世界中会出现一块**比原来更多**的碑，
+     * 而它是空的。它**不接受任何铭刻**（用空白铭牌右键只会被拒绝）。
+     *
+     * <p>不解释。你以为你赢了，而有些东西比你赢之前更少。
+     */
+    public static final RegistryObject<EmptyPlaqueBlock> EMPTY_PLAQUE =
+        BLOCKS.register("empty_plaque", () -> new EmptyPlaqueBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.DEEPSLATE)
+            .strength(2.0f)
+            .sound(SoundType.DEEPSLATE_BRICKS)));
+
     public static final RegistryObject<BlockEntityType<MemoryCrystalBlockEntity>> MEMORY_CRYSTAL_BE =
         BLOCK_ENTITIES.register("memory_crystal", () ->
             BlockEntityType.Builder.of(MemoryCrystalBlockEntity::new, MEMORY_CRYSTAL.get()).build(null));

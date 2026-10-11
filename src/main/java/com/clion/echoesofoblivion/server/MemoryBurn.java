@@ -95,6 +95,10 @@ public final class MemoryBurn {
         progress.forget(memoryIndex);
         data.markDirty();
 
+        // v2.5.0：记下来，供终局的「清点」逐条列出。
+        // 只记索引，不记正文——清点时玩家看到的是「你失去了什么」，不是内容本身。
+        Reckoning.recordBurn(player, memoryIndex);
+
         // 2. 演奏：先吸入再爆发，语汇与聚合体的收敛相反
         level.sendParticles(ParticleTypes.SOUL_FIRE_FLAME,
             player.getX(), player.getY() + 1.2, player.getZ(),

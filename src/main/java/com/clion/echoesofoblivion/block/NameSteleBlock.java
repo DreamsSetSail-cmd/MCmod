@@ -96,6 +96,8 @@ public class NameSteleBlock extends Block implements EntityBlock {
         // 代价从这里开始生效。标记在**玩家**身上而不是方块上——
         // 因此砸掉碑不会撤销代价（见类注释与 NameSteleObservation）。
         com.clion.echoesofoblivion.server.NameSteleObservation.markInscribed(serverPlayer);
+        // v2.5.0：同时记下数量，供终局的「清点」列出（只记数量，名字不进任何渲染）。
+        com.clion.echoesofoblivion.server.Reckoning.recordInscription(serverPlayer);
 
         // 消耗一块空白铭牌
         if (!player.getAbilities().instabuild) {
