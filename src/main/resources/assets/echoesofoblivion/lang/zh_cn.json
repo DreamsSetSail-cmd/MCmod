@@ -212,5 +212,10 @@
   "message.echoesofoblivion.inscription.observed.2": "对象已开始为自己留存记录。此举未被要求。",
   "message.echoesofoblivion.inscription.observed.3": "对象在名册上添了一个名字。名字已被接受。",
   "message.echoesofoblivion.inscription.observed.4": "对象已不再询问走廊是用来做什么的。",
-  "message.echoesofoblivion.inscription.observed.5": "对象的笔迹与更早的条目一致。"
+  "message.echoesofoblivion.inscription.observed.5": "对象的笔迹与更早的条目一致。",
+  "item.echoesofoblivion.fragment_choir_errata": "勘誤，第 41 次會談",
+  "fragment.echoesofoblivion.choir_errata.title": "勘誤，第 41 次會談",
+  "fragment.echoesofoblivion.choir_errata.text": "第 41 次會談。出席：九人。\\n橋將會建成。（已核。）\\n橋將會建成。（已核。）\\n橋已建成。（已核。）\\n橋早已建成。（已核。）\\n四條是同一條。我自己比對過。\\n我不知道檔案為什麼留著四條。",
+  "message.echoesofoblivion.choir.bleed": "你从未见证过这个，但你现在知道它的名字了：%s",
+  "message.echoesofoblivion.choir.bleed.hint": "附近的某个人知道一些你不知道的事。"
 }

@@ -191,6 +191,19 @@ public class ModItems {
     public static final RegistryObject<Item> FRAGMENT_PRAYER_LAST =
         fragment("prayer_last", LoreFragmentItem.Kind.PRAYER);
 
+    /**
+     * 第 13 段残片（v2.4.0）——**一份抄写错误率异常的会议记录**。
+     *
+     * <p>它是唯一一段**内容本身就在讲「同一句话被抄了多次」**的残片。
+     * 它从叙事上解释不了合唱机制（底线二：可解释即失效），
+     * 但它让玩家在读到时产生一个怀疑：**那我读到的是哪一版？**
+     *
+     * <p>刻意放在最后注册：它的收集顺序不影响任何判定，
+     * 而放在末尾让它在残片清单里显得像是**后来才被补进档案的**。
+     */
+    public static final RegistryObject<Item> FRAGMENT_CHOIR_ERRATA =
+        fragment("choir_errata", LoreFragmentItem.Kind.LOG);
+
     private static RegistryObject<Item> fragment(String id, LoreFragmentItem.Kind kind) {
         RegistryObject<Item> item = ITEMS.register("fragment_" + id,
             () -> new LoreFragmentItem(id, kind, new Properties().stacksTo(1)));
@@ -223,7 +236,8 @@ public class ModItems {
             FRAGMENT_FOUNDING, FRAGMENT_FIRST_BRIDGE, FRAGMENT_CHOIR_RECORD,
             FRAGMENT_COST_LEDGER, FRAGMENT_LETTER_HOME, FRAGMENT_HER_FIRST_NOTE,
             FRAGMENT_HER_LAST_NOTE, FRAGMENT_APPARATUS_SPEC, FRAGMENT_THE_QUIET_ORDER,
-            FRAGMENT_AFTER, FRAGMENT_PRAYER_FIRST, FRAGMENT_PRAYER_LAST
+            FRAGMENT_AFTER, FRAGMENT_PRAYER_FIRST, FRAGMENT_PRAYER_LAST,
+            FRAGMENT_CHOIR_ERRATA
         };
         return all;
     }

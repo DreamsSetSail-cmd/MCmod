@@ -42,6 +42,14 @@ import net.minecraftforge.gametest.GameTestHolder;
 @GameTestHolder(EchoesOfOblivionMod.MOD_ID)
 public final class BossGameTests {
 
+    /**
+     * 残片段数。v2.4.0 起是 13：12 段编年史 + 1 段合唱勘误。
+     *
+     * <p>抽成常量是为了让「加一段残片」只需要改一处——
+     * 分散在多处的魔数正是这类断言最容易失同步的地方。
+     */
+    private static final int FRAGMENT_COUNT = 13;
+
     private BossGameTests() {
     }
 
@@ -172,7 +180,8 @@ public final class BossGameTests {
      *
      * <p>三个容易静默出错的地方：
      * <ol>
-     *   <li>段数不是 12（漏注册一段，玩家永远集不齐）。</li>
+     *   <li>段数不对（漏注册一段，玩家永远集不齐）。v2.4.0 起是 13 段
+     *       （12 段编年史 + 1 段合唱勘误）。</li>
      *   <li>注册名不是 {@code fragment_<id>}——{@code ModItems} 按这个规则注册，
      *       语言键也按这个拼；一旦脱节，物品栏里就显示原始键名
      *       （v2.0.0 修过这个缺陷，加测试防止复发）。</li>
@@ -183,8 +192,9 @@ public final class BossGameTests {
     @GameTest(template = "echoesofoblivion:empty")
     public static void loreFragmentsAreRegistered(GameTestHelper helper) {
         var fragments = ModItems.fragments();
-        if (fragments.size() != 12) {
-            helper.fail("残片应为 12 段，实际注册了 " + fragments.size() + " 段");
+        if (fragments.size() != FRAGMENT_COUNT) {
+            helper.fail("残片应为 " + FRAGMENT_COUNT + " 段，实际注册了 "
+                + fragments.size() + " 段");
             return;
         }
         for (var entry : fragments.entrySet()) {

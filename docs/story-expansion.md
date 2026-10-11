@@ -304,7 +304,7 @@
 
 | 叙事元素 | 实现 | 状态 |
 | --- | --- | --- |
-| 12 段残片（标题 + 正文） | `ModItems` 的 `fragment_*` + 语言文件 | ✅ v2.0.0 |
+| 13 段残片（标题 + 正文；v2.4.0 加入《勘误，第 41 次会谈》） | `ModItems` 的 `fragment_*` + 语言文件 | ✅ v2.0.0 |
 | 残片阅读界面（按类别着色） | `client/screen/FragmentScreen` | ✅ v2.0.0 |
 | 四类语气标签 | `LoreFragmentItem.Kind` | ✅ v2.0.0 |
 | 5 段记忆（个人视角） | `MemoryRegistry` | ✅ v1.0.0 |

@@ -25,7 +25,7 @@ That knowledge does not stay in the corridor. You bring it home.
 memories begin to *resonate*, revealing more than any single memory could. Progress is per-player
 and persists in the world save.
 
-**A history you have to dig up** — The civilization's chronicle is broken into **12 lore fragments**
+**A history you have to dig up** — The civilization's chronicle is broken into **13 lore fragments**
 scattered through the ruins. They are items: carry them, collect them, re-read them. **The order is
 not yours to choose**, so you assemble the cause and effect yourself rather than being told.
 Four voices, deliberately distinct: *chronicle* (cold official record), *record* (lab notes),
@@ -61,7 +61,7 @@ information gap, and writing a response for all 120 arrangements would be noise 
 None of it costs you anything: no penalty, no corruption, no debuff. It is only text you now cannot
 un-read.
 
-And one of the 12 fragments is titled *Last Complete Sentence*. Its text is not complete. Nothing is
+And one of the 13 fragments is titled *Last Complete Sentence*. Its text is not complete. Nothing is
 missing from it — it simply never ends. You will probably not notice the first time.
 
 **You can write your own name into it** — The name steles in the ruins are blank, and they were
@@ -130,7 +130,7 @@ Every item does something. There are no placeholders.
 
 | Group | Items |
 | --- | --- |
-| **Archaeology** | Ruins Compass, Memory Scroll, Excavation Shovel, 12 lore fragments |
+| **Archaeology** | Ruins Compass, Memory Scroll, Excavation Shovel, 13 lore fragments |
 | **Rites** | Corridor Key, Eye of Silence, Resonance Fork, Ritual Alloy, Silence Shard |
 | **Consumables** | Purification Agent, Stabilizer, Memory Vial, Corruption Essence, Echo Whisper |
 | **Materials** | Shard of Truth, Void Embers, Crystal Dust, Resonant Alloy, Corrupted Fragment, Mirror Shard, Membrane, Archivist's Ink, Ossuary Ash, Thread of the Choir, Blank Plaque, Sealed Fragment |
@@ -236,7 +236,7 @@ python tools/make_v2_textures.py    # v2.0.0 set
 | [CHANGELOG.md](CHANGELOG.md) | Release notes |
 | [PUBLISHING.md](PUBLISHING.md) | How releases are built and published |
 | [docs/story-bible.md](docs/story-bible.md) | Full narrative design: chronology, characters, planned in-game expansion |
-| [docs/story-expansion.md](docs/story-expansion.md) | v2.0.0 narrative expansion: the 12 lore fragments in full, and the completed timeline |
+| [docs/story-expansion.md](docs/story-expansion.md) | v2.0.0 narrative expansion: the lore fragments in full, and the completed timeline |
 | [docs/technical-guide.md](docs/technical-guide.md) | Technical handbook: architecture, every system, pitfalls, modification guide |
 | [docs/ideas-backlog.md](docs/ideas-backlog.md) | Ideas that were considered and not built, with the reasoning |
 | [docs/roadmap-v2x.md](docs/roadmap-v2x.md) | The v2.1–v2.5 plan: one theme per release, and the three rules they all obey |

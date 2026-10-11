@@ -212,5 +212,10 @@
   "message.echoesofoblivion.inscription.observed.2": "The subject has begun keeping records of its own. This was not requested.",
   "message.echoesofoblivion.inscription.observed.3": "The subject added a name to the register. The name was accepted.",
   "message.echoesofoblivion.inscription.observed.4": "The subject no longer asks what the corridor is for.",
-  "message.echoesofoblivion.inscription.observed.5": "The subject's handwriting matches the earlier entries."
+  "message.echoesofoblivion.inscription.observed.5": "The subject's handwriting matches the earlier entries.",
+  "item.echoesofoblivion.fragment_choir_errata": "Errata, Session 41",
+  "fragment.echoesofoblivion.choir_errata.title": "Errata, Session 41",
+  "fragment.echoesofoblivion.choir_errata.text": "Session 41. Present: nine.\\nThe bridge will be built. (Checked.)\\nThe bridge will be built. (Checked.)\\nThe bridge is built. (Checked.)\\nThe bridge was built. (Checked.)\\nAll four entries are the same entry. I have compared them myself.\\nI do not know why the archive keeps four.",
+  "message.echoesofoblivion.choir.bleed": "You have not witnessed this, but you know its name now: %s",
+  "message.echoesofoblivion.choir.bleed.hint": "Someone nearby knows something you do not."
 }

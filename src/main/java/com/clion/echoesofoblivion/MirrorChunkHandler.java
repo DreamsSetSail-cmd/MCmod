@@ -227,5 +227,6 @@ public class MirrorChunkHandler {
     public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         StabilizerItem.clear(event.getEntity().getUUID());
         com.clion.echoesofoblivion.server.NameSteleObservation.forget(event.getEntity().getUUID());
+        com.clion.echoesofoblivion.server.ChoirBleed.forget(event.getEntity().getUUID());
     }
 }

@@ -66,7 +66,7 @@ org.gradle.caching=false                            # 见下
 │   │   ├── ResearcherLanternItem.java 持有期间侵蚀增长减半
 │   │   ├── MemoryScrollItem.java     打开记忆图鉴
 │   │   ├── RuinsCompassItem.java     螺旋区块扫描找水晶
-│   │   └── LoreFragmentItem.java     12 段残片（含 Kind 分类与阅读界面）
+│   │   └── LoreFragmentItem.java     13 段残片（含 Kind 分类与阅读界面）
 │   ├── entity/
 │   │   ├── ModEntities.java          实体注册 + 属性（@EventBusSubscriber 自动挂载）
 │   │   ├── PhantomEntity.java        亡魂
@@ -333,7 +333,7 @@ MinecraftForge.EVENT_BUS.register(com.clion.echoesofoblivion.server.RitualSchedu
 
 #### 残片（`item/LoreFragmentItem.java` + `client/screen/FragmentScreen.java`）
 
-12 段残片各有独立的**注册名**（`fragment_<id>`），共用一个类，靠构造参数带 `id` 与 `Kind`。
+13 段残片各有独立的**注册名**（`fragment_<id>`），共用一个类，靠构造参数带 `id` 与 `Kind`。
 这样物品栏里能显示不同的名字与图标，而不需要 12 个类。
 
 `Kind` 枚举同时携带语言键后缀与提示颜色，并在 `isFoil()` 里区分：
@@ -346,7 +346,7 @@ MinecraftForge.EVENT_BUS.register(com.clion.echoesofoblivion.server.RitualSchedu
 
 #### 残片龛（`block/FragmentNicheBlock.java`）
 
-12 段残片在世界里的**唯一来源**。它存在的理由是一条推论：
+13 段残片在世界里的**唯一来源**。它存在的理由是一条推论：
 **「没有配方」必须同时给出另一条获取途径**，否则这 12 件物品在生存模式下
 完全不可得，整套叙事就是死的。
 
@@ -361,7 +361,7 @@ for (var entry : ModItems.fragments().entrySet()) {
 
 三个刻意的决定：
 
-1. **确定性发放，而不是随机**。12 段的集合上随机必然导致赠券收集者问题——
+1. **确定性发放，而不是随机**。13 段的集合上随机必然导致赠券收集者问题——
    玩家会反复拿到读过的段落而永远缺某一段。改成按缺失索引发放后，
    「顺序不可控」依然成立：**找到哪个龛才是不可控的那一部分**。
 2. **按背包判定而不是进度存档**。丢掉的段落必须能再拿到；
@@ -925,7 +925,7 @@ ModLoadingContext.get().registerConfig(CLIENT, Config.CLIENT_SPEC);   // 49
 
 `PlayerProgress.isResonant()` 已实现判定，但幻境屏幕只显示一行「回响共鸣」提示。
 **这是叙事上最值得补的一块**：目前玩家无法在游戏内拼出记忆之间的因果链。
-（v2.0.0 的 12 段残片从侧面缓解了这一点——历史因果现在可以靠收集拼出来，
+（v2.0.0 起陆续加入的 13 段残片从侧面缓解了这一点——历史因果现在可以靠收集拼出来，
 但**记忆之间**的共鸣文本仍然只有一行。）
 方案与文案草案见 `docs/story-bible.md` §7.1。
 

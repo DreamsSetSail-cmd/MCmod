@@ -1,6 +1,7 @@
 package com.clion.echoesofoblivion;
 
 import com.clion.echoesofoblivion.item.ResearcherLanternItem;
+import com.clion.echoesofoblivion.server.ChoirBleed;
 import com.clion.echoesofoblivion.server.NameSteleObservation;
 import com.clion.echoesofoblivion.memory.PlayerMemoryData;
 import com.clion.echoesofoblivion.memory.PlayerProgress;
@@ -118,6 +119,10 @@ public class CorruptionEventHandler {
 
         // v2.3.0：刻名后偶尔出现「关于你的记述」。走聊天栏，因为是记录不是提示。
         NameSteleObservation.tickObservation(player, 1);
+
+        // v2.4.0：合唱渗出。多人且进度有差异时才可能发生——
+        // 挂在同一个每秒 tick 上，不新增调度点。
+        ChoirBleed.tick(player);
 
         int before = progress.corruption();
         data.markDirty();
