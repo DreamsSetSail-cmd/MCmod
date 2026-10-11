@@ -9,9 +9,9 @@
 | 远程 | `origin` → <https://github.com/DreamsSetSail-cmd/MCmod.git> |
 | 分支 | `main` |
 | 提交身份 | `DreamsSetSail-cmd <colinwangqihang@outlook.com>` |
-| 发布产物 | `build/libs/echoes-of-oblivion-2.0.0-mc1.20.6-forge.jar` |
-| 产物大小 | 约 570 KB（85 个 class） |
-| 跟踪文件 | 181 个 |
+| 发布产物 | `build/libs/echoes-of-oblivion-<版本>-mc1.20.6-forge.jar` |
+| 产物大小 | 约 580 KB（约 90 个 class） |
+| 跟踪文件 | 约 200 个 |
 
 ---
 
@@ -81,14 +81,14 @@ git push -u origin main
 工作流配置了「推送 `v*` 标签时自动创建 Release 并附上 jar」。所以：
 
 ```bash
-git tag v2.0.0-mc1.20.6-forge
-git push origin v2.0.0-mc1.20.6-forge
+git tag v2.2.0-mc1.20.6-forge
+git push origin v2.2.0-mc1.20.6-forge
 ```
 
 之后 GitHub 会自动：
 - 从该 tag 构建
 - 创建 Release（附带自动生成的更新说明）
-- 把 `echoes-of-oblivion-2.0.0-mc1.20.6-forge.jar` 作为 Release 附件
+- 把 `echoes-of-oblivion-2.2.0-mc1.20.6-forge.jar` 作为 Release 附件
 
 ---
 

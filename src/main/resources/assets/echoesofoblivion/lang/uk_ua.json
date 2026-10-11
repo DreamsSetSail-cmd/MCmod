@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "Ніша віддає те, що тримала.",
   "block.echoesofoblivion.fragment_niche.empty": "Ти вже несеш усе, що в неї було.",
   "message.echoesofoblivion.misaligned_echo": "Почуте раніше повертається неправильним.",
-  "message.echoesofoblivion.misaligned_echo.hint": "Коридор не утримує звук."
+  "message.echoesofoblivion.misaligned_echo.hint": "Коридор не утримує звук.",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "Попередження так і не було вимовлено.\\nНікому не сказали, і тому ніхто не не почув.",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "Ти читаєш це не по порядку.\\nПопередження прийшло пізніше. Воно завжди приходило пізніше.",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "Прилад існував раніше, ніж з'явилося будь-що, на що він міг би впливати.\\nЙого збудували першим. Тиша прийшла, щоб наповнити його."
 }

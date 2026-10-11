@@ -32,11 +32,48 @@ public class MemoryVisionScreen extends Screen {
 
     private static final Random JITTER = new Random();
 
+    /**
+     * 「第一段没说完的话」（v2.2.0）：这段记忆的正文在幻境里永远少最后一句。
+     *
+     * <p>选 {@code her_last_note}（《最后一句完整的话》）是刻意的：
+     * 标题承诺「完整」，而正文不完整。玩家第一次读不会觉得异样，
+     * 只有重读、或者想起标题时才会发现——**那句话一直没有结束**。
+     *
+     * <p>这是这一版的主题句：有些东西不是因为丢失而不完整，
+     * 而是本来就不完整。
+     */
+    private static final String UNFINISHED_FRAGMENT_ID = "her_last_note";
+
+    /**
+     * 抹掉结尾标点。
+     *
+     * <p>覆盖大多数语言里表示「句末」的字符。宁可多抹几个，
+     * 也不要因为某个语言的标点不在表里而让「没说完」露馅。
+     */
+    private static final String TRAILING_PUNCTUATION = "。．.！!？?…‥：:；;、，,";
+
+    private static String stripTrailingPunctuation(String line) {
+        int end = line.length();
+        while (end > 0 && TRAILING_PUNCTUATION.indexOf(line.charAt(end - 1)) >= 0) {
+            end--;
+        }
+        return line.substring(0, end);
+    }
+
     private final MemoryEntry entry;
     private final boolean firstTime;
     private final boolean resonant;
     private final List<String> lines;
     private final List<String> resonanceLines;
+
+    /**
+     * 矛盾碎片（v2.2.0）——按错误顺序见证时多出来的那一句。
+     *
+     * <p>为空表示没有。它是**语言键**，在这里才解析成文本——
+     * 文案不下网络这条原则没有破。
+     */
+    private final List<String> contradictionLines;
+
     private final String titleText;
     private final String clueText;
     private final String resonantText;
@@ -45,7 +82,8 @@ public class MemoryVisionScreen extends Screen {
 
     private int ticks;
 
-    public MemoryVisionScreen(MemoryEntry entry, boolean firstTime, boolean resonant) {
+    public MemoryVisionScreen(MemoryEntry entry, boolean firstTime, boolean resonant,
+                              String contradictionKey) {
         super(Component.translatable("screen.echoesofoblivion.memory_vision"));
         this.entry = entry;
         this.firstTime = firstTime;
@@ -59,6 +97,10 @@ public class MemoryVisionScreen extends Screen {
         this.lines = List.of(entry.content().getString().split("\\\\n|\\n"));
         // 共鸣碎片同样以 \n 分隔；只在共鸣时才会被渲染
         this.resonanceLines = List.of(entry.resonanceText().getString().split("\\\\n|\\n"));
+        // 矛盾碎片：空键表示没有。解析空键会得到空串，因此这里显式判空。
+        this.contradictionLines = (contradictionKey == null || contradictionKey.isBlank())
+            ? List.of()
+            : List.of(Component.translatable(contradictionKey).getString().split("\\\\n|\\n"));
     }
 
     @Override
@@ -114,9 +156,32 @@ public class MemoryVisionScreen extends Screen {
         // 抖动幅度随侵蚀值升高（最高约 ±3px）
         float jitterScale = 0.5f + ClientData.getCorruptionRatio() * 2.5f;
 
+        // 「第一段没说完的话」（v2.2.0）。
+        //
+        // 记着见证的两段里，有一段的正文在幻境里**永远少最后一句**。
+        // 这不是丢失——丢失会让它变成「内容被吞了」，而这一版要的是
+        // 「它本来就没有结束」。
+        //
+        // 为什么在渲染层砍、而不是改语言文件：改语言文件需要 21 个语言
+        // 一起把末句删掉，任何一个漏掉都会让这个细节只在部分语言里成立；
+        // 而且要验证「删对了没」得逐语言比对。放在渲染层只需要一条规则，
+        // 它在所有语言里同时成立。
+        List<String> rendered = lines;
+        if (entry.id().getPath().equals(UNFINISHED_FRAGMENT_ID) && !lines.isEmpty()) {
+            rendered = new ArrayList<>(lines);
+            // 去掉最后一行，并抹掉新末行结尾的标点——
+            // 「话说到一半停下」和「说完一句但没有句号」是两种不同的感觉，
+            // 这一版要的是前者，所以连标点一起拿走。
+            rendered.remove(rendered.size() - 1);
+            if (!rendered.isEmpty()) {
+                int last = rendered.size() - 1;
+                rendered.set(last, stripTrailingPunctuation(rendered.get(last)));
+            }
+        }
+
         int y = height / 3;
-        for (int i = 0; i < lines.size(); i++) {
-            String line = lines.get(i);
+        for (int i = 0; i < rendered.size(); i++) {
+            String line = rendered.get(i);
             float la = lineAlpha(i);
             if (line.isEmpty() || la <= 0.0f) {
                 y += LINE_HEIGHT;
@@ -138,6 +203,41 @@ public class MemoryVisionScreen extends Screen {
                 }
                 y += LINE_HEIGHT;
                 wrapIndex++;
+            }
+        }
+
+        // 矛盾碎片（v2.2.0）：按错误顺序见证时多出来的那句。
+        //
+        // 刻意紧接正文之后、用同样的字体与抖动、只是颜色略暗——
+        // 它必须读起来像**这段记忆自己的另一句正文**，而不是一条系统提示。
+        // 如果它看起来像 UI（「你收集顺序有误！」），整个效果就毁了。
+        //
+        // 出现时机比正文晚：先让玩家读完已知的内容，再让矛盾浮现。
+        if (!contradictionLines.isEmpty()) {
+            int appearAt = FADE_IN_TICKS + HOLD_TICKS / 2 + 30;
+            if (ticks >= appearAt) {
+                float local = Math.min(1.0f, (ticks - appearAt) / 30.0f);
+                y += LINE_HEIGHT;
+                // 左侧一个很细的记号，让它与正文有区隔但不喧哗
+                graphics.drawString(font, "│", left - 10, y,
+                    argb((int) (local * globalAlpha * 150.0f), 0x7A6A8A), false);
+                for (String line : contradictionLines) {
+                    if (line.isEmpty()) {
+                        y += LINE_HEIGHT;
+                        continue;
+                    }
+                    for (String wrapped : wrap(line, textWidth)) {
+                        int lineWidth = font.width(wrapped);
+                        int startX = centerX - lineWidth / 2;
+                        int color = argb((int) (local * globalAlpha * 190.0f), 0xC8B4D8);
+                        if (textInstability() > 0.0f) {
+                            drawUnstableLine(graphics, wrapped, 900 + y, startX, y, color);
+                        } else {
+                            graphics.drawString(font, wrapped, startX, y, color, false);
+                        }
+                        y += LINE_HEIGHT;
+                    }
+                }
             }
         }
 

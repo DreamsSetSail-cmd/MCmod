@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "窪みは、抱えていたものを手放します。",
   "block.echoesofoblivion.fragment_niche.empty": "それが持っていたものは、すでにすべてあなたが運んでいます。",
   "message.echoesofoblivion.misaligned_echo": "以前に聞いたものが、間違った形で戻ってきます。",
-  "message.echoesofoblivion.misaligned_echo.hint": "回廊は音を保てない。"
+  "message.echoesofoblivion.misaligned_echo.hint": "回廊は音を保てない。",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "あの警告は決して告げられなかった。\\n誰にも知らされず、だから誰も聞き損じなかった。",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "あなたはこれを順序どおりに読んでいない。\\n警告は後から来た。警告はいつも後から来た。",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "それが働きかける対象が何もなかった頃から、すでに器具はあった。\\nそれは先に作られた。静寂はそれを満たすために来た。"
 }

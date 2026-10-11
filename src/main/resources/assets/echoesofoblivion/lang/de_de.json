@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "Die Nische gibt her, was sie barg.",
   "block.echoesofoblivion.fragment_niche.empty": "Du trägst bereits alles, was sie hatte.",
   "message.echoesofoblivion.misaligned_echo": "Etwas früher Gehörtes kommt falsch zurück.",
-  "message.echoesofoblivion.misaligned_echo.hint": "Der Korridor hält den Klang nicht."
+  "message.echoesofoblivion.misaligned_echo.hint": "Der Korridor hält den Klang nicht.",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "Die Warnung wurde nie ausgesprochen.\\nNiemandem wurde es gesagt, und so hörte auch niemand nicht zu.",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "Du liest das hier in der falschen Reihenfolge.\\nDie Warnung kam danach. Sie kam immer danach.",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "Es gab ein Instrument, bevor es etwas gab, woran es arbeiten konnte.\\nEs wurde zuerst gebaut. Die Stille kam, um es zu füllen."
 }

@@ -52,6 +52,18 @@ in whole segments**, columns stand at a **constant spacing** and then simply sto
 lie along a single line. Random rubble reads as geology. This reads as **order that broke** — which
 is a different, and worse, thing.
 
+**Reading out of order has consequences** — The chronicle is not a linear quest, and the order you
+find the five memories in is yours to stumble into. But **some orders contradict each other**. If you
+witness the warning before the experiment it warned about, a fragment appears in the vision that
+**cannot be reconciled** with what you already know — it does not say you misremembered, it flatly
+contradicts the record. There are only three such pairs, because most reversals carry no real
+information gap, and writing a response for all 120 arrangements would be noise rather than dread.
+None of it costs you anything: no penalty, no corruption, no debuff. It is only text you now cannot
+un-read.
+
+And one of the 12 fragments is titled *Last Complete Sentence*. Its text is not complete. Nothing is
+missing from it — it simply never ends. You will probably not notice the first time.
+
 **Rites you perform yourself** — The **Resonance Fork** performs one of three rites, each consuming
 real materials. *Requiem* scatters every echo within 32 blocks. **Descent** silences the world
 within 48 blocks for 30 seconds — the first time you get to be the one who makes the silence,

@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "龕交出了它一直含著的東西。",
   "block.echoesofoblivion.fragment_niche.empty": "它有的東西你已經全帶在身上了。",
   "message.echoesofoblivion.misaligned_echo": "你聽過的某個東西回來了，但不對。",
-  "message.echoesofoblivion.misaligned_echo.hint": "迴廊留不住聲音。"
+  "message.echoesofoblivion.misaligned_echo.hint": "迴廊留不住聲音。",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "那句警告從未被說出口。\\n沒有人被告知，因此也沒有人沒有聽。",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "你在倒著讀。\\n警告是之後才有的。它一直都是之後才有的。",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "在還沒有東西可供它作用之前，儀器就已經存在了。\\n它先被造出來。寂靜是後來才來填滿它的。"
 }

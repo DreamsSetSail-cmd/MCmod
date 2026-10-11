@@ -2,7 +2,9 @@ package com.clion.echoesofoblivion.memory;
 
 import net.minecraft.nbt.CompoundTag;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -20,6 +22,21 @@ public final class PlayerProgress {
     public static final int MAX_CORRUPTION = 100;
 
     private final Set<Integer> collected = new HashSet<>();
+
+    /**
+     * 见证顺序（v2.2.0）。
+     *
+     * <p>{@code collected} 是 {@code HashSet}，**不保留顺序**。但 v2.2.0 的核心机制是
+     * 「按错误顺序见证记忆会浮现矛盾的碎片」——这需要知道顺序，
+     * 而顺序一旦丢失就无法重建。
+     *
+     * <p>因此单独维护一个按见证先后排列的列表。它与 {@code collected} 冗余，
+     * 但两者回答不同的问题：{@code collected} 回答「知不知道」，
+     * 这个列表回答「什么时候知道的」。顺序表只用于叙事判定
+     * （见 {@link #witnessOrder()}），任何逻辑判定仍然以 {@code collected} 为准。
+     */
+    private final List<Integer> order = new ArrayList<>();
+
     private final Set<String> clues = new HashSet<>();
     private int corruption;
 
@@ -50,6 +67,9 @@ public final class PlayerProgress {
      * @return 是否真的遗忘了（原本就没见证过时返回 false）
      */
     public boolean forget(int memoryIndex) {
+        // 顺序表也要清掉：焚烧之后这段记忆不再「曾经被知道」，
+        // 留着它会让后续的逆序判定读到一段已经被消耗掉的记忆。
+        order.remove(Integer.valueOf(memoryIndex));
         return collected.remove(memoryIndex);
     }
 
@@ -62,10 +82,51 @@ public final class PlayerProgress {
     }
 
     /**
+     * 见证顺序（v2.2.0）：按玩家**第一次**看到每段记忆的先后排列。
+     *
+     * <p>返回的是不可变副本。只用于叙事判定——任何「知不知道」的问题
+     * 都应该问 {@link #has(int)}。
+     */
+    public List<Integer> witnessOrder() {
+        return List.copyOf(order);
+    }
+
+    /**
+     * 一段记忆是否在另一段**之前**被见证。
+     *
+     * <p>这是 v2.2.0「矛盾碎片」的唯一判定入口。为了让它只依赖一个概念，
+     * 这里把三种边界情况都收在一个方法里：
+     *
+     * <ul>
+     *   <li>两段都见证过 → 比较它们在顺序表里的位置。</li>
+     *   <li>两段见证过但顺序表里缺失（例如老存档升级而来）→ 返回 false。
+     *       **不确定时不做判定**，因为错误的「你搞错了顺序」比缺失这句提示更糟。</li>
+     *   <li>任一段没见证过 → 返回 false。</li>
+     * </ul>
+     *
+     * @return true 表示 {@code earlier} 确实先于 {@code later} 被见证
+     */
+    public boolean witnessedBefore(int earlier, int later) {
+        if (!collected.contains(earlier) || !collected.contains(later)) {
+            return false;
+        }
+        int firstIndex = order.indexOf(earlier);
+        int secondIndex = order.indexOf(later);
+        if (firstIndex < 0 || secondIndex < 0) {
+            return false;
+        }
+        return firstIndex < secondIndex;
+    }
+
+    /**
      * @return 若这次收集是新记忆则返回 true（用于决定是否播放音效、是否推进叙事）
      */
     public boolean collect(int memoryIndex) {
-        return collected.add(memoryIndex);
+        boolean isNew = collected.add(memoryIndex);
+        if (isNew) {
+            order.add(memoryIndex);
+        }
+        return isNew;
     }
 
     public void collectClue(String clue) {
@@ -133,6 +194,9 @@ public final class PlayerProgress {
         tag.putInt("name_call_timer", secondsSinceNameCall);
         tag.putIntArray("collected", collected.stream().mapToInt(Integer::intValue).toArray());
         tag.putString("clues", String.join(",", clues));
+        // v2.2.0：见证顺序。单独一个键，老存档没有它也不会出错——
+        // load() 会把顺序表留空，而 witnessedBefore() 在信息不足时返回 false。
+        tag.putIntArray("witness_order", order.stream().mapToInt(Integer::intValue).toArray());
         return tag;
     }
 
@@ -142,6 +206,18 @@ public final class PlayerProgress {
         progress.secondsSinceNameCall = Math.max(0, tag.getInt("name_call_timer"));
         for (int index : tag.getIntArray("collected")) {
             progress.collected.add(index);
+        }
+        // v2.2.0：见证顺序。
+        //
+        // 老存档（v2.1 及以前）没有这个键，此时顺序表为空。这是**安全**的：
+        // witnessedBefore() 在顺序未知时返回 false，也就是「不判定」，
+        // 于是老存档不会凭空冒出矛盾碎片。缺失一句提示，好过冒出一句错的。
+        //
+        // 只接受「已收集」的索引，避免损坏的存档把顺序表撑成任意内容。
+        for (int index : tag.getIntArray("witness_order")) {
+            if (progress.collected.contains(index) && !progress.order.contains(index)) {
+                progress.order.add(index);
+            }
         }
         String rawClues = tag.getString("clues");
         if (!rawClues.isEmpty()) {

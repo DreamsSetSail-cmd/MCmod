@@ -1,6 +1,7 @@
 package com.clion.echoesofoblivion.server;
 
 import com.clion.echoesofoblivion.block.ModBlocks;
+import com.clion.echoesofoblivion.memory.Contradictions;
 import com.clion.echoesofoblivion.memory.MemoryEntry;
 import com.clion.echoesofoblivion.memory.MemoryProgression;
 import com.clion.echoesofoblivion.memory.MemoryRegistry;
@@ -78,7 +79,7 @@ public final class ServerPacketHandler {
         if (entry == null) {
             // 所有记忆都已目睹完毕：给一次「回响」，不改变进度
             int echo = Math.floorMod(base, MemoryRegistry.size());
-            ModNetwork.sendToPlayer(new MemoryVisionPacket(echo, false), player);
+            ModNetwork.sendToPlayer(MemoryVisionPacket.plain(echo, false), player);
             level.playSound(null, pos, ModSounds.MEMORY_COLLECT.get(), SoundSource.BLOCKS, 0.4f, 1.4f);
             return;
         }
@@ -90,7 +91,17 @@ public final class ServerPacketHandler {
         progress.addCorruption(6);
         data.markDirty();
 
-        ModNetwork.sendToPlayer(new MemoryVisionPacket(chosen, firstTime), player);
+        // v2.2.0：见证顺序的后果。
+        //
+        // 必须在 collect() **之后**算——这一步刚把 chosen 写进顺序表，
+        // 而「先看到警告再看仪器」正是要比较 chosen 与已见证项的位置。
+        //
+        // 只在首次见证时判定：重读一段旧记忆不该再冒出矛盾碎片，
+        // 那会让机制退化成「每次右键水晶都可能被念一句」。
+        String contradiction = firstTime ? Contradictions.forPlayer(progress) : null;
+
+        ModNetwork.sendToPlayer(new MemoryVisionPacket(chosen, firstTime,
+            contradiction == null ? "" : contradiction), player);
         level.playSound(null, pos, ModSounds.MEMORY_COLLECT.get(), SoundSource.BLOCKS, 0.8f, 1.0f);
 
         // 阶段 3 世界联动：跨过进度阈值时触发叙事与声音，并同步完整进度

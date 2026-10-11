@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "Výklenek vydává to, co držel.",
   "block.echoesofoblivion.fragment_niche.empty": "Už nesete všechno, co měla.",
   "message.echoesofoblivion.misaligned_echo": "Něco, co už zaznělo, se vrací špatně.",
-  "message.echoesofoblivion.misaligned_echo.hint": "Chodba neudrží zvuk."
+  "message.echoesofoblivion.misaligned_echo.hint": "Chodba neudrží zvuk.",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "Varování nebylo nikdy vysloveno.\\nNikdo se to nedozvěděl, a tak nikdo nepřestal naslouchat.",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "Čteš to ve špatném pořadí.\\nVarování přišlo později. Vždy přicházelo později.",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "Nástroj existoval dřív, než existovalo cokoli, na co by mohl působit.\\nByl postaven první. Ticho přišlo, aby ho naplnilo."
 }

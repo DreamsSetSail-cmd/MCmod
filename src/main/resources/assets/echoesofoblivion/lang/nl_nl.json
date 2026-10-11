@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "De nis geeft op wat ze vasthield.",
   "block.echoesofoblivion.fragment_niche.empty": "Je draagt al alles wat ze had.",
   "message.echoesofoblivion.misaligned_echo": "Iets wat eerder gehoord is, komt verkeerd terug.",
-  "message.echoesofoblivion.misaligned_echo.hint": "De Gang houdt het geluid niet vast."
+  "message.echoesofoblivion.misaligned_echo.hint": "De Gang houdt het geluid niet vast.",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "De waarschuwing is nooit gegeven.\\nNiemand werd het gezegd, en dus liet niemand na te luisteren.",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "Je leest dit in de verkeerde volgorde.\\nDe waarschuwing kwam daarna. Ze kwam altijd daarna.",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "Er was een instrument voordat er iets was waarop het kon werken.\\nHet werd eerst gebouwd. De stilte kwam om het te vullen."
 }

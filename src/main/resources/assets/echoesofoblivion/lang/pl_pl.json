@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "Nisza oddaje to, co trzymała.",
   "block.echoesofoblivion.fragment_niche.empty": "Niesiesz już wszystko, co miała.",
   "message.echoesofoblivion.misaligned_echo": "Coś, co już słyszano, wraca fałszywe.",
-  "message.echoesofoblivion.misaligned_echo.hint": "Korytarz nie zatrzymuje dźwięku."
+  "message.echoesofoblivion.misaligned_echo.hint": "Korytarz nie zatrzymuje dźwięku.",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "Ostrzeżenie nigdy nie zostało wypowiedziane.\\nNikogo nie poinformowano, więc nikt nie przestał słuchać.",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "Czytasz to w niewłaściwej kolejności.\\nOstrzeżenie przyszło później. Zawsze przychodziło później.",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "Istniał przyrząd, zanim istniało cokolwiek, na czym mógłby działać.\\nZostał zbudowany pierwszy. Cisza przyszła, aby go wypełnić."
 }

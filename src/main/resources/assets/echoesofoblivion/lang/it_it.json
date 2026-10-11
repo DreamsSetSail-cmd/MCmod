@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "La nicchia cede ciò che teneva.",
   "block.echoesofoblivion.fragment_niche.empty": "Porti già con te tutto ciò che aveva.",
   "message.echoesofoblivion.misaligned_echo": "Qualcosa di già udito ritorna sbagliato.",
-  "message.echoesofoblivion.misaligned_echo.hint": "Il corridoio non trattiene il suono."
+  "message.echoesofoblivion.misaligned_echo.hint": "Il corridoio non trattiene il suono.",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "L'avvertimento non fu mai dato.\\nA nessuno fu detto, e quindi nessuno mancò di ascoltare.",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "Stai leggendo questo fuori ordine.\\nL'avvertimento venne dopo. Venne sempre dopo.",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "C'era uno strumento prima che ci fosse qualcosa su cui potesse agire.\\nFu costruito per primo. Il silenzio venne a riempirlo."
 }

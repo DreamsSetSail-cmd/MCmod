@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "The niche gives up what it was holding.",
   "block.echoesofoblivion.fragment_niche.empty": "You are already carrying everything it had.",
   "message.echoesofoblivion.misaligned_echo": "Something you heard before comes back wrong.",
-  "message.echoesofoblivion.misaligned_echo.hint": "The corridor does not keep sound well."
+  "message.echoesofoblivion.misaligned_echo.hint": "The corridor does not keep sound well.",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "The warning was never given.\\nNo one was told, and so no one failed to listen.",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "You are reading these out of order.\\nThe warning came after. It always came after.",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "There was an instrument before there was anything for it to work on.\\nIt was built first. The silence came to fill it."
 }

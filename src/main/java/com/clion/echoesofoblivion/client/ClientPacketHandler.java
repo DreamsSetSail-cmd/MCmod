@@ -24,7 +24,7 @@ public final class ClientPacketHandler {
     }
 
     /** 打开记忆幻境。 */
-    public static void openVision(int memoryIndex, boolean firstTime) {
+    public static void openVision(int memoryIndex, boolean firstTime, String contradictionKey) {
         if (memoryIndex < 0 || memoryIndex >= MemoryRegistry.size()) {
             return;
         }
@@ -35,7 +35,7 @@ public final class ClientPacketHandler {
             && ClientData.hasCollected(memoryIndex);
 
         ClientData.markCollected(memoryIndex);
-        minecraft.setScreen(new MemoryVisionScreen(entry, firstTime, resonant));
+        minecraft.setScreen(new MemoryVisionScreen(entry, firstTime, resonant, contradictionKey));
         if (minecraft.player != null) {
             minecraft.player.playSound(ModSounds.MEMORY_VISION.get(), 0.6f, 1.0f);
         }

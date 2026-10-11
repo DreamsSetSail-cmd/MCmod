@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "Nisjen gir fra seg det den holdt.",
   "block.echoesofoblivion.fragment_niche.empty": "Du bærer allerede alt den hadde.",
   "message.echoesofoblivion.misaligned_echo": "Noe man har hørt før, kommer tilbake feil.",
-  "message.echoesofoblivion.misaligned_echo.hint": "Korridoren holder ikke på lyden."
+  "message.echoesofoblivion.misaligned_echo.hint": "Korridoren holder ikke på lyden.",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "Advarselen ble aldri gitt.\\nIngen ble fortalt det, og derfor unnlot ingen å lytte.",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "Du leser dette i feil rekkefølge.\\nAdvarselen kom etterpå. Den kom alltid etterpå.",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "Det fantes et instrument før det fantes noe for det å virke på.\\nDet ble bygget først. Stillheten kom for å fylle det."
 }

@@ -201,5 +201,8 @@
   "block.echoesofoblivion.fragment_niche.taken": "Ниша отдаёт то, что держала.",
   "block.echoesofoblivion.fragment_niche.empty": "Ты уже несёшь всё, что у неё было.",
   "message.echoesofoblivion.misaligned_echo": "Услышанное прежде возвращается неправильным.",
-  "message.echoesofoblivion.misaligned_echo.hint": "Коридор не удерживает звук."
+  "message.echoesofoblivion.misaligned_echo.hint": "Коридор не удерживает звук.",
+  "message.echoesofoblivion.contradiction.warning_before_apparatus": "Предупреждение так и не было произнесено.\\nНикому не сказали, и потому никто не не услышал.",
+  "message.echoesofoblivion.contradiction.warning_before_fall": "Ты читаешь это не по порядку.\\nПредупреждение пришло позже. Оно всегда приходило позже.",
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "Прибор существовал прежде, чем появилось хоть что-то, на что он мог бы воздействовать.\\nОн был построен первым. Тишина пришла, чтобы наполнить его."
 }
