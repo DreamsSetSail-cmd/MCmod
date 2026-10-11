@@ -64,6 +64,22 @@ un-read.
 And one of the 12 fragments is titled *Last Complete Sentence*. Its text is not complete. Nothing is
 missing from it — it simply never ends. You will probably not notice the first time.
 
+**You can write your own name into it** — The name steles in the ruins are blank, and they were
+always meant to stay blank. But you can put **your own name** on one, using a Blank Plaque. It is
+written, it persists, and **you will never see it** — nothing renders it, for you or for anyone
+else.
+
+The cost is real and the payoff is nothing. Corruption builds 25% faster, and every half hour or so
+a line appears describing what you did, in the third person, in the tone of a record: *"The subject
+added a name to the register. The name was accepted."* … *"The subject's handwriting matches the
+earlier entries."*
+
+Breaking the stele does not undo it. The cost is keyed to you, not to the block — what you wrote is
+not in the ruins, it is on you. If smashing it let you off, it would just be an experiment you could
+roll back.
+
+> You wrote yourself into that civilization's place. That is not a victory. It is a succession.
+
 **Rites you perform yourself** — The **Resonance Fork** performs one of three rites, each consuming
 real materials. *Requiem* scatters every echo within 32 blocks. **Descent** silences the world
 within 48 blocks for 30 seconds — the first time you get to be the one who makes the silence,

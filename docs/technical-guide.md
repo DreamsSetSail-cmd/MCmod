@@ -490,6 +490,64 @@ SoundInstance.getSoundEvent()    -> 不存在              ❌
 返回**第一个**命中的那一对——同时命中多对时只显示一句，
 幻境里堆三句矛盾会让它从「不安」变成「吵闹」。
 
+### 3.11 v2.3.0：名字碑（刻名与代价）
+
+#### 代价挂在玩家身上，不挂在方块上
+
+这是这一版唯一值得写进技术手册的设计决定。
+
+刻名之后，**侵蚀增长加快 25%**，并周期性出现「关于你的记述」。
+这两件事的判定依据是玩家自己的持久化标记：
+
+```java
+player.getPersistentData().getBoolean("echoes_inscribed")
+```
+
+而**不是**世界里还有没有那块碑。因此**砸掉碑不会撤销代价**。
+
+理由不是省事，是必须如此：如果砸碑能撤销，玩家会得到一个「试了再退」
+的安全阀，整个机制就退化成一次可回滚的实验。而这一版要说的恰恰是
+**你写上去的东西不在这里，在你身上。**
+
+#### 为什么用 `persistentData` 而不是 `PlayerProgress`
+
+| 方案 | 代价 |
+| --- | --- |
+| 加进 `PlayerProgress` | 要改存档结构、写兼容逻辑，而它只需要回答一个是非问题 |
+| `persistentData` | 跨维度、跨死亡保留，零存档兼容风险 |
+
+碑上的方块实体（`NameSteleBlockEntity`）仍然保存 UUID、名字与时间，
+用于追溯与调试——**但不进渲染**。
+
+#### 「刻名不可见」是有意为之，不是没做完
+
+客户端**收不到**那个名字字符串。没有任何渲染路径显示它。
+
+如果它被显示出来（哪怕只在聊天栏回显一次），刻名就变成了
+「我留下了痕迹」的满足感。而这一版的主题是相反的：
+
+> 你把自己写进了那个文明的位置。这不是胜利，是接替。
+
+代价是可见的（侵蚀加快、记述出现），收益是**零**。玩家会自己意识到
+这一点——那比任何提示都有效。
+
+#### 侵蚀倍率的叠加顺序
+
+提灯与刻名走**同一条「净变化」通路**，顺序是**先提灯、后刻名**：
+
+```java
+int delta = progress.corruption() - beforeGain;          // 本秒的净增长
+if (delta > 0 && ResearcherLanternItem.isCarried(player)) { ... }   // 提灯减半
+if (delta > 0) {
+    int afterLantern = progress.corruption() - beforeGain;          // 重新取值
+    float inscription = NameSteleObservation.corruptionMultiplier(player);
+    ...
+}
+```
+
+**必须重新取值**：用提灯之前的 `delta` 当基数会把两者的叠加算重。
+这是个很容易写错、且很难在游戏里察觉的地方（数值只是略大一点）。
+
 ---
 
 ## 4. 渲染实现（Forge 1.20.6 的特殊情况）
@@ -669,11 +727,57 @@ python tools/check_lang.py
 **处理**：`git update-index --chmod=+x gradlew`（索引模式 `100644` → `100755`），
 同时 workflow 里改用 `bash gradlew`，双保险。
 
-### 6.9 CI 上 gameTest 偶发不退出
+### 6.9 CI 上 gameTest 偶发不退出（v2.1.0 已定性）
 
-打 tag 那次的 `Run game tests` 挂了 **1 小时 31 分**，而同一流程在主分支上 2 分钟就过。
-**本机反复跑从未复现**（8 次全过），因此无法定位根因，只能加超时兜底：
-作业级 `timeout-minutes: 45`，gameTest 步骤级 `5`。
+**现象**：打 tag 那次的 `Run game tests` 挂了很久，而同一 commit 在主分支上很快通过。
+**本机曾反复跑从未复现**（多次全过），一度只能加超时兜底。
+
+**v2.1.0 定性的结果**：不是死锁，是**资源饥饿**。这台机器只有 4 个逻辑核，
+当有残留的 Gradle daemon 或上一次被杀掉一半的测试服务器还在占 CPU 时，
+测试服务器拿不到时间片、tick 严重落后，于是**进度条打印本身变成主要负载**
+（一次运行累计 14 万行、9.7 MB 日志），形成正反馈。
+
+清理掉残留 java 进程后，同一个提交 **17 秒跑完**。
+
+另外 `--no-daemon` 会显著加剧这个问题：CI 里 Build 步骤用 `--no-daemon` 没问题，
+但 gameTest 步骤用了它就会卡在进度条上，去掉后 10 秒跑完。
+详见 §7.2 的「gameTest 会假挂起」。
+
+### 6.10 `useItemOn` 的返回值类型在 1.20.5+ 变了
+
+写「手持某物品右键方块」的交互时，容易照旧教程写成：
+
+```java
+@Override
+protected InteractionResult useItemOn(ItemStack stack, BlockState state, Level level,
+                                     BlockPos pos, Player player, InteractionHand hand,
+                                     BlockHitResult hitResult) { ... }
+```
+
+**这在 1.20.6 编译不过**，报「方法不会覆盖或实现超类型的方法」。正确签名是：
+
+```java
+@Override
+protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level,
+                                         BlockPos pos, Player player, InteractionHand hand,
+                                         BlockHitResult hitResult) { ... }
+```
+
+要点：
+
+- 返回类型是 `net.minecraft.world.ItemInteractionResult`，**不是** `InteractionResult`。
+- 「我不管，交给默认处理」对应的常量是
+  `ItemInteractionResult.PASS_TO_DEFAULT_BLOCK_INTERACTION`
+  （而不是 `InteractionResult.PASS`）。
+- 不带物品的交互仍然是 `useWithoutItem`，返回 `InteractionResult`。
+  两者签名不同，不要混淆。
+
+用 `javap` 直接确认签名是最快的方式（本项目的惯例，见 §1 的注意事项）：
+
+```powershell
+javap -classpath <forge jar> net.minecraft.world.level.block.state.BlockBehaviour |
+  Select-String useItemOn
+```
 
 ---
 

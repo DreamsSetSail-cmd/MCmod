@@ -4,7 +4,10 @@ import com.clion.echoesofoblivion.EchoesOfOblivionMod;
 import com.clion.echoesofoblivion.block.ModBlocks;
 import com.clion.echoesofoblivion.entity.ModEntities;
 import com.clion.echoesofoblivion.entity.SilentAggregateEntity;
+import com.clion.echoesofoblivion.memory.Contradictions;
 import com.clion.echoesofoblivion.memory.MemoryRegistry;
+import com.clion.echoesofoblivion.memory.PlayerProgress;
+import com.clion.echoesofoblivion.server.NameSteleObservation;
 import com.clion.echoesofoblivion.item.LoreFragmentItem;
 import com.clion.echoesofoblivion.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -205,10 +208,192 @@ public final class BossGameTests {
         helper.succeed();
     }
 
+    /**
+     * v2.2.0：见证顺序必须被真实记录，且逆序判定要正确。
+     *
+     * <p>这一版的核心机制是「按错误顺序见证会浮现矛盾的碎片」，
+     * 而它完全依赖顺序表。顺序表一旦失效，机制会**静默**消失——
+     * 玩家只是永远看不到矛盾碎片，没有任何报错。
+     * 因此这里的断言是必要的，不是锦上添花。
+     */
+    @GameTest(template = "echoesofoblivion:empty")
+    public static void witnessOrderIsTracked(GameTestHelper helper) {
+        PlayerProgress progress = new PlayerProgress();
+
+        // 空进度：任何比较都应为 false
+        if (progress.witnessedBefore(0, 1)) {
+            helper.fail("空进度不应该判定出任何先后关系");
+            return;
+        }
+
+        // 按 4 → 3 → 1 的顺序见证
+        progress.collect(4);
+        progress.collect(3);
+        progress.collect(1);
+
+        // 顺序表应保留见证次序，而不是像 Set 那样无序
+        if (!progress.witnessOrder().equals(java.util.List.of(4, 3, 1))) {
+            helper.fail("见证顺序应为 [4, 3, 1]，实际为 " + progress.witnessOrder());
+            return;
+        }
+        // 4 早于 3：这正是「先听到警告再看仪器」，应当被判出来
+        if (!progress.witnessedBefore(4, 3)) {
+            helper.fail("4 早于 3 见证，witnessedBefore(4,3) 应为 true");
+            return;
+        }
+        // 反向应为 false
+        if (progress.witnessedBefore(3, 4)) {
+            helper.fail("witnessedBefore(3,4) 应为 false");
+            return;
+        }
+        // 未见证的索引不参与判定
+        if (progress.witnessedBefore(0, 4) || progress.witnessedBefore(4, 2)) {
+            helper.fail("未见证的记忆不应参与顺序判定");
+            return;
+        }
+
+        // 重复见证不应改变顺序（重读旧记忆不能把它挪到末尾）
+        progress.collect(4);
+        if (!progress.witnessOrder().equals(java.util.List.of(4, 3, 1))) {
+            helper.fail("重复见证改变了顺序表：" + progress.witnessOrder());
+            return;
+        }
+
+        // 焚烧（forget）必须同时清掉顺序表，
+        // 否则后续判定会引用一段已经被消耗掉的记忆
+        progress.forget(4);
+        if (progress.witnessOrder().contains(4)) {
+            helper.fail("焚烧后顺序表仍含有被烧掉的记忆：" + progress.witnessOrder());
+            return;
+        }
+
+        helper.succeed();
+    }
+
+    /**
+     * v2.2.0：矛盾碎片的选择必须稳定且只在真正逆序时触发。
+     *
+     * <p>顺带校验 {@code Contradictions.REVERSALS} 里每个键都确实存在于
+     * {@code MemoryRegistry} 的索引范围内——索引写错会让机制静默失效。
+     */
+    @GameTest(template = "echoesofoblivion:empty")
+    public static void contradictionsTriggerOnlyInReverseOrder(GameTestHelper helper) {
+        int size = MemoryRegistry.size();
+        for (Contradictions.Reversal reversal : Contradictions.REVERSALS) {
+            if (reversal.earlier() < 0 || reversal.earlier() >= size
+                || reversal.later() < 0 || reversal.later() >= size) {
+                helper.fail("逆序对的索引超出记忆范围：" + reversal);
+                return;
+            }
+            if (reversal.earlier() == reversal.later()) {
+                helper.fail("逆序对的两端相同：" + reversal);
+                return;
+            }
+        }
+
+        // 正序见证：不该有任何矛盾碎片
+        PlayerProgress inOrder = new PlayerProgress();
+        for (int i = 0; i < size; i++) {
+            inOrder.collect(i);
+        }
+        if (Contradictions.forPlayer(inOrder) != null) {
+            helper.fail("按 0..4 顺序见证不应触发矛盾碎片，实际触发 "
+                + Contradictions.forPlayer(inOrder));
+            return;
+        }
+
+        // 逆序见证：先 4 再 3，应命中「警告在仪器之前」那一对
+        PlayerProgress reversed = new PlayerProgress();
+        reversed.collect(4);
+        reversed.collect(3);
+        String key = Contradictions.forPlayer(reversed);
+        if (key == null) {
+            helper.fail("先见证 4 再见证 3 应当触发矛盾碎片");
+            return;
+        }
+        if (!key.equals("message.echoesofoblivion.contradiction.warning_before_apparatus")) {
+            helper.fail("命中的矛盾碎片不是优先级最高的那一对，实际为 " + key);
+            return;
+        }
+        if (!Contradictions.isReversalKey(key)) {
+            helper.fail("命中的键不在已登记的逆序对里：" + key);
+            return;
+        }
+
+        helper.succeed();
+    }
+
+    /**
+     * v2.2.0：「第一段没说完的话」依赖的残片必须存在。
+     *
+     * <p>渲染层按 ID 硬编码了一段残片（见 {@code MemoryVisionScreen}）。
+     * 它按 **lore fragment** 的 ID 匹配（{@code her_last_note}），
+     * 因此这里断言这个 ID 确实已注册——否则那个细节会静默失效，
+     * 而它恰恰是这一版的主题句。
+     */
+    @GameTest(template = "echoesofoblivion:empty")
+    public static void unfinishedFragmentExists(GameTestHelper helper) {
+        if (!ModItems.fragments().containsKey("her_last_note")) {
+            helper.fail("「第一段没说完的话」依赖的残片 her_last_note 未注册");
+            return;
+        }
+        helper.succeed();
+    }
+
+    /**
+     * v2.3.0：名字碑的方块实体与「刻名代价」的倍率必须成立。
+     *
+     * <p>两个容易静默出错的地方：
+     * <ol>
+     *   <li>方块实体的注册名与方块对不上——碑会放下去但立刻变成「无效方块实体」，
+     *       刻名静默失败。</li>
+     *   <li>倍率没被应用或应用成了 &lt;= 1.0——刻名变成一个纯亏的装饰行为，
+     *       而这正是这一版要避免的（代价必须真实，收益必须是零）。</li>
+     * </ol>
+     */
+    @GameTest(template = "echoesofoblivion:empty")
+    public static void nameSteleIsInscribable(GameTestHelper helper) {
+        // 方块实体类型必须已注册，且绑定了名字碑方块
+        if (ModBlocks.NAME_STELE_BE.get() == null) {
+            helper.fail("名字碑的方块实体类型未注册");
+            return;
+        }
+        if (!ModBlocks.NAME_STELE_BE.get().isValid(ModBlocks.NAME_STELE.get().defaultBlockState())) {
+            helper.fail("名字碑的方块实体类型没有绑定到名字碑方块");
+            return;
+        }
+
+        // 倍率必须是「加快」，而且严格大于 1
+        if (NameSteleObservation.CORRUPTION_MULTIPLIER <= 1.0f) {
+            helper.fail("刻名的侵蚀倍率应大于 1，实际为 "
+                + NameSteleObservation.CORRUPTION_MULTIPLIER);
+            return;
+        }
+        // 应用倍率：3 点增长 → 约 4 点
+        int base = 4;
+        int scaled = NameSteleObservation.applyMultiplier(base,
+            NameSteleObservation.CORRUPTION_MULTIPLIER);
+        if (scaled <= base) {
+            helper.fail("倍率未被应用：" + base + " → " + scaled);
+            return;
+        }
+        // 观测语句必须有内容，否则刻名之后什么都不会发生
+        if (NameSteleObservation.observationCount() < 3) {
+            helper.fail("观测语句过少：" + NameSteleObservation.observationCount());
+            return;
+        }
+
+        // 方块可放置
+        BlockPos pos = new BlockPos(2, 2, 3);
+        helper.setBlock(pos, ModBlocks.NAME_STELE.get());
+        helper.assertBlockPresent(ModBlocks.NAME_STELE.get(), pos);
+
+        helper.succeed();
+    }
+
     /** 两个实体的属性必须已注册，否则创建时会抛异常。 */
     @GameTest(template = "echoesofoblivion:empty")
-    public static void entitiesHaveAttributes(GameTestHelper helper) {
-        if (!checkAttributes(helper, ModEntities.SILENT_AGGREGATE.get(), "silent_aggregate")) {
+    public static void entitiesHaveAttributes(GameTestHelper helper) {        if (!checkAttributes(helper, ModEntities.SILENT_AGGREGATE.get(), "silent_aggregate")) {
             return;
         }
         if (!checkAttributes(helper, ModEntities.PHANTOM.get(), "phantom")) {

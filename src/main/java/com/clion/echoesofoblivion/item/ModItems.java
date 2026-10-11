@@ -52,6 +52,10 @@ public class ModItems {
     public static final RegistryObject<Item> FRAGMENT_NICHE = ITEMS.register("fragment_niche",
         () -> new BlockItem(ModBlocks.FRAGMENT_NICHE.get(), new Properties()));
 
+    /** 名字碑：可以把自己刻上去，然后承担结果（v2.3.0）。 */
+    public static final RegistryObject<Item> NAME_STELE = ITEMS.register("name_stele",
+        () -> new BlockItem(ModBlocks.NAME_STELE.get(), new Properties()));
+
     /** 记忆卷轴：右键打开记忆图鉴。 */
     public static final RegistryObject<Item> MEMORY_SCROLL = ITEMS.register("memory_scroll",
         () -> new MemoryScrollItem(new Properties().stacksTo(1)));
@@ -204,7 +208,7 @@ public class ModItems {
         @SuppressWarnings("unchecked")
         RegistryObject<Item>[] all = new RegistryObject[]{
             // 考古
-            MEMORY_CRYSTAL, FRAGMENT_NICHE, MEMORY_SCROLL, RUINS_COMPASS, EXCAVATION_SHOVEL,
+            MEMORY_CRYSTAL, FRAGMENT_NICHE, NAME_STELE, MEMORY_SCROLL, RUINS_COMPASS, EXCAVATION_SHOVEL,
             // 仪式
             CORRIDOR_KEY, EYE_OF_SILENCE, RESONANCE_FORK, RITUAL_ALLOY, SILENCE_SHARD,
             // 消耗

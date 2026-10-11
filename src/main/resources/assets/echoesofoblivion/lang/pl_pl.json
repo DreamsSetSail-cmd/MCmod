@@ -204,5 +204,13 @@
   "message.echoesofoblivion.misaligned_echo.hint": "Korytarz nie zatrzymuje dźwięku.",
   "message.echoesofoblivion.contradiction.warning_before_apparatus": "Ostrzeżenie nigdy nie zostało wypowiedziane.\\nNikogo nie poinformowano, więc nikt nie przestał słuchać.",
   "message.echoesofoblivion.contradiction.warning_before_fall": "Czytasz to w niewłaściwej kolejności.\\nOstrzeżenie przyszło później. Zawsze przychodziło później.",
-  "message.echoesofoblivion.contradiction.apparatus_before_silence": "Istniał przyrząd, zanim istniało cokolwiek, na czym mógłby działać.\\nZostał zbudowany pierwszy. Cisza przyszła, aby go wypełnić."
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "Istniał przyrząd, zanim istniało cokolwiek, na czym mógłby działać.\\nZostał zbudowany pierwszy. Cisza przyszła, aby go wypełnić.",
+  "block.echoesofoblivion.name_stele": "Name Stele",
+  "block.echoesofoblivion.name_stele.inscribed": "The name is cut. No one will read it.",
+  "block.echoesofoblivion.name_stele.taken": "Somebody is already here.",
+  "message.echoesofoblivion.inscription.observed.1": "The subject continues to move through the corridor with purpose.",
+  "message.echoesofoblivion.inscription.observed.2": "The subject has begun keeping records of its own. This was not requested.",
+  "message.echoesofoblivion.inscription.observed.3": "The subject added a name to the register. The name was accepted.",
+  "message.echoesofoblivion.inscription.observed.4": "The subject no longer asks what the corridor is for.",
+  "message.echoesofoblivion.inscription.observed.5": "The subject's handwriting matches the earlier entries."
 }

@@ -1,6 +1,7 @@
 package com.clion.echoesofoblivion;
 
 import com.clion.echoesofoblivion.item.ResearcherLanternItem;
+import com.clion.echoesofoblivion.server.NameSteleObservation;
 import com.clion.echoesofoblivion.memory.PlayerMemoryData;
 import com.clion.echoesofoblivion.memory.PlayerProgress;
 import com.clion.echoesofoblivion.network.ModNetwork;
@@ -93,6 +94,30 @@ public class CorruptionEventHandler {
             int reduction = Math.max(1, Math.round(delta * (1.0f - ResearcherLanternItem.GROWTH_MULTIPLIER)));
             progress.addCorruption(-reduction);
         }
+
+        // v2.3.0：刻过名字的玩家侵蚀增长加快。
+        //
+        // 与提灯走同一条「净变化」通路，顺序是**先提灯后刻名**——
+        // 两者可以叠加，而提灯仍然能在最需要它的地方生效。
+        //
+        // 这里刻意不做「刻名覆盖提灯」之类的优先级设计：玩家会自己发现
+        // 提灯只能把加快的部分拉回一些，而它从来不是解药。
+        if (delta > 0) {
+            // 用**提灯折扣之后**的净增量作为基数，而不是提灯之前的 delta——
+            // 否则提灯与刻名的叠加会被算重。
+            int afterLantern = progress.corruption() - beforeGain;
+            float inscription = NameSteleObservation.corruptionMultiplier(player);
+            if (afterLantern > 0 && inscription > 1.0f) {
+                int extra = NameSteleObservation.applyMultiplier(afterLantern, inscription)
+                    - afterLantern;
+                if (extra > 0) {
+                    progress.addCorruption(extra);
+                }
+            }
+        }
+
+        // v2.3.0：刻名后偶尔出现「关于你的记述」。走聊天栏，因为是记录不是提示。
+        NameSteleObservation.tickObservation(player, 1);
 
         int before = progress.corruption();
         data.markDirty();

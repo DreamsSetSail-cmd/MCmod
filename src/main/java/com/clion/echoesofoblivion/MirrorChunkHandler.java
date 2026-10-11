@@ -218,13 +218,14 @@ public class MirrorChunkHandler {
     }
 
     /**
-     * 玩家退出时清理稳定剂计时。
+     * 玩家退出时清理按玩家分桶的静态状态。
      *
-     * <p>不清也不会出错（查询是惰性的），但长跑服务器上那张 Map 会随
+     * <p>不清也不会出错（查询都是惰性的），但长跑服务器上那几张 Map 会随
      * 登录过的 UUID 无限增长，属于必须收口的资源。
      */
     @SubscribeEvent
     public void onPlayerLogout(PlayerEvent.PlayerLoggedOutEvent event) {
         StabilizerItem.clear(event.getEntity().getUUID());
+        com.clion.echoesofoblivion.server.NameSteleObservation.forget(event.getEntity().getUUID());
     }
 }

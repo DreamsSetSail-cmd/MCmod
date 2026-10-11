@@ -1,5 +1,6 @@
 package com.clion.echoesofoblivion.world;
 
+import com.clion.echoesofoblivion.block.ModBlocks;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import net.minecraft.core.BlockPos;
@@ -236,9 +237,16 @@ public class MonumentFeature extends Feature<MonumentFeature.Config> {
             BlockPos pos = origin.offset(i * 2, 0, 0);
             int height = 2 + random.nextInt(2);
 
-            // 基座
+            // v2.3.0：所有碑都换成**名字碑**（可刻名的方块实体）。
+            //
+            // 这不改变外观——名字碑用的还是同一套深板岩材质与同样的碑形，
+            // 因此旧世界的观感不变。区别只在于它现在**可以被写上去**。
+            //
+            // 用名字碑替换原石材的其中一个理由是叙事上的：
+            // 原来的碑是「空白且永远空白」，而现在它是一个**等待**。
+            // 空碑数量总是比能刻的多一块，暗示总有一个位置留着。
             if (isReplaceable(level, pos)) {
-                level.setBlock(pos, base(), 2);
+                level.setBlock(pos, ModBlocks.NAME_STELE.get().defaultBlockState(), 2);
                 placed = true;
             }
             // 碑身：正面用较亮的抛光砖，模拟被打磨过的碑面

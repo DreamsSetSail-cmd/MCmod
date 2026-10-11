@@ -204,5 +204,13 @@
   "message.echoesofoblivion.misaligned_echo.hint": "走廊留不住声音。",
   "message.echoesofoblivion.contradiction.warning_before_apparatus": "那句警告从未被说出口。\\n没有人被告知，因此也没有人没有听。",
   "message.echoesofoblivion.contradiction.warning_before_fall": "你在倒着读。\\n警告是之后才有的。它一直都是之后才有的。",
-  "message.echoesofoblivion.contradiction.apparatus_before_silence": "在还没有东西可供它作用之前，仪器就已经存在了。\\n它先被造出来。寂静是后来才来填满它的。"
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "在还没有东西可供它作用之前，仪器就已经存在了。\\n它先被造出来。寂静是后来才来填满它的。",
+  "block.echoesofoblivion.name_stele": "名字碑",
+  "block.echoesofoblivion.name_stele.inscribed": "名字刻好了。没有人会读到它。",
+  "block.echoesofoblivion.name_stele.taken": "已经有人在这里了。",
+  "message.echoesofoblivion.inscription.observed.1": "对象仍在走廊中带着目的移动。",
+  "message.echoesofoblivion.inscription.observed.2": "对象已开始为自己留存记录。此举未被要求。",
+  "message.echoesofoblivion.inscription.observed.3": "对象在名册上添了一个名字。名字已被接受。",
+  "message.echoesofoblivion.inscription.observed.4": "对象已不再询问走廊是用来做什么的。",
+  "message.echoesofoblivion.inscription.observed.5": "对象的笔迹与更早的条目一致。"
 }

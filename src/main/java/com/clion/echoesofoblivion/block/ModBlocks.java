@@ -2,6 +2,7 @@ package com.clion.echoesofoblivion.block;
 
 import com.clion.echoesofoblivion.EchoesOfOblivionMod;
 import com.clion.echoesofoblivion.block.entity.MemoryCrystalBlockEntity;
+import com.clion.echoesofoblivion.block.entity.NameSteleBlockEntity;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -61,7 +62,28 @@ public class ModBlocks {
             .noOcclusion()
             .noLootTable()));
 
+    /**
+     * 名字碑（v2.3.0）——玩家可以把自己刻上去，然后承担结果。
+     *
+     * <p>它是一个**满方块**（与原有的碑身石材同样是一整块），因此外观上
+     * 与纪念碑里的其它石头没有区别——这一点是刻意的：你不该一眼看出
+     * 「这块能写字」。
+     *
+     * <p>刻名**不可见**（没有任何渲染路径显示它），代价却真实存在：
+     * 侵蚀增长加快，并开始出现关于你的记录式短句。
+     * 详见 {@code NameSteleBlock} 与 {@code NameSteleObservation} 的类注释。
+     */
+    public static final RegistryObject<NameSteleBlock> NAME_STELE =
+        BLOCKS.register("name_stele", () -> new NameSteleBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.DEEPSLATE)
+            .strength(2.0f)
+            .sound(SoundType.DEEPSLATE_BRICKS)));
+
     public static final RegistryObject<BlockEntityType<MemoryCrystalBlockEntity>> MEMORY_CRYSTAL_BE =
         BLOCK_ENTITIES.register("memory_crystal", () ->
             BlockEntityType.Builder.of(MemoryCrystalBlockEntity::new, MEMORY_CRYSTAL.get()).build(null));
+
+    public static final RegistryObject<BlockEntityType<NameSteleBlockEntity>> NAME_STELE_BE =
+        BLOCK_ENTITIES.register("name_stele", () ->
+            BlockEntityType.Builder.of(NameSteleBlockEntity::new, NAME_STELE.get()).build(null));
 }

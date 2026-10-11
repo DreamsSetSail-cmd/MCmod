@@ -204,5 +204,13 @@
   "message.echoesofoblivion.misaligned_echo.hint": "회랑은 소리를 붙잡아 두지 못합니다.",
   "message.echoesofoblivion.contradiction.warning_before_apparatus": "그 경고는 결코 주어지지 않았다.\\n아무에게도 알려지지 않았고, 그래서 아무도 듣지 못한 것이 아니었다.",
   "message.echoesofoblivion.contradiction.warning_before_fall": "당신은 이것을 순서가 틀린 채로 읽고 있다.\\n경고는 나중에 왔다. 그것은 언제나 나중에 왔다.",
-  "message.echoesofoblivion.contradiction.apparatus_before_silence": "그것이 작용할 대상이 무엇 하나 없던 때부터 기구는 있었다.\\n그것은 먼저 만들어졌다. 정적은 그것을 채우러 왔다."
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "그것이 작용할 대상이 무엇 하나 없던 때부터 기구는 있었다.\\n그것은 먼저 만들어졌다. 정적은 그것을 채우러 왔다.",
+  "block.echoesofoblivion.name_stele": "Name Stele",
+  "block.echoesofoblivion.name_stele.inscribed": "The name is cut. No one will read it.",
+  "block.echoesofoblivion.name_stele.taken": "Somebody is already here.",
+  "message.echoesofoblivion.inscription.observed.1": "The subject continues to move through the corridor with purpose.",
+  "message.echoesofoblivion.inscription.observed.2": "The subject has begun keeping records of its own. This was not requested.",
+  "message.echoesofoblivion.inscription.observed.3": "The subject added a name to the register. The name was accepted.",
+  "message.echoesofoblivion.inscription.observed.4": "The subject no longer asks what the corridor is for.",
+  "message.echoesofoblivion.inscription.observed.5": "The subject's handwriting matches the earlier entries."
 }

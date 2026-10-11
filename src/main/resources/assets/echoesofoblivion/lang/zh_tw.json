@@ -204,5 +204,13 @@
   "message.echoesofoblivion.misaligned_echo.hint": "迴廊留不住聲音。",
   "message.echoesofoblivion.contradiction.warning_before_apparatus": "那句警告從未被說出口。\\n沒有人被告知，因此也沒有人沒有聽。",
   "message.echoesofoblivion.contradiction.warning_before_fall": "你在倒著讀。\\n警告是之後才有的。它一直都是之後才有的。",
-  "message.echoesofoblivion.contradiction.apparatus_before_silence": "在還沒有東西可供它作用之前，儀器就已經存在了。\\n它先被造出來。寂靜是後來才來填滿它的。"
+  "message.echoesofoblivion.contradiction.apparatus_before_silence": "在還沒有東西可供它作用之前，儀器就已經存在了。\\n它先被造出來。寂靜是後來才來填滿它的。",
+  "block.echoesofoblivion.name_stele": "Name Stele",
+  "block.echoesofoblivion.name_stele.inscribed": "The name is cut. No one will read it.",
+  "block.echoesofoblivion.name_stele.taken": "Somebody is already here.",
+  "message.echoesofoblivion.inscription.observed.1": "The subject continues to move through the corridor with purpose.",
+  "message.echoesofoblivion.inscription.observed.2": "The subject has begun keeping records of its own. This was not requested.",
+  "message.echoesofoblivion.inscription.observed.3": "The subject added a name to the register. The name was accepted.",
+  "message.echoesofoblivion.inscription.observed.4": "The subject no longer asks what the corridor is for.",
+  "message.echoesofoblivion.inscription.observed.5": "The subject's handwriting matches the earlier entries."
 }
