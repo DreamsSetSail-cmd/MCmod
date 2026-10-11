@@ -548,6 +548,77 @@ if (delta > 0) {
 **必须重新取值**：用提灯之前的 `delta` 当基数会把两者的叠加算重。
 这是个很容易写错、且很难在游戏里察觉的地方（数值只是略大一点）。
 
+### 3.12 v2.5.0：终局清点与空碑
+
+#### 结算取代奖励
+
+Boss 战原本在 `BossCombat.onBossDefeated()` 里**立刻**发放真理碎片。
+v2.5.0 把那两行删掉，改成 `Reckoning.begin(player)`，发放被推迟到
+清点队列的**最后一步**。
+
+这是一个值得记住的模式：**把「结算」与「发放」拆开**，
+于是可以在两者之间插入一段必须走完的叙事。
+如果发放仍在前面，玩家拿到东西就会走开，清点变成可选内容。
+
+#### 队列用 tick 记、用秒驱动
+
+清点挂在既有的每秒侵蚀 tick 上（同一个 tick 已经驱动合唱渗出与刻名观测），
+不新增调度点：
+
+```java
+int remaining = head.delayTicks() - 20;   // 每秒 tick 减 20
+```
+
+延迟以 **tick** 存在 `Step` 里（`LINE_INTERVAL = 40` 即 2 秒），
+因为它需要与客户端表现对齐；而**推进**以秒进行，因为 tick 是每秒一次的。
+
+写这段时容易犯的错：把 `LINE_INTERVAL` 直接当秒数用。那样队列会走得慢 20 倍。
+
+#### 留档读的是「历史」，不是「当前进度」
+
+清点要列出你**烧掉过**的记忆。但烧掉的记忆**已经不在 `PlayerProgress.collected` 里**——
+那正是「烧掉」的含义。所以必须在烧的那一刻单独留档：
+
+```java
+Reckoning.recordBurn(player, memoryIndex);      // MemoryBurn 里调用
+Reckoning.recordInscription(serverPlayer);      // NameSteleBlock 里调用
+```
+
+两者都放玩家的 `persistentData`（`echoes_burned` 整数数组、`echoes_inscribed_count` 计数）。
+
+**刻名只记数量，不记名字。** 这不是省事，是必须的：
+名字一旦留档就有被渲染出来的风险，而 v2.3.0 的全部设计建立在
+「刻上去的名字永远不会被显示」之上。清点时那句「名册上多了一个名字」
+读的就是这个计数，而不是名字本身。
+
+#### 「什么都没烧」是主路径，不是边界情况
+
+`burned.length == 0` 与 `inscribed == 0` 时各自显示一条**中性的账目**
+（「已焚烧：无。」），而不是跳过。
+
+理由：**多数玩家不会烧记忆**。如果这条路径在实现上被当成边界情况而写坏
+（少一步、提前 return、空数组导致异常），多数玩家就看不到结局。
+gameTest `reckoningAndEmptyPlaqueAreSound` 专门覆盖了这一点。
+
+#### 空碑的放置
+
+`placeEmptyPlaque()` 按「正前方、右前、左前、右、左」的顺序尝试几个偏移，
+取第一个「脚下是实心、自己可替换」的位置。
+
+**顺序是刻意的**：不放在玩家背后（他会错过），也不放在脚下（会把他埋了）。
+而且**不播任何音效、不给任何提示**——它应当在你回头时**已经在那里**。
+
+#### 空碑与名字碑的视觉区分
+
+| | 名字碑 | 空碑 |
+| --- | --- | --- |
+| 石材 | 打磨过，有砖缝 | 粗糙，**没有砖缝** |
+| 铭文区 | 一块明显的空白矩形 | **没有区域**，只有一道试过就停的凿痕 |
+| 读起来是 | 一个等待 | **没有开始** |
+
+两者的贴图由各自的生成脚本产出（`make_stele_texture.py` /
+`make_empty_plaque_texture.py`），都在 `tools/` 下，用同一套 `Canvas` 图元。
+
 ---
 
 ## 4. 渲染实现（Forge 1.20.6 的特殊情况）
@@ -788,9 +859,9 @@ javap -classpath <forge jar> net.minecraft.world.level.block.state.BlockBehaviou
 | 命令 | 覆盖范围 | 耗时 |
 | --- | --- | --- |
 | `gradlew compileJava` | 编译正确性 | ~20s |
-| `python tools/check_lang.py` | 21 个语言文件的一致性 | ~1s |
+| `python tools/check_lang.py` | 21 个语言文件的一致性 + **漏译检测** | ~1s |
 | `gradlew build` | 编译 + 打包（含 datagen 产物） | ~1min |
-| `gradlew runGameTestServer` | 服务端逻辑（10 项断言） | ~3min |
+| `gradlew runGameTestServer` | 服务端逻辑（12 项断言） | ~3min |
 | `gradlew runData` | datagen provider 输出 | ~2min |
 | `gradlew runServer` | 数据包加载、维度注册 | ~2min |
 | `gradlew runClient` | 资源解析、渲染路径、音效 | ~5min |
