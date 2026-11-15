@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "Kontoen er lukket.",
   "block.echoesofoblivion.empty_plaque": "Tom stele",
   "block.echoesofoblivion.empty_plaque.refused": "Stenen tager ikke imod det.",
-  "block.echoesofoblivion.empty_plaque.look": "Her er intet skrevet. Der er plads til noget."
+  "block.echoesofoblivion.empty_plaque.look": "Her er intet skrevet. Der er plads til noget.",
+  "block.echoesofoblivion.apparatus_core": "Apparatkerne",
+  "block.echoesofoblivion.apparatus_core.activated": "%s chunks blev stille.",
+  "block.echoesofoblivion.apparatus_core.done": "Det er derfor, de byggede det.",
+  "block.echoesofoblivion.apparatus_core.already": "Denne grund var allerede stille.",
+  "block.echoesofoblivion.fragment_niche.silenced": "Nichen er tom. Her gemmes intet længere."
 }

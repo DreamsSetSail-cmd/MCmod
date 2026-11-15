@@ -8,6 +8,7 @@ import com.clion.echoesofoblivion.network.ModNetwork;
 import com.clion.echoesofoblivion.network.packets.ShadowSyncPacket;
 import com.clion.echoesofoblivion.sound.ModSounds;
 import com.clion.echoesofoblivion.world.RealityData;
+import com.clion.echoesofoblivion.world.SilenceData;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -31,6 +32,12 @@ import java.util.List;
  * 也没有边界，属于必须替换的临时逻辑。
  */
 public class MirrorChunkHandler {
+
+    /** 静默区扩散间隔（秒）。远慢于感染扩散。 */
+    private static final int SILENCE_SPREAD_INTERVAL_SECONDS = 900;
+
+    /** 静默区每次扩散最多新增的区块数。 */
+    private static final int SILENCE_SPREAD_PER_CYCLE = 6;
 
     /** 重力闪烁的检查间隔（tick）。 */
     private static final int FLICKER_INTERVAL = 10;
@@ -69,6 +76,30 @@ public class MirrorChunkHandler {
                 level.playSound(null, player.blockPosition(), ModSounds.CORRUPTION_PULSE.get(),
                     SoundSource.AMBIENT, 0.5f, 0.7f);
             }
+        }
+
+        spreadSilence(level);
+    }
+
+    /**
+     * 静默区扩散（v2.6.0）。
+     *
+     * <p>间隔刻意比感染扩散**慢得多**：感染是「世界在腐坏」，
+     * 而静默是「你亲手让一部分世界停止了」。前者可以急，后者应当慢到
+     * 玩家几乎察觉不到——直到有一天他发现那块安静变大了。
+     *
+     * <p>每次最多推进 {@value #SILENCE_SPREAD_PER_CYCLE} 个区块，
+     * 因此即使静默区很大，扩散也是可预期的、不会一夜之间吞掉地图。
+     */
+    private void spreadSilence(ServerLevel level) {
+        int intervalTicks = SILENCE_SPREAD_INTERVAL_SECONDS * 20;
+        if (level.getGameTime() % intervalTicks != 0) {
+            return;
+        }
+        SilenceData silence = SilenceData.get(level);
+        List<Long> added = silence.spread(level, level.getRandom(), SILENCE_SPREAD_PER_CYCLE);
+        if (!added.isEmpty()) {
+            silence.broadcastIncrement(level, added);
         }
     }
 
@@ -198,6 +229,7 @@ public class MirrorChunkHandler {
         if (event.getEntity() instanceof ServerPlayer player
             && player.serverLevel().dimension().equals(Level.OVERWORLD)) {
             RealityData.get(player.serverLevel()).syncFull(player);
+            SilenceData.get(player.serverLevel()).syncFull(player);
         }
     }
 
@@ -206,6 +238,7 @@ public class MirrorChunkHandler {
         if (event.getEntity() instanceof ServerPlayer player
             && player.serverLevel().dimension().equals(Level.OVERWORLD)) {
             RealityData.get(player.serverLevel()).syncFull(player);
+            SilenceData.get(player.serverLevel()).syncFull(player);
         }
     }
 

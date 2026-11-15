@@ -93,6 +93,23 @@ public class ModBlocks {
             .strength(2.0f)
             .sound(SoundType.DEEPSLATE_BRICKS)));
 
+    /**
+     * 仪器核心（v2.6.0）——**那台仪器，由你重新造出来**。
+     *
+     * <p>右键启动后，半径 {@code SilenceData.ACTIVATION_RADIUS} 区块内的世界
+     * **永久静默**：不能被感染、清除已有感染、侵蚀停止增长、残片龛死掉，
+     * 而且静默会**缓慢扩散**。
+     *
+     * <p>它真的有用——那个文明造它就是为了阻止扩散。恐怖之处不是它没用。
+     * 而且它**不可撤回**：没有任何物品能清除静默，因为静默不是感染，是缺席。
+     * 详见 {@code ApparatusCoreBlock} 与 {@code SilenceData} 的类注释。
+     */
+    public static final RegistryObject<ApparatusCoreBlock> APPARATUS_CORE =
+        BLOCKS.register("apparatus_core", () -> new ApparatusCoreBlock(BlockBehaviour.Properties.of()
+            .mapColor(MapColor.DEEPSLATE)
+            .strength(2.5f)
+            .sound(SoundType.DEEPSLATE_TILES)
+            .requiresCorrectToolForDrops()));
     public static final RegistryObject<BlockEntityType<MemoryCrystalBlockEntity>> MEMORY_CRYSTAL_BE =
         BLOCK_ENTITIES.register("memory_crystal", () ->
             BlockEntityType.Builder.of(MemoryCrystalBlockEntity::new, MEMORY_CRYSTAL.get()).build(null));

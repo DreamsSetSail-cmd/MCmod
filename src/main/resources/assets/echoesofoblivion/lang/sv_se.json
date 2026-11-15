@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "Kontot är stängt.",
   "block.echoesofoblivion.empty_plaque": "Tom stele",
   "block.echoesofoblivion.empty_plaque.refused": "Stenen tar inte emot det.",
-  "block.echoesofoblivion.empty_plaque.look": "Här står ingenting skrivet. Det finns plats för något."
+  "block.echoesofoblivion.empty_plaque.look": "Här står ingenting skrivet. Det finns plats för något.",
+  "block.echoesofoblivion.apparatus_core": "Apparatkärna",
+  "block.echoesofoblivion.apparatus_core.activated": "%s chunkar blev tysta.",
+  "block.echoesofoblivion.apparatus_core.done": "Det är därför de byggde den.",
+  "block.echoesofoblivion.apparatus_core.already": "Denna mark var redan tyst.",
+  "block.echoesofoblivion.fragment_niche.silenced": "Nischen är tom. Ingenting förvaras här längre."
 }

@@ -56,6 +56,11 @@ public class ModItems {
     public static final RegistryObject<Item> NAME_STELE = ITEMS.register("name_stele",
         () -> new BlockItem(ModBlocks.NAME_STELE.get(), new Properties()));
 
+    /** 仪器核心（v2.6.0）：放下去、启动它，世界的一部分从此没有声音。 */
+    public static final RegistryObject<Item> APPARATUS_CORE = ITEMS.register("apparatus_core",
+        () -> new BlockItem(ModBlocks.APPARATUS_CORE.get(), new Properties()
+            .rarity(Rarity.RARE)));
+
     /** 空碑：清点之后出现的、比原来更多的那一块（v2.5.0）。 */
     public static final RegistryObject<Item> EMPTY_PLAQUE = ITEMS.register("empty_plaque",
         () -> new BlockItem(ModBlocks.EMPTY_PLAQUE.get(), new Properties()));
@@ -225,7 +230,7 @@ public class ModItems {
         @SuppressWarnings("unchecked")
         RegistryObject<Item>[] all = new RegistryObject[]{
             // 考古
-            MEMORY_CRYSTAL, FRAGMENT_NICHE, NAME_STELE, EMPTY_PLAQUE, MEMORY_SCROLL, RUINS_COMPASS, EXCAVATION_SHOVEL,
+            MEMORY_CRYSTAL, FRAGMENT_NICHE, NAME_STELE, EMPTY_PLAQUE, APPARATUS_CORE, MEMORY_SCROLL, RUINS_COMPASS, EXCAVATION_SHOVEL,
             // 仪式
             CORRIDOR_KEY, EYE_OF_SILENCE, RESONANCE_FORK, RITUAL_ALLOY, SILENCE_SHARD,
             // 消耗

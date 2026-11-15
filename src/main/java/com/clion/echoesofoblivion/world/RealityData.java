@@ -104,6 +104,9 @@ public class RealityData extends SavedData {
         int centerZ = player.blockPosition().getZ() >> 4;
 
         List<Long> added = new ArrayList<>();
+        // 静默状态在整轮扩散里取一次就够：`getDataStorage().computeIfAbsent` 是查表，
+        // 放在内层循环会做 49 次多余查找（每个玩家每轮）。这里提到循环外。
+        SilenceData silence = SilenceData.get(player.serverLevel());
         outer:
         for (int dx = -SPREAD_RADIUS; dx <= SPREAD_RADIUS; dx++) {
             for (int dz = -SPREAD_RADIUS; dz <= SPREAD_RADIUS; dz++) {
@@ -113,6 +116,12 @@ public class RealityData extends SavedData {
                 }
                 double chance = 1.0 - distance / (SPREAD_RADIUS + 1.0);
                 if (player.getRandom().nextDouble() > chance) {
+                    continue;
+                }
+                // v2.6.0：静默优先于污染。已静默的区块不会被重新感染。
+                // 这条必须写在这里，而不只是写在 infect() 里——
+                // 扩散是绕开 infect() 直接写集合的。
+                if (silence.isSilenced(centerX + dx, centerZ + dz)) {
                     continue;
                 }
                 if (infected.add(ChunkPos.asLong(centerX + dx, centerZ + dz))) {
@@ -132,11 +141,41 @@ public class RealityData extends SavedData {
         return added;
     }
 
-    /** 手动感染一个区块（供调试与仪式召唤使用）。 */
-    public void infect(int chunkX, int chunkZ) {
+    /**
+     * 手动感染一个区块（供调试与仪式召唤使用）。
+     *
+     * <p>v2.6.0 起带 {@code level}：**静默优先于污染**——已经静默的区块不能被感染。
+     * 这条判定以前不存在，是 v2.6.0 的 gameTest 抓出来的：
+     * 注释里写了「静默优先」，但代码里没有任何地方真的拦住它。
+     *
+     * <p>把 {@code level} 作为参数而不是让调用方自己检查，是为了让
+     * **绕过这道闸变得困难**——需要主动去调 {@code forceInfect}。
+     *
+     * @return 是否真的感染了（静默区块返回 false）
+     */
+    public boolean infect(ServerLevel level, int chunkX, int chunkZ) {
+        if (SilenceData.get(level).isSilenced(chunkX, chunkZ)) {
+            return false;
+        }
         if (infected.add(ChunkPos.asLong(chunkX, chunkZ))) {
             setDirty();
+            return true;
         }
+        return false;
+    }
+
+    /**
+     * 强制感染，**绕过静默判定**。
+     *
+     * <p>只给测试与调试用。正常玩法里没有理由绕过「静默优先」这条规则，
+     * 而它一旦被绕过，静默区就不再是一个可以被信任的边界。
+     */
+    public boolean forceInfect(int chunkX, int chunkZ) {
+        if (infected.add(ChunkPos.asLong(chunkX, chunkZ))) {
+            setDirty();
+            return true;
+        }
+        return false;
     }
 
     public void clearAll() {

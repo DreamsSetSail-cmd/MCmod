@@ -55,6 +55,22 @@ public final class ClientPacketHandler {
         ClientData.setCorruption(level, ratio);
     }
 
+    /**
+     * 应用静默区块同步（v2.6.0）。
+     *
+     * <p>客户端只需要知道「哪些区块是静的」，因为它唯一要做的事是
+     * **不在那里播放错位的回响**（见 {@code MisalignedEchoes}）。
+     *
+     * @param add true = 增量追加，false = 全量替换
+     */
+    public static void applySilenceSync(java.util.List<Long> chunks, boolean add) {
+        java.util.Set<Long> set = new java.util.HashSet<>(chunks);
+        if (add) {
+            ClientData.addSilencedChunks(set);
+        } else {
+            ClientData.setSilencedChunks(set);
+        }
+    }
     public static void applyShadow(int state) {
         ClientData.setShadowState(state);
     }

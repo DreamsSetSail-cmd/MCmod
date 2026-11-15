@@ -78,8 +78,20 @@ public class CorruptionEventHandler {
         // 记录增长前的值，供提灯的净变化折扣使用
         int beforeGain = progress.corruption();
 
+        // v2.6.0：静默区里侵蚀**停止增长**。
+        //
+        // 这是仪器「真的有用」的核心一条：那个文明造它就是为了让扩散停下来，
+        // 而它有效。注意这里只挡**自然增长**，不挡「见证记忆 +6」——
+        // 知识本身就是污染，这一点不能被一台机器豁免。
+        //
+        // 必须先判维度：静默区只存在于主世界，而走廊的坐标可能恰好落进
+        // 某个主世界静默区块的编码里。
+        boolean silenced = level.dimension().equals(net.minecraft.world.level.Level.OVERWORLD)
+            && com.clion.echoesofoblivion.world.SilenceData.get(level)
+                .isSilenced(player.getX(), player.getZ());
+
         // 每秒推进一次侵蚀值
-        int gain = ConfigHelper.getInt(Config.corruptionGainRate, 1);
+        int gain = silenced ? 0 : ConfigHelper.getInt(Config.corruptionGainRate, 1);
         if (gain > 0) {
             progress.addCorruption(gain);
         }

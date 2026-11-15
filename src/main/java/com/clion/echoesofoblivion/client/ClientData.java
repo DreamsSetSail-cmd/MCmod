@@ -32,6 +32,8 @@ public final class ClientData {
     /** 聚合体光环强度 0~1（v1.2.0）。用于抑制环境音，不是伤害。 */
     private static float bossAura;
     private static final Set<Long> infectedChunks = new HashSet<>();
+    /** v2.6.0：静默区块。与感染区块是两套互斥的状态——静默优先。 */
+    private static final Set<Long> silencedChunks = new HashSet<>();
     private static Set<String> clues = Set.of();
 
     private ClientData() {
@@ -130,6 +132,31 @@ public final class ClientData {
         return realityPhase;
     }
 
+    // ---------------------------------------------------------------- 静默区块（v2.6.0）
+
+    public static void setSilencedChunks(Set<Long> chunks) {
+        silencedChunks.clear();
+        silencedChunks.addAll(chunks);
+    }
+
+    public static void addSilencedChunks(Set<Long> chunks) {
+        silencedChunks.addAll(chunks);
+    }
+
+    public static boolean isChunkSilenced(long chunkKey) {
+        return silencedChunks.contains(chunkKey);
+    }
+
+    /** 按世界坐标查询，供客户端表现层使用。 */
+    public static boolean isSilencedAt(double x, double z) {
+        long key = ((long) ((int) Math.floor(x) >> 4) << 32)
+            | (((int) Math.floor(z) >> 4) & 0xFFFFFFFFL);
+        return silencedChunks.contains(key);
+    }
+
+    public static void clearSilencedChunks() {
+        silencedChunks.clear();
+    }
     // ---------------------------------------------------------------- Boss（阶段 6）
 
     public static void setBossPhase(int phase) {
@@ -165,6 +192,7 @@ public final class ClientData {
         collectedMask = 0;
         clues = Set.of();
         infectedChunks.clear();
+        silencedChunks.clear();
         realityPhase = 0;
         bossPhase = -1;
         bossStability = 0.0f;

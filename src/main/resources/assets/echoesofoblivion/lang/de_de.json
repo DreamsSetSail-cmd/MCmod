@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "Das Konto ist abgeschlossen.",
   "block.echoesofoblivion.empty_plaque": "Leere Stele",
   "block.echoesofoblivion.empty_plaque.refused": "Der Stein nimmt es nicht an.",
-  "block.echoesofoblivion.empty_plaque.look": "Hier ist nichts geschrieben. Es ist Platz für etwas."
+  "block.echoesofoblivion.empty_plaque.look": "Hier ist nichts geschrieben. Es ist Platz für etwas.",
+  "block.echoesofoblivion.apparatus_core": "Apparaturkern",
+  "block.echoesofoblivion.apparatus_core.activated": "%s Chunks wurden still.",
+  "block.echoesofoblivion.apparatus_core.done": "Dafür haben sie es gebaut.",
+  "block.echoesofoblivion.apparatus_core.already": "Dieser Boden war schon still.",
+  "block.echoesofoblivion.fragment_niche.silenced": "Die Nische ist leer. Hier wird nichts mehr aufbewahrt."
 }

@@ -52,6 +52,7 @@ org.gradle.caching=false                            # 见下
 │   │   ├── ModBlocks.java            方块与方块实体注册
 │   │   ├── MemoryCrystalBlock.java   记忆水晶（客户端发包）
 │   │   ├── UnstablePortalBlock.java  无碰撞传送门，进入即传送
+│   │   ├── ApparatusCoreBlock.java   仪器核心：启动后永久静默一片区域（v2.6.0）
 │   │   └── entity/MemoryCrystalBlockEntity.java
 │   ├── item/
 │   │   ├── ModItems.java             物品注册（42 件）
@@ -79,7 +80,7 @@ org.gradle.caching=false                            # 见下
 │   │   ├── PlayerMemoryData.java     SavedData：按 UUID 分桶的进度容器
 │   │   └── PlayerProgress.java       单玩家进度 + 侵蚀值 + forget()（焚烧用）
 │   ├── network/
-│   │   ├── ModNetwork.java           ChannelBuilder + 9 个包的注册
+│   │   ├── ModNetwork.java           ChannelBuilder + 12 个包的注册
 │   │   └── packets/                  9 个 CustomPacketPayload
 │   ├── server/
 │   │   ├── ServerPacketHandler.java  水晶交互判定 + 进度同步
@@ -90,6 +91,7 @@ org.gradle.caching=false                            # 见下
 │   ├── world/
 │   │   ├── ModWorldGen.java          ResourceKey + 自定义 Feature 注册
 │   │   ├── RealityData.java          镜像区块的 SavedData
+│   │   ├── SilenceData.java           静默区块的 SavedData（v2.6.0，不可撤回）
 │   │   ├── CorridorTeleportHelper.java 双向传送与落点铺设
 │   │   ├── Rituals.java              三种仪式的效果实现
 │   │   ├── RuinPileFeature.java      废墟地物
@@ -128,7 +130,7 @@ org.gradle.caching=false                            # 见下
 **实体属性**用 `@Mod.EventBusSubscriber(bus = MOD)` 自动挂载，
 **不要**再在主类里手动 `modBus.addListener(ModEntities::registerAttributes)`——那会双重注册。
 
-### 3.2 网络层（9 个包）
+### 3.2 网络层（12 个包，id 0~11）
 
 ```java
 public static final SimpleChannel CHANNEL = ChannelBuilder
@@ -621,6 +623,78 @@ gameTest `reckoningAndEmptyPlaqueAreSound` 专门覆盖了这一点。
 
 ---
 
+### 3.13 v2.6.0：仪器与静默区
+
+#### 「静默优先于污染」这条规则必须实现两次
+
+这是 v2.6.0 最值得记的一件事，因为它是被 **gameTest 抓出来**的。
+
+我在 `SilenceData` 的注释里写了「静默优先于污染」，但代码里**没有任何地方真的拦住它**。
+第一个写「静默区块不能被重新感染」的断言，第一次运行就失败了。
+
+缺口有两处，因为写入感染集合有两个入口：
+
+| 入口 | 问题 |
+| --- | --- |
+| `infect(int, int)` | 完全不检查静默 |
+| `spreadFrom(ServerPlayer)` | **绕开 `infect()`** 直接往集合里写 |
+
+修复方式：
+
+- `spreadFrom()` 在写入前检查静默。
+- `infect()` 改为**必须传 `ServerLevel`**，内部检查静默；另留 `forceInfect()`
+  给测试与调试，名字就写明它会绕过这道闸。
+
+**为什么把 `level` 做成参数**：如果让调用方自己检查，任何一个新调用点忘记检查都会
+静默破坏规则。做成参数后，绕过必须主动去调一个名字里带 `force` 的方法。
+
+**教训**：注释不是契约，测试才是。这个项目此前有几条「文档写了但代码没实现」的先例，
+而这一条是靠断言才发现的。
+
+#### 为什么静默必须真的有用
+
+如果静默区只是「没有声音」的氛围，这个机制就是装饰。所以它必须：
+
+```java
+// 静默优先于污染：把这片区域从感染集合里摘掉。
+RealityData reality = RealityData.get(level);
+reality.removeChunks(added);
+```
+
+那句 `removeChunks` 是整个机制的意义所在。恐怖之处不是仪器没用，而是**它有用**。
+
+#### 但知识仍然要计价
+
+静默只挡**自然侵蚀增长**（`CorruptionEventHandler` 里的 `corruptionGainRate`），
+**不挡**「见证记忆 +6」（`ServerPacketHandler`）。
+
+否则最优解会变成「先在静默区里刷满记忆再出来」——仪器就从
+「一个需要代价的决定」退化成「一个最优流程」。
+
+#### 扩散必须比感染慢得多
+
+| | 感染扩散 | 静默扩散 |
+| --- | --- | --- |
+| 间隔 | `mirrorExpandInterval`（默认 300 秒） | 900 秒 |
+| 每轮上限 | 按半径概率 | 6 个区块 |
+| 采样 | 以玩家为中心 | 从已有静默区块随机抽 24 个源 |
+
+静默扩散**只从已有的静默区块往外长**，所以它永远不会凭空出现——
+玩家必须记得是自己按下的。
+
+随机抽样 `SPREAD_SOURCES` 个源而不是全量扫描：静默区可能有上千个区块，
+全量扫描既慢又没必要，而抽样让扩散速度与区域大小无关。
+
+#### 网络：静默没有强度，也没有时间
+
+`SilenceSyncPacket` 只承载「哪些区块是静的」。
+
+客户端需要它的唯一理由是 `MisalignedEchoes` 里那一行：
+静默区里不能有错位的回响。
+
+协议版本因此从 2 升到 **3**——旧客户端连不上是对的，少了这个包它会继续播放回声。
+
+---
 ## 4. 渲染实现（Forge 1.20.6 的特殊情况）
 
 ### 4.1 GUI 覆层体系已被移除
@@ -861,7 +935,7 @@ javap -classpath <forge jar> net.minecraft.world.level.block.state.BlockBehaviou
 | `gradlew compileJava` | 编译正确性 | ~20s |
 | `python tools/check_lang.py` | 21 个语言文件的一致性 + **漏译检测** | ~1s |
 | `gradlew build` | 编译 + 打包（含 datagen 产物） | ~1min |
-| `gradlew runGameTestServer` | 服务端逻辑（12 项断言） | ~3min |
+| `gradlew runGameTestServer` | 服务端逻辑（13 项断言） | ~3min |
 | `gradlew runData` | datagen provider 输出 | ~2min |
 | `gradlew runServer` | 数据包加载、维度注册 | ~2min |
 | `gradlew runClient` | 资源解析、渲染路径、音效 | ~5min |
@@ -986,11 +1060,14 @@ ModLoadingContext.get().registerConfig(CLIENT, Config.CLIENT_SPEC);   // 49
 仍是色块。因为自绘几何渲染**不采样它们**，所以不影响观感；
 升级为 `MobRenderer` + 正式模型时才需要补上。
 
-### 9.3 废墟只有断墙（v2.0.0 已部分解决）
+### 9.3 废墟的环境叙事（v2.1.0 / v2.3.0 已解决）
 
-`RuinPileFeature` 生成断墙、碎砖、残柱，现在还会在约四分之一的废墟中心放一个
-**残片龛**。名字碑（`blank_plaque` 作为成品方块）仍未落地，
-方案见 `docs/story-bible.md` §7.3。
+`RuinPileFeature` 在 v2.1.0 重写为**布局语法**（轴向生长、成段塌陷、等距柱列），
+并在轴线端点放**残片龛**；`MonumentFeature` 的纪念碑现在生成**名字碑**
+（`name_stele`，v2.3.0 可刻名）。
+
+原条目担心的「名字碑没有落地」已经不存在。真正没做的只剩「桥墩」一类更细的
+环境叙事物，而它们的价值低于成本。
 
 ### 9.4 共鸣只有提示，没有第二段文本
 

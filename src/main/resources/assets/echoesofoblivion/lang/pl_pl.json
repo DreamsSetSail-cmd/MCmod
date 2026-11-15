@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "Konto jest zamknięte.",
   "block.echoesofoblivion.empty_plaque": "Pusta Stela",
   "block.echoesofoblivion.empty_plaque.refused": "Kamień tego nie przyjmuje.",
-  "block.echoesofoblivion.empty_plaque.look": "Nic tu nie jest napisane. Jest miejsce na coś."
+  "block.echoesofoblivion.empty_plaque.look": "Nic tu nie jest napisane. Jest miejsce na coś.",
+  "block.echoesofoblivion.apparatus_core": "Rdzeń Aparatu",
+  "block.echoesofoblivion.apparatus_core.activated": "%s chunków ucichło.",
+  "block.echoesofoblivion.apparatus_core.done": "Po to je zbudowali.",
+  "block.echoesofoblivion.apparatus_core.already": "Ta ziemia już była cicha.",
+  "block.echoesofoblivion.fragment_niche.silenced": "Nisza jest pusta. Nic już tu nie jest przechowywane."
 }

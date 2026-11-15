@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "Рахунок закрито.",
   "block.echoesofoblivion.empty_plaque": "Порожня стела",
   "block.echoesofoblivion.empty_plaque.refused": "Камінь цього не приймає.",
-  "block.echoesofoblivion.empty_plaque.look": "Тут нічого не написано. Місце для чогось є."
+  "block.echoesofoblivion.empty_plaque.look": "Тут нічого не написано. Місце для чогось є.",
+  "block.echoesofoblivion.apparatus_core": "Ядро апарата",
+  "block.echoesofoblivion.apparatus_core.activated": "%s чанків стихло.",
+  "block.echoesofoblivion.apparatus_core.done": "Для цього вони його збудували.",
+  "block.echoesofoblivion.apparatus_core.already": "Ця земля вже була тихою.",
+  "block.echoesofoblivion.fragment_niche.silenced": "Ніша порожня. Тут більше нічого не зберігається."
 }

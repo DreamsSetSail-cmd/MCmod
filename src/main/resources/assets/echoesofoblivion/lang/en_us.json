@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "The account is closed.",
   "block.echoesofoblivion.empty_plaque": "Empty Plaque",
   "block.echoesofoblivion.empty_plaque.refused": "The stone does not take it.",
-  "block.echoesofoblivion.empty_plaque.look": "There is nothing written here. There is room for something."
+  "block.echoesofoblivion.empty_plaque.look": "There is nothing written here. There is room for something.",
+  "block.echoesofoblivion.apparatus_core": "Apparatus Core",
+  "block.echoesofoblivion.apparatus_core.activated": "%s chunks went quiet.",
+  "block.echoesofoblivion.apparatus_core.done": "That is what they built it for.",
+  "block.echoesofoblivion.apparatus_core.already": "This ground was already quiet.",
+  "block.echoesofoblivion.fragment_niche.silenced": "The niche is empty. Nothing is kept here any more."
 }

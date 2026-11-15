@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "Счёт закрыт.",
   "block.echoesofoblivion.empty_plaque": "Пустая стела",
   "block.echoesofoblivion.empty_plaque.refused": "Камень этого не принимает.",
-  "block.echoesofoblivion.empty_plaque.look": "Здесь ничего не написано. Место для чего-то есть."
+  "block.echoesofoblivion.empty_plaque.look": "Здесь ничего не написано. Место для чего-то есть.",
+  "block.echoesofoblivion.apparatus_core": "Ядро аппарата",
+  "block.echoesofoblivion.apparatus_core.activated": "%s чанков стихло.",
+  "block.echoesofoblivion.apparatus_core.done": "Для этого они его построили.",
+  "block.echoesofoblivion.apparatus_core.already": "Эта земля уже была тихой.",
+  "block.echoesofoblivion.fragment_niche.silenced": "Ниша пуста. Здесь больше ничего не хранится."
 }

@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "Účet je uzavřen.",
   "block.echoesofoblivion.empty_plaque": "Prázdná stéla",
   "block.echoesofoblivion.empty_plaque.refused": "Kámen to nepřijímá.",
-  "block.echoesofoblivion.empty_plaque.look": "Není tu nic napsáno. Je tu místo pro něco."
+  "block.echoesofoblivion.empty_plaque.look": "Není tu nic napsáno. Je tu místo pro něco.",
+  "block.echoesofoblivion.apparatus_core": "Jádro přístroje",
+  "block.echoesofoblivion.apparatus_core.activated": "%s chunků utichlo.",
+  "block.echoesofoblivion.apparatus_core.done": "Proto ho postavili.",
+  "block.echoesofoblivion.apparatus_core.already": "Tato země už byla tichá.",
+  "block.echoesofoblivion.fragment_niche.silenced": "Výklenek je prázdný. Už se tu nic neuchovává."
 }

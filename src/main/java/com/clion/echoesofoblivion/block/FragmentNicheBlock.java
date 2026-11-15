@@ -60,6 +60,22 @@ public class FragmentNicheBlock extends Block {
             return InteractionResult.SUCCESS;
         }
 
+        // v2.6.0：静默区里的残片龛**死掉**。
+        //
+        // 这不是惩罚，是同一件事的另一面：仪器清空的是介质，而残片是靠介质
+        // 留存下来的东西。介质没有了，龛就只是一个空的石槽。
+        //
+        // 这条让「造仪器」有了一个真实的、不可挽回的代价：
+        // 你可能正在把还没找到的那几段历史，连同它们所在的地方一起清掉。
+        if (serverLevel.dimension().equals(net.minecraft.world.level.Level.OVERWORLD)
+                && com.clion.echoesofoblivion.world.SilenceData.get(serverLevel)
+                    .isSilenced(pos.getX(), pos.getZ())) {
+            serverPlayer.displayClientMessage(
+                Component.translatable("block.echoesofoblivion.fragment_niche.silenced")
+                    .withStyle(ChatFormatting.DARK_GRAY), true);
+            return InteractionResult.CONSUME;
+        }
+
         ItemStack fragment = takeNextFragment(serverPlayer);
         if (fragment.isEmpty()) {
             // 12 段都拿过了——这个龛对你已经没有东西可给

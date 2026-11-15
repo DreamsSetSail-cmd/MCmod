@@ -93,6 +93,28 @@ sound. It is there when you turn around.
 
 > You won, and something is smaller than it was before.
 
+**You can rebuild the instrument** — The ruins have always contained apparatus bases: a round platform
+with an **empty slot** in the middle. That slot was scenery for five releases. Now you can craft an
+**Apparatus Core** and start it.
+
+It works. Within three chunks, the world goes **permanently quiet**: those chunks can no longer be
+infected, existing infection there is cleared, corruption stops building, and the misplaced echoes
+stop — the medium is gone, so there is nothing left to corrupt. The silent region then **spreads on
+its own**, slowly, and any fragment niche it reaches goes dead.
+
+There is no item that removes silence. A purification agent clears *infection*; silence is not
+infection, it is **absence**, and you cannot clean absence out. This is the only irreversible world
+change in the mod.
+
+> That is what they built it for.
+
+One thing is deliberately **not** covered by the silence: witnessing a memory still costs you
+corruption. Knowledge is contamination, and a machine does not get to exempt you from that — otherwise
+the optimal play would be to farm every memory inside your quiet zone before stepping out, and the
+instrument would stop being a decision.
+
+Starting it plays one low thud and nothing else. No explosion, no flash, no fanfare — with a grand
+sound effect over the top, you would not *hear* the silence arrive.
 **Rites you perform yourself** — The **Resonance Fork** performs one of three rites, each consuming
 real materials. *Requiem* scatters every echo within 32 blocks. **Descent** silences the world
 within 48 blocks for 30 seconds — the first time you get to be the one who makes the silence,

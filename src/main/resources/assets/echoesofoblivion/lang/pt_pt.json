@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "A conta está encerrada.",
   "block.echoesofoblivion.empty_plaque": "Estela vazia",
   "block.echoesofoblivion.empty_plaque.refused": "A pedra não aceita isso.",
-  "block.echoesofoblivion.empty_plaque.look": "Não há nada escrito aqui. Há espaço para algo."
+  "block.echoesofoblivion.empty_plaque.look": "Não há nada escrito aqui. Há espaço para algo.",
+  "block.echoesofoblivion.apparatus_core": "Núcleo do Aparato",
+  "block.echoesofoblivion.apparatus_core.activated": "%s chunks ficaram em silêncio.",
+  "block.echoesofoblivion.apparatus_core.done": "Foi para isso que o construíram.",
+  "block.echoesofoblivion.apparatus_core.already": "Este chão já estava em silêncio.",
+  "block.echoesofoblivion.fragment_niche.silenced": "O nicho está vazio. Aqui já não se guarda nada."
 }

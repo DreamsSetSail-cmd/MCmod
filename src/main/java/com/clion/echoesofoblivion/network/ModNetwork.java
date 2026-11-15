@@ -12,6 +12,7 @@ import com.clion.echoesofoblivion.network.packets.PortalTravelPacket;
 import com.clion.echoesofoblivion.network.packets.RealityShiftPacket;
 import com.clion.echoesofoblivion.network.packets.RenderStatePacket;
 import com.clion.echoesofoblivion.network.packets.ShadowSyncPacket;
+import com.clion.echoesofoblivion.network.packets.SilenceSyncPacket;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.Channel;
@@ -32,8 +33,8 @@ import net.minecraftforge.network.SimpleChannel;
  */
 public final class ModNetwork {
 
-    /** 协议版本：客户端与服务端必须完全一致。 */
-    private static final int PROTOCOL_VERSION = 2;
+    /** 协议版本：客户端与服务端必须完全一致。v2.6.0 新增静默区块同步，因此升到 3。 */
+    private static final int PROTOCOL_VERSION = 3;
 
     public static final SimpleChannel CHANNEL = ChannelBuilder
         .named(EchoesOfOblivionMod.id("main"))
@@ -105,6 +106,13 @@ public final class ModNetwork {
         CHANNEL.messageBuilder(BossAuraPacket.class, 10)
             .codec(BossAuraPacket.STREAM_CODEC)
             .consumerMainThread(BossAuraPacket::handle)
+            .add();
+
+        // v2.6.0：静默区块同步。客户端只知道「哪些区块是静的」——
+        // 它需要这个的唯一理由是不在静默区里播放错位的回响。
+        CHANNEL.messageBuilder(SilenceSyncPacket.class, 11)
+            .codec(SilenceSyncPacket.STREAM_CODEC)
+            .consumerMainThread(SilenceSyncPacket::handle)
             .add();
     }
 

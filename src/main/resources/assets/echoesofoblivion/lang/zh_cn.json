@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "账目结清了。",
   "block.echoesofoblivion.empty_plaque": "空碑",
   "block.echoesofoblivion.empty_plaque.refused": "这块石头不接受。",
-  "block.echoesofoblivion.empty_plaque.look": "这里什么都没有写。而位置是够的。"
+  "block.echoesofoblivion.empty_plaque.look": "这里什么都没有写。而位置是够的。",
+  "block.echoesofoblivion.apparatus_core": "仪器核心",
+  "block.echoesofoblivion.apparatus_core.activated": "%s 个区块安静了。",
+  "block.echoesofoblivion.apparatus_core.done": "他们造它，就是为了这个。",
+  "block.echoesofoblivion.apparatus_core.already": "这片地面本来就安静着。",
+  "block.echoesofoblivion.fragment_niche.silenced": "龛里是空的。这里不再留存任何东西。"
 }

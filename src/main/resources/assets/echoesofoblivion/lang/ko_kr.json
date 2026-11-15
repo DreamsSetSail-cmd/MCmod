@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "계정은 마감되었습니다.",
   "block.echoesofoblivion.empty_plaque": "빈 비석",
   "block.echoesofoblivion.empty_plaque.refused": "돌은 그것을 받지 않습니다.",
-  "block.echoesofoblivion.empty_plaque.look": "여기에는 아무것도 쓰여 있지 않습니다. 무언가를 위한 자리는 있습니다."
+  "block.echoesofoblivion.empty_plaque.look": "여기에는 아무것도 쓰여 있지 않습니다. 무언가를 위한 자리는 있습니다.",
+  "block.echoesofoblivion.apparatus_core": "장치의 핵심",
+  "block.echoesofoblivion.apparatus_core.activated": "%s개의 청크가 조용해졌습니다.",
+  "block.echoesofoblivion.apparatus_core.done": "그것이 그들이 그것을 만든 이유입니다.",
+  "block.echoesofoblivion.apparatus_core.already": "이 땅은 원래 조용했습니다.",
+  "block.echoesofoblivion.fragment_niche.silenced": "벽감은 비어 있습니다. 이제 여기에 아무것도 남지 않습니다."
 }

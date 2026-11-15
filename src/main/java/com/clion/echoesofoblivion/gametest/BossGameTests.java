@@ -9,6 +9,8 @@ import com.clion.echoesofoblivion.memory.MemoryRegistry;
 import com.clion.echoesofoblivion.memory.PlayerProgress;
 import com.clion.echoesofoblivion.server.NameSteleObservation;
 import com.clion.echoesofoblivion.server.Reckoning;
+import com.clion.echoesofoblivion.world.RealityData;
+import com.clion.echoesofoblivion.world.SilenceData;
 import com.clion.echoesofoblivion.item.LoreFragmentItem;
 import com.clion.echoesofoblivion.item.ModItems;
 import net.minecraft.core.BlockPos;
@@ -425,6 +427,72 @@ public final class BossGameTests {
         BlockPos pos = new BlockPos(3, 2, 4);
         helper.setBlock(pos, ModBlocks.EMPTY_PLAQUE.get());
         helper.assertBlockPresent(ModBlocks.EMPTY_PLAQUE.get(), pos);
+
+        helper.succeed();
+    }
+    /**
+     * v2.6.0：仪器核心必须真的「有用」。
+     *
+     * <p>这一版的核心陈述是「那个文明造的仪器确实有效，恐怖之处不是它没用」。
+     * 因此测试必须验证**它真的阻止扩散**，而不只是验证方块能放下去。
+     *
+     * <p>四个断言，对应四种静默失效：
+     * <ol>
+     *   <li>常量非正 → 激活什么都不做。</li>
+     *   <li>静默区块没有被记录 → 世界看起来变了，但数据没变，重启即失效。</li>
+     *   <li>静默**没有**清除已有感染 → 「它有用」这句话不成立，整个机制退化成氛围。</li>
+     *   <li>静默区块仍然可以被重新感染 → 静默会被感染吃掉，机制自相矛盾。</li>
+     * </ol>
+     */
+    @GameTest(template = "echoesofoblivion:empty")
+    public static void apparatusCreatesSilenceZone(GameTestHelper helper) {
+        if (SilenceData.ACTIVATION_RADIUS <= 0 || SilenceData.MAX_SILENCED <= 0) {
+            helper.fail("静默区的常量必须为正");
+            return;
+        }
+
+        var level = helper.getLevel();
+        SilenceData silence = SilenceData.get(level);
+        RealityData reality = RealityData.get(level);
+        int before = silence.size();
+
+        int chunkX = helper.absolutePos(new BlockPos(0, 0, 0)).getX() >> 4;
+        int chunkZ = helper.absolutePos(new BlockPos(0, 0, 0)).getZ() >> 4;
+
+        // 先在这一点制造感染，再让静默覆盖它——这样才能证明「异静默优先于污染」
+        reality.infect(level, chunkX, chunkZ);
+        if (!reality.isInfected(chunkX, chunkZ)) {
+            helper.fail("前置条件失败：无法感染测试区块");
+            return;
+        }
+
+        java.util.List<Long> added = silence.silenceArea(level, chunkX, chunkZ, 1);
+        if (added.isEmpty()) {
+            helper.fail("激活没有记录任何静默区块");
+            return;
+        }
+        if (silence.size() <= before) {
+            helper.fail("静默区块数没有增加：" + before + " -> " + silence.size());
+            return;
+        }
+        if (!silence.isSilenced(chunkX, chunkZ)) {
+            helper.fail("中心区块没有被标记为静默");
+            return;
+        }
+        // 最关键的一条：静默必须清除已有感染
+        if (reality.isInfected(chunkX, chunkZ)) {
+            helper.fail("静默没有清除已有感染——「仪器有用」这个前提不成立");
+            return;
+        }
+        // 静默区块不能被重新感染
+        boolean reinfected = reality.infect(level, chunkX, chunkZ);
+        if (reinfected || reality.isInfected(chunkX, chunkZ)) {
+            helper.fail("静默区块又被感染了——静默没有优先于污染");
+            return;
+        }
+
+        // 清理，避免污染后续测试（静默区是真实世界数据）
+        reality.removeChunks(added);
 
         helper.succeed();
     }

@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "勘定は締められた。",
   "block.echoesofoblivion.empty_plaque": "空の碑",
   "block.echoesofoblivion.empty_plaque.refused": "石はそれを受け取らない。",
-  "block.echoesofoblivion.empty_plaque.look": "ここには何も書かれていない。何かのための余地はある。"
+  "block.echoesofoblivion.empty_plaque.look": "ここには何も書かれていない。何かのための余地はある。",
+  "block.echoesofoblivion.apparatus_core": "装置の核",
+  "block.echoesofoblivion.apparatus_core.activated": "%s 個のチャンクが静かになった。",
+  "block.echoesofoblivion.apparatus_core.done": "彼らがそれを作ったのは、そのためだ。",
+  "block.echoesofoblivion.apparatus_core.already": "この地面はもともと静かだった。",
+  "block.echoesofoblivion.fragment_niche.silenced": "窪みは空だ。ここにはもう何も残されていない。"
 }

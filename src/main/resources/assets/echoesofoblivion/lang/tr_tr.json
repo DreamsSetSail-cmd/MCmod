@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "Hesap kapandı.",
   "block.echoesofoblivion.empty_plaque": "Boş Stel",
   "block.echoesofoblivion.empty_plaque.refused": "Taş onu kabul etmiyor.",
-  "block.echoesofoblivion.empty_plaque.look": "Burada yazılı hiçbir şey yok. Bir şey için yer var."
+  "block.echoesofoblivion.empty_plaque.look": "Burada yazılı hiçbir şey yok. Bir şey için yer var.",
+  "block.echoesofoblivion.apparatus_core": "Alet Çekirdeği",
+  "block.echoesofoblivion.apparatus_core.activated": "%s chunk sessizleşti.",
+  "block.echoesofoblivion.apparatus_core.done": "Onu bunun için yaptılar.",
+  "block.echoesofoblivion.apparatus_core.already": "Bu zemin zaten sessizdi.",
+  "block.echoesofoblivion.fragment_niche.silenced": "Niş boş. Burada artık hiçbir şey saklanmıyor."
 }

@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "De rekening is gesloten.",
   "block.echoesofoblivion.empty_plaque": "Lege stele",
   "block.echoesofoblivion.empty_plaque.refused": "De steen neemt het niet aan.",
-  "block.echoesofoblivion.empty_plaque.look": "Hier is niets geschreven. Er is ruimte voor iets."
+  "block.echoesofoblivion.empty_plaque.look": "Hier is niets geschreven. Er is ruimte voor iets.",
+  "block.echoesofoblivion.apparatus_core": "Apparaatkern",
+  "block.echoesofoblivion.apparatus_core.activated": "%s chunks werden stil.",
+  "block.echoesofoblivion.apparatus_core.done": "Daar hebben ze het voor gebouwd.",
+  "block.echoesofoblivion.apparatus_core.already": "Deze grond was al stil.",
+  "block.echoesofoblivion.fragment_niche.silenced": "De nis is leeg. Hier wordt niets meer bewaard."
 }

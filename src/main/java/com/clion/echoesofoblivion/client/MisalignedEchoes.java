@@ -194,6 +194,13 @@ public final class MisalignedEchoes {
             return;
         }
 
+        // v2.6.0：静默区里没有回响。
+        // 介质已经被清空了——没有可腐坏的东西，也就没有可出错的声音。
+        // 这是「仪器真的有用」的一个具体表现，而不只是氛围。
+        if (ClientData.isSilencedAt(minecraft.player.getX(), minecraft.player.getZ())) {
+            return;
+        }
+
         // 只在寂静走廊里发生。走廊的介质是坏的，主世界还不是。
         // 用维度 ResourceKey 比较而不是名字符串——后者脆弱且不符合规范。
         if (!minecraft.level.dimension().equals(ModWorldGen.SILENT_CORRIDOR)) {

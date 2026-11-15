@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " R ",
+    "RSR",
+    " T "
+  ],
+  "key": {
+    "R": {
+      "item": "echoesofoblivion:ritual_alloy"
+    },
+    "S": {
+      "item": "echoesofoblivion:silence_shard"
+    },
+    "T": {
+      "item": "echoesofoblivion:thread_of_choir"
+    }
+  },
+  "result": {
+    "id": "echoesofoblivion:apparatus_core",
+    "count": 1
+  }
+}

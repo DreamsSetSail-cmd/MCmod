@@ -35,6 +35,9 @@ public class ModBlockStateProvider extends BlockStateProvider {
         // 空碑（v2.5.0）：满方块，纹理 textures/block/empty_plaque.png
         simpleBlockWithItem(ModBlocks.EMPTY_PLAQUE.get(), cubeAll(ModBlocks.EMPTY_PLAQUE.get()));
 
+        // 仪器核心（v2.6.0）：满方块，纹理 textures/block/apparatus_core.png
+        simpleBlockWithItem(ModBlocks.APPARATUS_CORE.get(), cubeAll(ModBlocks.APPARATUS_CORE.get()));
+
         // 不稳定传送门：方块本身不可见（RenderShape.INVISIBLE），因此引用原版空气模型，
         // 保证缺少 blockstate 时不会出现「模型缺失」的紫黑格
         invisibleBlock(ModBlocks.UNSTABLE_PORTAL.get());

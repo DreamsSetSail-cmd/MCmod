@@ -227,5 +227,10 @@
   "message.echoesofoblivion.reckoning.settled": "Il conto è chiuso.",
   "block.echoesofoblivion.empty_plaque": "Stele vuota",
   "block.echoesofoblivion.empty_plaque.refused": "La pietra non lo accetta.",
-  "block.echoesofoblivion.empty_plaque.look": "Qui non c'è scritto nulla. C'è spazio per qualcosa."
+  "block.echoesofoblivion.empty_plaque.look": "Qui non c'è scritto nulla. C'è spazio per qualcosa.",
+  "block.echoesofoblivion.apparatus_core": "Nucleo dell'apparecchio",
+  "block.echoesofoblivion.apparatus_core.activated": "%s chunk sono diventati silenziosi.",
+  "block.echoesofoblivion.apparatus_core.done": "È per questo che l'hanno costruito.",
+  "block.echoesofoblivion.apparatus_core.already": "Questo suolo era già silenzioso.",
+  "block.echoesofoblivion.fragment_niche.silenced": "La nicchia è vuota. Qui non si conserva più nulla."
 }
